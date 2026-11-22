@@ -1,0 +1,983 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f4f7fb">
+<title>PRESSURELESS — Your Blood Pressure Companion</title>
+<style>
+:root{--bg:#f4f7fb;--panel:#fff;--ink:#17243b;--muted:#75829a;--line:#e6ebf3;--blue:#4169e1;--blue2:#eef2ff;--teal:#159b89;--red:#d95364;--amber:#bd8121;--shadow:0 12px 32px rgba(33,54,94,.055)}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}.layout{min-height:100vh;display:grid;grid-template-columns:258px 1fr}aside{background:#fff;border-right:1px solid var(--line);padding:23px 16px;display:flex;flex-direction:column;gap:25px;z-index:15}.brand{display:flex;gap:11px;align-items:center;padding:0 10px;font-size:21px;font-weight:850;letter-spacing:-.7px}.brandmark{background:var(--blue);color:#fff;width:38px;height:38px;border-radius:13px;display:grid;place-items:center;font-size:24px;box-shadow:0 6px 15px #4169e133}.nav-label{font-size:10px;text-transform:uppercase;letter-spacing:1.4px;color:#a0aabc;font-weight:800;padding:0 12px;margin-bottom:8px}.nav{display:grid;gap:4px}.nav button{border:0;background:transparent;color:#687791;padding:11px 12px;border-radius:11px;text-align:left;display:flex;align-items:center;gap:12px;font-weight:650}.nav button:hover,.nav button.active{background:var(--blue2);color:var(--blue)}.nav .ni{width:20px;font-size:16px;text-align:center}.sidebottom{margin-top:auto;background:#f2f5ff;border:1px solid #e4eaff;border-radius:15px;padding:14px;color:#64718c;font-size:11px}.sidebottom strong{color:var(--ink);font-size:13px;display:block;margin-bottom:3px}main{width:100%;max-width:1550px;margin:0 auto;padding:28px clamp(16px,3.5vw,46px)}.top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:24px}.top-left{display:flex;align-items:center;gap:12px}.date{font-size:11px;letter-spacing:.7px;color:var(--muted);font-weight:750}.top h1{font-size:27px;letter-spacing:-.9px;margin:2px 0 0}.user{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:750}.avatar{width:38px;height:38px;display:grid;place-items:center;background:#e5ebff;color:#3154b6;border-radius:50%;font-weight:850}.mobile{display:none;border:1px solid var(--line);background:#fff;width:40px;height:40px;border-radius:11px}.page{display:none}.page.active{display:block}.cards{display:grid;gap:16px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:16px}.cols2{grid-template-columns:1.45fr 1fr}.cols3{grid-template-columns:repeat(3,1fr)}.card{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:19px;box-shadow:var(--shadow);min-width:0}.stathead,.cardhead{display:flex;justify-content:space-between;align-items:center;gap:10px}.stathead{font-size:11px;color:var(--muted);font-weight:750}.sticon{width:34px;height:34px;border-radius:11px;background:var(--blue2);display:grid;place-items:center;font-size:16px}.statvalue{font-size:28px;font-weight:850;letter-spacing:-1.2px;margin:12px 0 1px}.statfoot{color:var(--muted);font-size:11px}.good{color:var(--teal)}.warn{color:var(--amber)}.bad{color:var(--red)}h2{font-size:15px;letter-spacing:-.2px;margin:0}.sub{font-size:11px;color:var(--muted);margin-top:3px}.cardhead{margin-bottom:15px}.btn{border:0;border-radius:10px;background:var(--blue);color:white;padding:10px 13px;font-size:11px;font-weight:800}.btn:hover{filter:brightness(.97)}.btn.soft{background:var(--blue2);color:var(--blue)}.btn.light{background:#f1f4f8;color:#596780}.btn.red{background:#fff0f1;color:var(--red)}.btn.teal{background:#e7f7f3;color:var(--teal)}.btn.tiny{padding:7px 9px;font-size:10px}.btnline{display:flex;gap:8px;flex-wrap:wrap}.pill{display:inline-flex;align-items:center;padding:5px 9px;border-radius:20px;background:#e9f8f3;color:var(--teal);font-size:10px;font-weight:850}.pill.gray{background:#f0f3f8;color:#6e7a90}.pill.amber{background:#fff6e6;color:var(--amber)}.pill.red{background:#fff0f1;color:var(--red)}.bpnum{font-weight:900;font-size:38px;letter-spacing:-1.6px;margin:0}.bpunit{font-size:11px;color:var(--muted)}.chart{width:100%;height:190px;display:block}.legend{font-size:10px;color:var(--muted);display:flex;gap:14px}.dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:5px;background:var(--blue)}.dot.dia{background:var(--teal)}.list{display:grid;gap:11px}.item{display:flex;align-items:center;gap:10px;min-width:0}.itemicon{width:37px;height:37px;border-radius:12px;background:#f2f5fb;display:grid;place-items:center;flex:none}.itemcopy{flex:1;min-width:0}.itemcopy strong{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.itemcopy span{display:block;color:var(--muted);font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.check{width:26px;height:26px;border:1px solid #dce3ee;background:#fff;color:#92a0b6;border-radius:8px}.check.done{background:#e7f7f3;color:var(--teal);border-color:#c4e9e0}.sectiontitle{font-size:20px;letter-spacing:-.5px;margin:2px 0 4px}.sectiondesc{font-size:12px;color:var(--muted);margin:0 0 18px}.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field{display:grid;gap:5px;min-width:0}.field.full{grid-column:1/-1}.field label{font-size:10px;font-weight:800;color:#64718a}.field input,.field select,.field textarea{width:100%;min-width:0;border:1px solid #dfe5ef;border-radius:10px;padding:10px 11px;background:#fff;color:var(--ink);outline:none;font-size:12px}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px #4169e116}.field textarea{resize:vertical}.muted{color:var(--muted)}.tinytext{font-size:10px;color:var(--muted)}.tablebox{overflow:auto}table{border-collapse:collapse;width:100%;font-size:11px}th,td{padding:10px 9px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}th{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px}.notice{border-radius:12px;background:#fff8e9;border:1px solid #f2e4c4;padding:11px 13px;color:#775f30;font-size:10px;margin-top:13px}.notice.amber{background:#fff6e8;border:1px solid #f2d7a9;color:#80551b}.notice.red{background:#fff0f1;border-color:#ffd8dc;color:#9f3545}.notice.blue{background:#f0f4ff;border-color:#dfe6ff;color:#536797}.pagegrid{display:grid;gap:16px}.tag{font-size:10px;font-weight:800;background:#f0f3f9;color:#60708a;border-radius:7px;padding:4px 7px}.progress{height:7px;background:#edf1f6;border-radius:20px;overflow:hidden}.progress span{display:block;height:100%;border-radius:20px;background:var(--teal)}.challenge{border:1px solid var(--line);border-radius:13px;padding:13px;display:flex;align-items:center;gap:10px}.challenge .itemcopy{flex:1}.chatbox{height:385px;overflow:auto;background:#f8faff;border:1px solid var(--line);border-radius:13px;padding:13px;display:flex;flex-direction:column;gap:10px}.bubble{max-width:88%;background:#fff;border:1px solid var(--line);border-radius:13px;padding:10px 12px;font-size:12px;white-space:pre-wrap}.bubble.user{align-self:flex-end;background:var(--blue);border-color:var(--blue);color:#fff}.chatinput{display:flex;gap:7px;margin-top:9px}.chatinput input{flex:1;min-width:0;border:1px solid var(--line);border-radius:10px;padding:11px;font-size:12px}.consent{display:flex;gap:8px;align-items:flex-start;font-size:10px;color:#68758c;margin-top:10px}.consent input{margin-top:2px}.status{display:flex;align-items:center;gap:7px;font-size:10px;color:var(--muted)}.status i{width:7px;height:7px;border-radius:50%;background:#d5a54d}.status.online i{background:#17aa91}.extract{background:#f9faff;border:1px solid #e4eaf6;border-radius:13px;padding:13px;margin-top:13px}.extractgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.extractrow{font-size:10px}.extractrow b{display:block;color:#64718a;margin-bottom:2px}.empty{padding:18px;text-align:center;color:var(--muted);font-size:11px}.kpi{display:flex;justify-content:space-between;gap:10px;align-items:center}.divider{height:1px;background:var(--line);margin:13px 0}.footer{padding:26px 0 8px;text-align:center;color:#98a3b5;font-size:10px}.hidden{display:none!important}.help{font-size:10px;color:var(--muted);line-height:1.6}.remindline{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#f8faff;padding:10px;border-radius:10px}.remindline strong{font-size:11px}.remindline span{font-size:10px;color:var(--muted)}
+@media(max-width:1040px){.stats{grid-template-columns:repeat(2,1fr)}.cols2{grid-template-columns:1fr}.cols3{grid-template-columns:1fr 1fr}}
+@media(max-width:720px){.layout{display:block}aside{position:fixed;top:0;bottom:0;left:0;width:270px;transform:translateX(-105%);transition:transform .22s;box-shadow:var(--shadow)}aside.open{transform:translateX(0)}.mobile{display:block}main{padding:19px 13px}.top h1{font-size:21px}.user span{display:none}.card{padding:15px}.stats{gap:9px}.statvalue{font-size:23px}.cols3{grid-template-columns:1fr}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.bpnum{font-size:32px}}
+@media print{aside,.top,.no-print,.footer{display:none!important}.layout{display:block}main{max-width:none;padding:0}.page{display:none!important}#history{display:block!important}.card{box-shadow:none;break-inside:avoid}}
+
+/* AI connection settings */
+.ai-settings-card{max-width:820px}
+.api-key-row{display:flex;gap:9px;align-items:stretch}
+.api-key-row input{flex:1;min-width:0}
+.api-status{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700}
+.api-status .status-dot{width:9px;height:9px;border-radius:50%;background:#d6a24c;display:inline-block}
+.api-status.connected .status-dot{background:#159b89}
+.ai-brand-icon{width:22px;height:22px;display:inline-grid;place-items:center;color:currentColor}
+.ai-brand-icon svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:700px){.api-key-row{flex-direction:column}.api-key-row .btn{width:100%;min-height:46px}}
+
+
+:root[data-theme="dark"]{--bg:#142321;--panel:#1d302d;--ink:#edf5f1;--muted:#a6b9b1;--line:#344b46;--blue:#54b6a6;--blue2:#294640;--teal:#62c7a9;--red:#f08089;--amber:#e6b86b;--shadow:0 12px 32px rgba(0,0,0,.2)}
+:root[data-theme="dark"] body,:root[data-theme="dark"] main{background:var(--bg);color:var(--ink)}
+:root[data-theme="dark"] aside,:root[data-theme="dark"] .card,:root[data-theme="dark"] .chatbox,:root[data-theme="dark"] .bubble,:root[data-theme="dark"] .field input,:root[data-theme="dark"] .field select,:root[data-theme="dark"] .field textarea,:root[data-theme="dark"] .chatinput input{background:var(--panel);color:var(--ink);border-color:var(--line)}
+:root[data-theme="dark"] .nav button{color:#c0d0ca}:root[data-theme="dark"] .nav button.active,:root[data-theme="dark"] .nav button:hover{background:var(--blue2);color:#b8eee0}
+:root[data-theme="dark"] .sidebottom,:root[data-theme="dark"] .remindline,:root[data-theme="dark"] .extract,:root[data-theme="dark"] .itemicon{background:#243a35;border-color:var(--line);color:var(--muted)}
+:root[data-theme="dark"] .notice.blue{background:#263a50;border-color:#405a72;color:#d0e0f5}:root[data-theme="dark"] .notice.amber{background:#463a25;border-color:#705a32;color:#f0d8a6}:root[data-theme="dark"] .notice.red{background:#482d32;border-color:#75434b;color:#ffd5d8}
+:root[data-theme="dark"] th,:root[data-theme="dark"] td{border-color:var(--line)}
+:root[dir="rtl"] body{direction:rtl}:root[dir="rtl"] .nav button,:root[dir="rtl"] th,:root[dir="rtl"] td{text-align:right}:root[dir="rtl"] .top-left{flex-direction:row-reverse}:root[dir="rtl"] .field{text-align:right}
+
+</style>
+
+<style id="pressureless-design-system">
+:root{
+ --bg:#f5f4ed;--panel:#fffefa;--ink:#163b3d;--muted:#718789;--line:#e5e9e3;
+ --blue:#126a69;--blue2:#e7f3ef;--teal:#269f94;--red:#df776d;--amber:#bd9149;
+ --shadow:0 10px 28px rgba(14,66,65,.075)
+}
+body{background:var(--bg);color:var(--ink);font-family:Inter,"Segoe UI",Arial,sans-serif}
+.layout{background:var(--bg)}
+aside{background:#fffefa;border-right-color:#e3e9e3}
+.brand{gap:9px;padding:0 8px;color:#124e50;font-size:0}
+.brandmark{width:43px;height:43px;border-radius:50%;background:#e6f3ef;color:#126a69;box-shadow:none}
+.brandword{font-size:17px;font-weight:850;letter-spacing:1.8px;color:#174e50}
+.brandword span{color:#55a99d}
+.nav-label{color:#91a4a0}
+.nav button{color:#587372;border-radius:13px}
+.nav button:hover,.nav button.active{background:#e7f3ef;color:#126a69}
+.sidebottom{background:#eaf4ef;border-color:#d9ebe3;color:#577572}
+.sidebottom strong{color:#174e50}
+main{padding-top:26px}
+.top h1{color:#153e40}
+.date{color:#78908d}
+.avatar{background:#d9eee8;color:#126a69}
+.card{background:var(--panel);border-color:#e5eae3;border-radius:19px;box-shadow:var(--shadow)}
+.btn{background:#126a69;border-radius:999px;padding:10px 16px}
+.btn:hover{background:#0d5555}
+.btn.soft,.btn.teal{background:#e3f1ed;color:#126a69}
+.btn.light{background:#f0f2ec;color:#59716e}
+.btn.red{background:#fff0ee;color:#c35e58}
+.pill{background:#e4f4ed;color:#197c70}
+.pill.gray{background:#f0f2ec;color:#6f8580}
+.pill.amber{background:#fff4df;color:#9a702e}
+.pill.red{background:#fff0ee;color:#bd5c55}
+.sticon{background:#e6f3ef;color:#126a69}
+.itemicon{background:#edf5f0;color:#1b7772}
+.check.done{background:#e5f4ed;color:#178678;border-color:#c9e8dc}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#319b91;box-shadow:0 0 0 3px #319b9119}
+.chatbox{background:#f5f8f3;border-color:#e2eae3}
+.bubble{border-radius:15px;background:#fffefa}
+.bubble.user{background:#126a69;border-color:#126a69}
+.notice.blue{background:#eef6f1;border-color:#dbece3;color:#4d706a}
+.notice{border-radius:14px}
+.progress span{background:#269f94}
+.chart{max-height:190px}
+.sectiontitle{color:#153e40}
+.tag{background:#edf4ef;color:#5c7c76}
+.extract{background:#f8faf5;border-color:#e5ece4}
+.remindline{background:#f5f8f3}
+.footer{color:#91a49e}
+@media(max-width:720px){
+ body{padding-bottom:10px}
+ aside{background:#fffefa}
+ main{padding:15px 12px 26px}
+ .top{margin-bottom:18px}
+ .top h1{font-size:21px}
+ .card{border-radius:17px}
+ .mobile{border-color:#e2e9e2;color:#126a69;background:#fffefa}
+ .brandword{font-size:16px}
+}
+</style>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style id="pressureless-polished-ui">
+:root{
+ --bg:#f4f5ef;--panel:#fffefa;--ink:#173f40;--muted:#718482;--line:#e3e9e3;
+ --blue:#126968;--blue2:#e7f2ed;--teal:#299b8e;--red:#d96f68;--amber:#ad8240;
+ --shadow:0 3px 14px rgba(19,61,59,.045)
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',Arial,sans-serif;font-size:14px;line-height:1.55;letter-spacing:0;color:var(--ink);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+h1,h2,h3,.brandword,.statvalue,.bpnum{font-family:'Manrope','DM Sans',Arial,sans-serif}
+h2{font-size:15px;font-weight:750;letter-spacing:-.25px}
+.layout{grid-template-columns:244px minmax(0,1fr)}
+aside{padding:25px 15px;background:#fffefa;border-right:1px solid #e2e8e1}
+.brand{padding:0 9px;margin-bottom:3px}
+.brandword{font-size:16px;font-weight:800;letter-spacing:1.45px}
+.brandmark{width:41px;height:41px;background:#e7f2ed;color:#126968}
+.nav-label{font-size:10px;letter-spacing:1.1px;font-weight:700;color:#899b96}
+.nav{gap:3px}
+.nav button{min-height:42px;padding:10px 11px;border-radius:9px;font-size:12px;font-weight:600;color:#5e7773;transition:background .15s,color .15s}
+.nav button:hover,.nav button.active{background:#e8f2ed;color:#126968}
+.nav .ni{font-size:15px;opacity:.85}
+.sidebottom{border:0;border-radius:10px;background:#eef4ee;padding:14px;font-size:11px;line-height:1.65}
+main{max-width:1500px;padding:27px clamp(18px,3vw,42px)}
+.top{margin-bottom:25px}
+.date{font-size:10px;font-weight:700;letter-spacing:.65px;text-transform:uppercase}
+.top h1{font-size:25px;line-height:1.25;font-weight:750;letter-spacing:-.8px}
+.user{font-size:12px;font-weight:650}
+.avatar{background:#dcece5;color:#176b66}
+.card{border:1px solid #e3e9e3;border-radius:13px;box-shadow:0 2px 10px rgba(20,62,59,.035);padding:18px}
+.cards{gap:14px}
+.stats{gap:12px;margin-bottom:14px}
+.stathead{font-size:11px;font-weight:650;color:#728581}
+.statvalue{font-size:27px;font-weight:750;letter-spacing:-.9px;color:#173f40}
+.statfoot,.sub,.sectiondesc{line-height:1.6}
+.sectiontitle{font-size:21px;font-weight:750;letter-spacing:-.6px;margin-bottom:3px}
+.sectiondesc{font-size:12px;color:#718482;margin-bottom:18px}
+.cardhead{margin-bottom:13px}
+.btn{font-family:'DM Sans',Arial,sans-serif;font-size:11px;font-weight:700;border-radius:8px;padding:10px 14px;letter-spacing:.05px;transition:background .15s,transform .15s}
+.btn:active{transform:translateY(1px)}
+.btn.soft,.btn.teal{background:#e6f2ed;color:#176d66}
+.btn.light{background:#f1f3ee;color:#5d716d}
+.pill{font-size:10px;font-weight:700;padding:5px 8px}
+.itemicon,.sticon{border-radius:10px;background:#edf4ef;color:#176d66}
+.itemcopy strong{font-size:12px;font-weight:700;color:#254a49}
+.itemcopy span{font-size:10px;color:#7a8d88}
+.field label{font-size:11px;font-weight:700;color:#58716d}
+.field input,.field select,.field textarea{font-family:'DM Sans',Arial,sans-serif;font-size:12px;border-radius:8px;border-color:#dce5dd;background:#fffefa;padding:10px 11px}
+.field input::placeholder,.field textarea::placeholder{color:#a0ada7}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#37968b;box-shadow:0 0 0 3px rgba(55,150,139,.10)}
+.tablebox table{font-size:11px}
+th{font-size:9px;font-weight:700;color:#82918b;letter-spacing:.7px}
+td{color:#355452}
+.notice{font-size:10px;line-height:1.65;border-radius:9px}
+.notice.blue{background:#eef5ef;border-color:#e0ebe1;color:#526f68}
+.notice.amber{background:#fff6e8;border:1px solid #f2d7a9;color:#80551b}.notice.red{background:#fff1ef;border-color:#f3d9d4;color:#9d514b}
+.chatbox{background:#f7f8f3;border-color:#e4e9e2;border-radius:12px}
+.bubble{font-size:12px;line-height:1.6;border-radius:11px;border-color:#e6eae4;background:#fffefa}
+.bubble.user{background:#176b68;border-color:#176b68}
+.chatinput input{font-family:'DM Sans',Arial,sans-serif;border-radius:8px}
+.progress{background:#e9eee8;height:6px}
+.progress span{background:#329b8e}
+.challenge{border:1px solid #e4e9e3;border-radius:10px;padding:12px}
+.check{border-radius:7px}
+.extract{background:#f8faf6;border-color:#e4eae2;border-radius:10px}
+.remindline{background:#f7f8f3;border:1px solid #edf0e9;border-radius:9px}
+.tag{font-size:9px;font-weight:700;letter-spacing:.25px}
+.footer{font-size:10px;color:#91a19a}
+/* Dashboard welcome panel: restrained, editorial rather than a generic gradient card. */
+#dashboard>.card:first-child{background:#eaf3ed!important;border-color:#e0ebe3!important;border-radius:14px;padding:22px}
+#dashboard>.card:first-child h2{font-size:21px!important;line-height:1.3;color:#164c4a}
+#dashboard>.card:first-child .sub{color:#55716b}
+#dashboard>.card:first-child .divider{background:#d7e5dc}
+#dashboard>.card:first-child .sticon{background:#d8ebe2;color:#176b68}
+/* Keep data visualizations calm and legible. */
+.chart{max-height:190px}
+@media(max-width:720px){
+ .layout{display:block}
+ aside{background:#fffefa}
+ main{padding:15px 12px 25px}
+ .top h1{font-size:21px}
+ .card{border-radius:12px;padding:15px}
+ #dashboard>.card:first-child{padding:17px}
+ #dashboard>.card:first-child h2{font-size:18px!important}
+ .brandword{font-size:15px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+</style>
+
+
+<style id="pressureless-app-ui">
+:root{--app-teal:#126968;--app-mint:#e7f2ed;--app-paper:#f4f5ef}
+body{background:#eef1eb}
+.layout{min-height:100vh;max-width:1680px;margin:0 auto;background:var(--app-paper);box-shadow:0 0 50px rgba(24,65,60,.07)}
+aside{position:sticky;top:0;height:100vh;overflow:auto}
+.brandmark{background:#e5f2ec;border:1px solid #d4e8dd}
+.nav button{min-height:44px;gap:11px}
+.nav .ni{width:31px;height:31px;border-radius:9px;background:#f0f4ef;display:grid;place-items:center;color:#47736d;flex:none}
+.nav button.active .ni{background:#d8ebe2;color:#126968}
+.nav .ni svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+main{min-height:100vh}
+.top{position:sticky;top:0;z-index:5;background:rgba(244,245,239,.93);backdrop-filter:blur(12px);padding:8px 0 13px;border-bottom:1px solid rgba(222,231,222,.75)}
+.user{padding:5px 10px 5px 6px;border:1px solid #e1e8df;background:#fffefa;border-radius:999px}
+.avatar{width:34px;height:34px}
+.page{animation:appIn .18s ease-out}
+@keyframes appIn{from{opacity:.5;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+#mobileTabs{display:none}
+#onboarding{position:fixed;inset:0;z-index:1000;background:radial-gradient(ellipse at 80% 15%,#dceee5 0,transparent 34%),#f4f5ef;display:none;align-items:center;justify-content:center;padding:22px;overflow:auto}
+#onboarding.show{display:flex}
+.onboard-shell{width:min(100%,980px);min-height:570px;display:grid;grid-template-columns: .9fr 1.1fr;background:#fffefa;border:1px solid #e2e9e1;border-radius:26px;overflow:hidden;box-shadow:0 24px 80px rgba(20,66,60,.13)}
+.onboard-art{background:#0e5b5b;color:#fff;padding:42px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.onboard-art:before,.onboard-art:after{content:"";position:absolute;border:1px solid rgba(255,255,255,.16);border-radius:50%;width:370px;height:370px;right:-180px;bottom:-170px}
+.onboard-art:after{width:260px;height:260px;right:-115px;bottom:-115px}
+.onboard-logo{display:flex;align-items:center;gap:12px;font-family:Manrope,sans-serif;font-weight:800;letter-spacing:2px;font-size:18px}
+.onboard-logo-mark{width:49px;height:49px;border-radius:50%;display:grid;place-items:center;background:#dff0e9;color:#126968}
+.onboard-logo-mark svg{width:32px;height:32px}
+.onboard-art h1{font:800 clamp(30px,4vw,44px)/1.12 Manrope,sans-serif;letter-spacing:-1.6px;margin:0 0 14px;max-width:390px}
+.onboard-art p{color:#d1e6df;line-height:1.8;max-width:360px;font-size:14px}
+.onboard-art-foot{font-size:11px;color:#c3ddd5;position:relative;z-index:1}
+.onboard-form{padding:42px clamp(24px,5vw,58px);display:flex;flex-direction:column;justify-content:center}
+.onboard-step{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;font-weight:800;color:#6a9188;margin-bottom:12px}
+.onboard-form h2{font:800 27px/1.2 Manrope,sans-serif;color:#173f40;margin:0 0 7px}
+.onboard-form>p{color:#788b83;font-size:12px;margin:0 0 24px;line-height:1.7}
+.onboard-form .field{margin-bottom:13px}
+.onboard-form .field label{font-size:11px}
+.onboard-form .field input,.onboard-form .field select{padding:12px 13px;border-radius:10px;font-size:13px}
+.onboard-submit{width:100%;padding:13px 16px;border-radius:10px;margin-top:8px;font-size:13px}
+.onboard-privacy{font-size:10px;color:#87958d;line-height:1.6;margin-top:13px}
+@media(max-width:760px){
+ body{background:#f4f5ef;padding-bottom:74px}
+ .layout{display:block;min-height:100vh;box-shadow:none}
+ aside{position:fixed;top:0;bottom:0;left:0;width:275px;height:100dvh;z-index:30;transform:translateX(-105%);transition:transform .22s;box-shadow:0 15px 45px rgba(17,55,51,.16)}aside.open{transform:translateX(0)}
+ main{min-height:100vh;padding:13px 13px 92px}
+ .top{top:0;margin:0 -13px 17px;padding:8px 13px 12px}
+ .top h1{font-size:20px}
+ .mobile{width:37px;height:37px;border-radius:10px;background:#fffefa;color:#126968}
+ #mobileTabs{position:fixed;z-index:25;display:grid;grid-template-columns:repeat(5,1fr);left:10px;right:10px;bottom:max(9px,env(safe-area-inset-bottom));height:62px;padding:6px;background:rgba(255,254,250,.96);border:1px solid #e1e8df;border-radius:17px;box-shadow:0 8px 28px rgba(20,65,60,.13);backdrop-filter:blur(15px)}
+ #mobileTabs button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:0;background:transparent;border-radius:11px;color:#78908a;font-size:9px;font-weight:700}
+ #mobileTabs button svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+ #mobileTabs button.active{background:#e6f2ec;color:#126968}
+ .onboard-shell{grid-template-columns:1fr;max-width:460px;min-height:0;border-radius:20px}
+ .onboard-art{padding:23px 25px 22px;min-height:210px}
+ .onboard-art h1{font-size:28px;margin-top:28px}
+ .onboard-art p{font-size:12px;margin-bottom:5px}
+ .onboard-art-foot{display:none}
+ .onboard-form{padding:25px 24px 28px}
+ .onboard-form h2{font-size:23px}
+}
+@media(prefers-reduced-motion:reduce){.page{animation:none}#onboarding *{transition:none!important}}
+</style>
+
+
+<style id="pressureless-mobile-type-and-reference-colors">
+/* Brand palette inspired by the supplied PRESSURELESS app reference */
+:root{
+ --bg:#f3f2e9;--panel:#fffdf7;--ink:#123f42;--muted:#647f7e;--line:#dfe8df;
+ --blue:#075e60;--blue2:#e4f2ed;--teal:#35a99b;--red:#e4776d;--amber:#e5a15c;
+ --shadow:0 5px 18px rgba(12,66,65,.07)
+}
+body{background:#edf1e9;color:#123f42}
+.layout{background:#f3f2e9}
+aside{background:#fffdf7;border-right-color:#dfe8df}
+.brandmark{background:#e2f2eb;color:#075e60;border-color:#cce6dc}
+.nav button.active,.nav button:hover{background:#e2f2eb;color:#075e60}
+.nav button.active .ni{background:#cfe9df;color:#075e60}
+.sidebottom{background:#e5f1e8;border:1px solid #d6e8dc}
+.card{background:#fffdf7;border-color:#e0e8df;box-shadow:0 4px 15px rgba(14,66,63,.055)}
+.btn{background:#075e60;color:#fff}
+.btn:hover{background:#064f51}
+.btn.soft,.btn.teal{background:#dff0e8;color:#075e60}
+.btn.light{background:#f0f1e8;color:#526d68}
+.btn.red{background:#fff0ec;color:#bd5c54}
+.pill{background:#e1f3e9;color:#187d70}
+.pill.amber{background:#fff1df;color:#a76d2e}
+.pill.red{background:#ffefeb;color:#bd5c54}
+.sticon,.itemicon{background:#e6f2eb;color:#126b68}
+.stats .card:nth-child(2) .sticon{background:#e2effa;color:#4e8cbd}
+.stats .card:nth-child(3) .sticon{background:#fff0df;color:#d18a43}
+.stats .card:nth-child(4) .sticon{background:#fce9e5;color:#d8786b}
+#dashboard>.card:first-child{background:#dff0e8!important;border-color:#d1e7dc!important}
+#dashboard>.card:first-child .sticon{background:#c9e8dc;color:#075e60}
+.chart{--chart-accent:#075e60}
+#mobileTabs{background:rgba(255,253,247,.97);border-color:#dce8df}
+#mobileTabs button.active{background:#dff0e8;color:#075e60}
+#onboarding{background:radial-gradient(ellipse at 80% 15%,#d8eee4 0,transparent 35%),#f3f2e9}
+.onboard-art{background:#075e60}
+.onboard-logo-mark{background:#e0f1e9;color:#075e60}
+.onboard-submit{background:#075e60}
+
+/* Larger, touch-friendly type on phones and small tablets */
+@media(max-width:760px){
+ body{font-size:16px;line-height:1.6}
+ main{padding-left:15px;padding-right:15px}
+ .top{margin-left:-15px;margin-right:-15px;padding-left:15px;padding-right:15px}
+ .top h1{font-size:24px;line-height:1.25;letter-spacing:-.55px}
+ .date{font-size:12px;letter-spacing:.35px}
+ .user{font-size:14px}
+ .sectiontitle{font-size:23px;line-height:1.3}
+ .sectiondesc{font-size:14px;line-height:1.55;margin-bottom:20px}
+ h2{font-size:18px;line-height:1.35}
+ .card{padding:17px;border-radius:17px}
+ .cardhead{margin-bottom:16px}
+ .sub,.statfoot,.itemcopy span,.tinytext,.help{font-size:13px;line-height:1.5}
+ .stathead{font-size:13px;line-height:1.4}
+ .statvalue{font-size:27px}
+ .bpnum{font-size:36px}
+ .itemcopy strong{font-size:15px;line-height:1.4;white-space:normal}
+ .itemcopy span{white-space:normal}
+ .itemicon,.sticon{width:41px;height:41px;font-size:18px;border-radius:12px}
+ .btn{font-size:13px;padding:12px 16px;min-height:43px}
+ .btn.tiny{font-size:12px;padding:9px 11px;min-height:36px}
+ .pill{font-size:12px;padding:6px 10px}
+ .tag{font-size:11px}
+ .field{gap:7px}
+ .field label{font-size:13px}
+ .field input,.field select,.field textarea{font-size:16px;padding:13px 12px;min-height:46px;border-radius:10px}
+ .field textarea{min-height:94px}
+ .chatbox{height: min(52vh,460px);padding:14px}
+ .bubble{font-size:14px;line-height:1.6;padding:12px 14px;max-width:92%}
+ .chatinput input{font-size:16px;min-height:46px;padding:12px}
+ .notice{font-size:12px;line-height:1.6;padding:13px}
+ .tablebox table{font-size:12px}
+ th{font-size:10px}
+ td{font-size:12px}
+ .remindline{padding:13px;gap:12px}
+ .remindline strong{font-size:14px;line-height:1.4}
+ .remindline span{font-size:12px;line-height:1.5}
+ .check{width:32px;height:32px;font-size:15px}
+ #mobileTabs{height:68px;left:9px;right:9px;padding:6px}
+ #mobileTabs button{font-size:11px;gap:4px}
+ #mobileTabs button svg{width:22px;height:22px}
+ .mobile{width:42px;height:42px;font-size:18px}
+ .onboard-art{min-height:220px;padding:25px 26px}
+ .onboard-art h1{font-size:30px;line-height:1.15}
+ .onboard-art p{font-size:14px;line-height:1.6}
+ .onboard-form{padding:26px 23px 30px}
+ .onboard-form h2{font-size:25px}
+ .onboard-form>p{font-size:14px;line-height:1.6}
+ .onboard-form .field label{font-size:13px}
+ .onboard-form .field input,.onboard-form .field select{font-size:16px;min-height:48px}
+ .onboard-submit{font-size:15px;min-height:48px}
+}
+@media(max-width:390px){
+ main{padding-left:12px;padding-right:12px}
+ .top{margin-left:-12px;margin-right:-12px;padding-left:12px;padding-right:12px}
+ .statvalue{font-size:24px}
+ .stats{gap:8px}
+ .card{padding:14px}
+ #mobileTabs{left:6px;right:6px}
+}
+</style>
+
+
+<style id="pressureless-global-readable-type">
+/* Global typography pass: increase every interface text size consistently. */
+body{font-size:16px!important;line-height:1.6!important}
+.date{font-size:13px!important;letter-spacing:.45px}
+.top h1{font-size:30px!important;line-height:1.2!important}
+.brandword{font-size:18px!important}
+.nav-label{font-size:12px!important}
+.nav button{font-size:15px!important;min-height:48px}
+.nav .ni{font-size:19px!important}
+.sidebottom{font-size:13px!important;line-height:1.55}
+.sidebottom strong{font-size:15px!important}
+.user{font-size:14px!important}
+h2{font-size:18px!important;line-height:1.35!important}
+.sectiontitle{font-size:24px!important;line-height:1.3!important}
+.sectiondesc{font-size:15px!important;line-height:1.55!important}
+.stathead{font-size:14px!important}
+.statvalue{font-size:32px!important}
+.statfoot,.sub{font-size:13px!important;line-height:1.5!important}
+.btn{font-size:14px!important;padding:11px 17px!important;line-height:1.35}
+.btn.tiny{font-size:12px!important;padding:8px 11px!important}
+.pill,.tag{font-size:12px!important;padding:6px 10px!important}
+.bpnum{font-size:42px!important}
+.bpunit{font-size:14px!important}
+.itemcopy strong{font-size:15px!important;line-height:1.4}
+.itemcopy span{font-size:13px!important;line-height:1.45}
+.itemicon{width:41px;height:41px;font-size:19px}
+.check{width:32px;height:32px;font-size:15px}
+.field label{font-size:13px!important}
+.field input,.field select,.field textarea{font-size:15px!important;padding:12px 13px!important;min-height:45px}
+.tinytext,.help{font-size:13px!important;line-height:1.55!important}
+.notice{font-size:13px!important;line-height:1.55!important;padding:13px 15px}
+th{font-size:12px!important}
+td{font-size:14px!important;padding:12px 10px}
+.legend{font-size:13px!important}
+.empty{font-size:14px!important;line-height:1.55}
+.remindline strong{font-size:15px!important;line-height:1.45}
+.remindline span{font-size:13px!important;line-height:1.5}
+.chatinput input{font-size:15px!important;min-height:46px}
+.chatinput .btn{min-width:76px}
+.bubble{font-size:15px!important;line-height:1.65!important;padding:12px 14px}
+.consent{font-size:13px!important;line-height:1.5}
+.status{font-size:13px!important}
+.extractrow{font-size:13px!important;line-height:1.5}
+.extractrow b{font-size:13px!important}
+.footer{font-size:12px!important}
+#mobileTabs button{font-size:12px!important}
+#mobileTabs button svg{width:23px;height:23px}
+.onboard-logo{font-size:20px!important}
+.onboard-art h1{font-size:clamp(32px,4vw,46px)!important}
+.onboard-art p{font-size:16px!important;line-height:1.7!important}
+.onboard-art-foot{font-size:13px!important}
+.onboard-step{font-size:12px!important}
+.onboard-form h2{font-size:30px!important}
+.onboard-form>p{font-size:15px!important;line-height:1.65!important}
+.onboard-form .field label{font-size:14px!important}
+.onboard-form .field input,.onboard-form .field select{font-size:16px!important;min-height:49px}
+.onboard-submit{font-size:16px!important;min-height:50px}
+.onboard-privacy{font-size:13px!important}
+@media(max-width:760px){
+ body{font-size:17px!important;line-height:1.65!important}
+ main{padding-left:15px!important;padding-right:15px!important}
+ .top h1{font-size:25px!important}
+ .date{font-size:13px!important}
+ .user{font-size:14px!important}
+ .sectiontitle{font-size:26px!important}
+ .sectiondesc{font-size:16px!important}
+ h2{font-size:19px!important}
+ .stathead{font-size:14px!important;line-height:1.45}
+ .statvalue{font-size:30px!important}
+ .statfoot,.sub{font-size:14px!important}
+ .itemcopy strong{font-size:16px!important;white-space:normal;overflow:visible}
+ .itemcopy span{font-size:14px!important;white-space:normal;overflow:visible}
+ .btn{font-size:15px!important;min-height:44px;padding:11px 16px!important}
+ .btn.tiny{font-size:13px!important;min-height:38px}
+ .pill,.tag{font-size:13px!important}
+ .bpnum{font-size:38px!important}
+ .bpunit{font-size:15px!important}
+ .field label{font-size:14px!important}
+ .field input,.field select,.field textarea{font-size:16px!important;min-height:49px;padding:13px 14px!important}
+ .notice,.tinytext,.help,.empty{font-size:14px!important}
+ th{font-size:12px!important}
+ td{font-size:14px!important}
+ .legend{font-size:13px!important}
+ .remindline strong{font-size:16px!important}
+ .remindline span{font-size:14px!important}
+ .bubble{font-size:16px!important;max-width:94%;line-height:1.7!important}
+ .chatinput input{font-size:16px!important;min-height:49px}
+ .consent,.status{font-size:14px!important}
+ .extractrow,.extractrow b{font-size:14px!important}
+ #mobileTabs{height:74px!important}
+ #mobileTabs button{font-size:12px!important;gap:4px}
+ #mobileTabs button svg{width:24px!important;height:24px!important}
+ .onboard-art h1{font-size:32px!important}
+ .onboard-art p{font-size:15px!important}
+ .onboard-form h2{font-size:27px!important}
+ .onboard-form>p{font-size:15px!important}
+ .onboard-form .field label{font-size:14px!important}
+ .onboard-form .field input,.onboard-form .field select{font-size:16px!important}
+ .onboard-submit{font-size:16px!important}
+ .onboard-privacy{font-size:13px!important}
+ .footer{font-size:12px!important}
+}
+@media(max-width:390px){
+ .sectiontitle{font-size:24px!important}
+ .statvalue{font-size:28px!important}
+ .itemcopy strong{font-size:15px!important}
+ .itemcopy span{font-size:13px!important}
+ #mobileTabs button{font-size:11px!important}
+}
+</style>
+
+
+<style id="pressureless-native-app-polish">
+/* Cohesive app typography and motion system — desktop + mobile */
+:root{--app-ease:cubic-bezier(.22,.8,.24,1);--app-duration:260ms}
+html{scroll-behavior:smooth}
+body,button,input,select,textarea{font-family:Inter,"SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;font-optical-sizing:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+body{font-size:15px;line-height:1.58;letter-spacing:-.012em}
+h1,h2,h3,.brand,.brandword,.statvalue,.bpnum,.sectiontitle{font-family:Inter,"SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-weight:720;letter-spacing:-.035em}
+h1{line-height:1.16}h2{line-height:1.3}.date,.nav-label,.field label,th{letter-spacing:.055em}
+/* Smooth, restrained feedback across the entire interface */
+a,button,.btn,.nav button,.card,.itemicon,.sticon,.avatar,.pill,.check,.field input,.field select,.field textarea,.chatinput input,.challenge,.remindline,.extract,.bubble,.sidebottom{transition:color var(--app-duration) var(--app-ease),background-color var(--app-duration) var(--app-ease),border-color var(--app-duration) var(--app-ease),box-shadow var(--app-duration) var(--app-ease),transform var(--app-duration) var(--app-ease),opacity var(--app-duration) var(--app-ease)}
+button:hover,.btn:hover{transform:translateY(-1px)}button:active,.btn:active{transform:translateY(0) scale(.975)}
+.card{transition:transform 280ms var(--app-ease),box-shadow 280ms var(--app-ease),border-color 280ms var(--app-ease)}
+.card:hover{box-shadow:0 14px 34px rgba(14,66,65,.095);border-color:#d5e4dc}
+.nav button{transition:background 220ms var(--app-ease),color 220ms var(--app-ease),transform 220ms var(--app-ease)}
+.nav button:hover{transform:translateX(3px)}
+.field input:focus,.field select:focus,.field textarea:focus,.chatinput input:focus{transform:translateY(-1px);box-shadow:0 0 0 3px rgba(38,159,148,.14)}
+.page.active{animation:appPageIn 360ms var(--app-ease) both}
+@keyframes appPageIn{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+.bubble{animation:appBubbleIn 220ms var(--app-ease) both}
+@keyframes appBubbleIn{from{opacity:0;transform:translateY(5px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}
+/* Desktop proportions and readable type */
+@media(min-width:721px){body{font-size:15px}.top h1{font-size:clamp(25px,2vw,31px)}h2{font-size:16px}.nav button{font-size:14px;min-height:46px}.nav .ni{font-size:19px}.stathead{font-size:13px}.statvalue{font-size:31px}.statfoot,.sub{font-size:13px}.sectiontitle{font-size:23px}.sectiondesc{font-size:14px}.itemcopy strong{font-size:14px}.itemcopy span{font-size:12px}.field label{font-size:12px}.field input,.field select,.field textarea,.chatinput input{font-size:14px}.btn{font-size:13px}.pill,.tag{font-size:11px}.notice,.help,.tinytext{font-size:12px}table{font-size:13px}th{font-size:10px}.bubble{font-size:14px}.sidebottom{font-size:12px}}
+/* Mobile: larger, touch-friendly type without changing the desktop layout */
+@media(max-width:720px){body{font-size:16px;line-height:1.62}main{padding:20px 15px}.top h1{font-size:24px}.date{font-size:12px}.brand{font-size:21px}.nav button{font-size:15px;min-height:49px}.nav .ni{font-size:20px}.nav-label{font-size:11px}.card{padding:17px;border-radius:16px}.stathead{font-size:12px}.statvalue{font-size:26px}.statfoot,.sub{font-size:12px}h2{font-size:17px}.sectiontitle{font-size:23px}.sectiondesc{font-size:14px}.bpnum{font-size:36px}.itemcopy strong{font-size:14px}.itemcopy span{font-size:12px}.field label{font-size:13px}.field input,.field select,.field textarea,.chatinput input{font-size:16px;min-height:47px;padding:12px}.btn{font-size:14px;min-height:43px;padding:11px 15px}.pill,.tag{font-size:11px}.notice,.help,.tinytext{font-size:12px;line-height:1.6}.bubble{font-size:15px;line-height:1.6;padding:12px 14px}.chatbox{height:min(52vh,430px)}.check{width:32px;height:32px}.challenge{padding:15px}.footer{font-size:11px}}
+@media(max-width:390px){.top h1{font-size:22px}.statvalue{font-size:24px}.card{padding:14px}.sectiontitle{font-size:21px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
+
+
+<style id="pressureless-refined-dark-mode">
+:root[data-theme="dark"]{color-scheme:dark;--bg:#101c1b;--panel:#192927;--ink:#e8f1ed;--muted:#a4b8b0;--line:#304640;--blue:#69c5b2;--blue2:#24443d;--teal:#70d0b5;--red:#f08b83;--amber:#e9bd75;--shadow:0 8px 28px rgba(0,0,0,.24)}
+:root[data-theme="dark"] body,:root[data-theme="dark"] .layout,:root[data-theme="dark"] main{background:var(--bg)!important;color:var(--ink)!important}
+:root[data-theme="dark"] aside,:root[data-theme="dark"] .top,:root[data-theme="dark"] .card,:root[data-theme="dark"] .user,:root[data-theme="dark"] #mobileTabs,:root[data-theme="dark"] .onboard-shell,:root[data-theme="dark"] .onboard-form{background:#192927!important;color:var(--ink)!important;border-color:var(--line)!important}
+:root[data-theme="dark"] .top{background:rgba(16,28,27,.94)!important;border-color:var(--line)!important}
+:root[data-theme="dark"] .top h1,:root[data-theme="dark"] .sectiontitle,:root[data-theme="dark"] h2,:root[data-theme="dark"] .itemcopy strong,:root[data-theme="dark"] .statvalue,:root[data-theme="dark"] .bpnum,:root[data-theme="dark"] .brandword{color:#e8f1ed!important}
+:root[data-theme="dark"] .nav button{color:#c0d0c9!important}:root[data-theme="dark"] .nav button.active,:root[data-theme="dark"] .nav button:hover{background:#24443d!important;color:#a6ead8!important}
+:root[data-theme="dark"] .nav .ni,:root[data-theme="dark"] .itemicon,:root[data-theme="dark"] .sticon,:root[data-theme="dark"] .avatar,:root[data-theme="dark"] .sidebottom,:root[data-theme="dark"] .remindline,:root[data-theme="dark"] .extract,:root[data-theme="dark"] .challenge,:root[data-theme="dark"] .tag{background:#223a34!important;color:#b8e1d4!important;border-color:var(--line)!important}
+:root[data-theme="dark"] .field input,:root[data-theme="dark"] .field select,:root[data-theme="dark"] .field textarea,:root[data-theme="dark"] .chatinput input,:root[data-theme="dark"] .bubble,:root[data-theme="dark"] .chatbox{background:#142321!important;color:var(--ink)!important;border-color:#3a514a!important}
+:root[data-theme="dark"] input::placeholder,:root[data-theme="dark"] textarea::placeholder{color:#91a69d!important}
+:root[data-theme="dark"] .bubble.user{background:#176b68!important;color:white!important}
+:root[data-theme="dark"] .btn.light{background:#2b403a!important;color:#d5e5de!important}:root[data-theme="dark"] .btn.soft,:root[data-theme="dark"] .btn.teal{background:#24483f!important;color:#b9eadb!important}
+:root[data-theme="dark"] .pill,:root[data-theme="dark"] .check.done{background:#24483f!important;color:#a9e8d5!important}
+:root[data-theme="dark"] .notice{background:#302b20!important;color:#f0d8a6!important;border-color:#5a4a2e!important}:root[data-theme="dark"] .notice.blue{background:#203a3c!important;color:#c2e3df!important;border-color:#365b59!important}:root[data-theme="dark"] .notice.red{background:#40282b!important;color:#ffd2d0!important;border-color:#684044!important}
+:root[data-theme="dark"] th,:root[data-theme="dark"] td{color:#d4e2dc!important;border-color:var(--line)!important}
+:root[data-theme="dark"] .onboard-art{background:#0d4544!important}:root[data-theme="dark"] .onboard-form h2{color:#e8f1ed!important}:root[data-theme="dark"] .onboard-form>p,:root[data-theme="dark"] .onboard-privacy{color:#a9bbb3!important}
+:root[data-theme="dark"] #dashboard>.card:first-child{background:#1d3832!important;border-color:#36534a!important}:root[data-theme="dark"] #dashboard>.card:first-child h2{color:#e5f3ed!important}
+</style>
+
+
+<style id="pressureless-arabic-rtl-polish">
+:root[lang="ar"] body,:root[lang="ar"] button,:root[lang="ar"] input,:root[lang="ar"] select,:root[lang="ar"] textarea{font-family:"Noto Sans Arabic",Tahoma,Arial,sans-serif;letter-spacing:0}
+:root[dir="rtl"] .layout{direction:rtl;grid-template-columns:minmax(0,1fr) 244px}
+:root[dir="rtl"] aside{grid-column:2;grid-row:1;border-right:0;border-left:1px solid var(--line)}
+:root[dir="rtl"] main{grid-column:1;grid-row:1}
+:root[dir="rtl"] .nav button{text-align:right;flex-direction:row}
+:root[dir="rtl"] .top,:root[dir="rtl"] .cardhead,:root[dir="rtl"] .stathead,:root[dir="rtl"] .item,:root[dir="rtl"] .challenge{direction:rtl}
+:root[dir="rtl"] .field input,:root[dir="rtl"] .field select,:root[dir="rtl"] .field textarea{text-align:right;direction:rtl}
+:root[dir="rtl"] .bubble{direction:rtl;text-align:right}
+:root[dir="rtl"] .nav button:hover{transform:translateX(-3px)}
+@media(max-width:760px){:root[dir="rtl"] .layout{display:block}:root[dir="rtl"] aside{left:auto;right:0;transform:translateX(105%);border-left:1px solid var(--line);border-right:0}:root[dir="rtl"] aside.open{transform:translateX(0)}:root[dir="rtl"] #mobileTabs{direction:rtl}}
+</style>
+
+</head>
+<body>
+
+<div id="languageGate" role="dialog" aria-modal="true" aria-labelledby="languageTitle" style="position:fixed;inset:0;z-index:2000;background:linear-gradient(135deg,#f3f2e9,#dcefe8);display:flex;align-items:center;justify-content:center;padding:22px">
+ <div style="width:min(520px,100%);background:#fff;border:1px solid #dce8e1;border-radius:24px;padding:clamp(24px,5vw,42px);box-shadow:0 24px 70px #164b4320;text-align:center">
+  <div style="width:58px;height:58px;border-radius:18px;background:#e1f1e9;color:#176e68;display:grid;place-items:center;margin:0 auto 16px;font-size:28px">♥</div>
+  <div style="font-weight:850;letter-spacing:2px;color:#176e68;font-size:13px">PRESSURELESS</div>
+  <h1 id="languageTitle" style="font-size:clamp(25px,5vw,34px);margin:12px 0 6px;color:#183b38">Choose your language</h1>
+  <p style="color:#71827d;margin:0 0 22px">اختر لغتك للمتابعة</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+   <button id="chooseEnglish" type="button" style="border:1px solid #b9d8ce;background:#edf7f2;color:#185c56;border-radius:14px;padding:17px;font-weight:800;font-size:17px">English</button>
+   <button id="chooseArabic" type="button" style="border:1px solid #b9d8ce;background:#edf7f2;color:#185c56;border-radius:14px;padding:17px;font-weight:800;font-size:17px;direction:rtl">العربية</button>
+  </div>
+  <p style="font-size:11px;color:#87948f;margin:18px 0 0">You can change this later in Settings.</p>
+ </div>
+</div>
+
+<div id="onboarding" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
+ <div class="onboard-shell">
+  <div class="onboard-art">
+   <div class="onboard-logo"><span class="onboard-logo-mark"><svg viewBox="0 0 48 48" fill="none"><path d="M24 40S6 29 6 17.5C6 10.8 11 7 16.2 7c3.8 0 6.5 2.2 7.8 5 1.3-2.8 4-5 7.8-5C37 7 42 10.8 42 17.5 42 29 24 40 24 40Z" stroke="currentColor" stroke-width="2.4"/><path d="M10 24h8l4-8 5 15 4-7h7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>PRESSURELESS</div>
+   <div><h1>Your health, in your hands.</h1><p>A calmer way to keep track of blood pressure, medicines and everyday habits — all in one place.</p></div>
+   <div class="onboard-art-foot">YOUR BLOOD PRESSURE COMPANION · PRIVATE BY DESIGN</div>
+  </div>
+  <form class="onboard-form" id="welcomeForm">
+   <div class="onboard-step">Let's get started · 1 minute</div>
+   <h2 id="welcomeTitle">First, what should we call you?</h2>
+   <p>Set up your profile so Pressureless can greet you and organize your health records. You can edit these details any time.</p>
+   <div class="field"><label for="welcomeName">Your name *</label><input id="welcomeName" autocomplete="given-name" placeholder="Enter your name" maxlength="70" required></div>
+   <div class="field"><label for="welcomeCondition">What brings you here?</label><select id="welcomeCondition"><option value="Hypertension" selected>High blood pressure (hypertension)</option><option value="Hypotension">Low blood pressure (hypotension)</option><option value="Both high and low blood pressure">Monitoring both high and low blood pressure</option><option value="Diabetes">Diabetes</option><option value="Heart disease">Heart disease</option><option value="Other">Other / supporting someone</option></select></div>
+   <div class="field"><label for="welcomeDoctor">Doctor or clinic <span class="muted">(optional)</span></label><input id="welcomeDoctor" placeholder="Your care provider" maxlength="100"></div>
+   <div class="field"><label for="welcomeAllergies">Allergies <span class="muted">(optional)</span></label><input id="welcomeAllergies" placeholder="As recorded by your clinician" maxlength="180"></div>
+   <button class="btn onboard-submit" type="submit">Create my profile <span aria-hidden="true">→</span></button>
+   <div class="onboard-privacy">Your profile is saved in this browser on this device. This standalone HTML does not create an online account or sync data between devices.</div>
+  </form>
+ </div>
+</div>
+
+<div class="layout">
+<aside id="sidebar">
+ <div class="brand"><div class="brandmark" aria-hidden="true">
+  <svg viewBox="0 0 48 48" width="29" height="29" fill="none" xmlns="http://www.w3.org/2000/svg">
+   <path d="M24 40S6 29 6 17.5C6 10.8 11 7 16.2 7c3.8 0 6.5 2.2 7.8 5 1.3-2.8 4-5 7.8-5C37 7 42 10.8 42 17.5 42 29 24 40 24 40Z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+   <path d="M10 24h8l4-8 5 15 4-7h7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+ </div><span class="brandword">PRESSURE<span>LESS</span></span></div>
+ <div><div class="nav-label">Hypertension care</div><nav class="nav">
+  <button class="active" data-page="dashboard"><span class="ni"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="5" rx="2"/><rect x="13" y="10" width="8" height="11" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/></svg></span>Dashboard</button>
+  <button data-page="scanner"><span class="ni"><svg viewBox="0 0 24 24"><path d="M7 3H5a2 2 0 0 0-2 2v2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M3 17v2a2 2 0 0 0 2 2h2"/><path d="M7 8h10v8H7zM9 11h6M9 13h4"/></svg></span>AI prescription scanner</button>
+  <button data-page="medications"><span class="ni"><svg viewBox="0 0 24 24"><path d="M10.5 3.5a5 5 0 0 1 7.1 7.1l-7 7a5 5 0 0 1-7.1-7.1z"/><path d="m8 8 8 8"/><path d="M14 4l6 6"/></svg></span>Medication organizer</button>
+  <button data-page="assistant"><span class="ni"><svg viewBox="0 0 24 24"><path d="m12 2 1.7 6.3L20 10l-6.3 1.7L12 18l-1.7-6.3L4 10l6.3-1.7L12 2Z"/><path d="m19 15 .8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z"/><path d="M5 3v3M3.5 4.5h3"/></svg></span>AI medical assistant</button>
+  <button data-page="blood"><span class="ni"><svg viewBox="0 0 24 24"><path d="M3 12h4l2-5 4 10 2-5h6"/><path d="M12 22s-8-4.7-8-12a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 7.3-8 12-8 12Z"/></svg></span>Blood pressure tracker</button>
+  <button data-page="lifestyle"><span class="ni"><svg viewBox="0 0 24 24"><path d="M20 4c-8 0-14 3-14 10a6 6 0 0 0 6 6c7 0 10-8 8-16Z"/><path d="M4 21c3-5 7-8 12-11"/></svg></span>Health & lifestyle journal</button>
+  <button data-page="challenges"><span class="ni"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v5c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6z"/><path d="m8.5 12 2.2 2.2 4.8-5"/></svg></span>Daily health challenges</button>
+  <button data-page="history"><span class="ni"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 12h7M9 16h7"/></svg></span>Medical history & reports</button>
+  <button data-page="settings"><span class="ni"><svg viewBox="0 0 24 24"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"/><path d="m19.4 15 .1.1a1.7 1.7 0 0 1-2.4 2.4l-.1-.1a1.7 1.7 0 0 0-2.9 1.2v.2a1.7 1.7 0 0 1-3.4 0v-.2a1.7 1.7 0 0 0-2.9-1.2l-.1.1a1.7 1.7 0 1 1-2.4-2.4l.1-.1a1.7 1.7 0 0 0-1.2-2.9H4a1.7 1.7 0 0 1 0-3.4h.2a1.7 1.7 0 0 0 1.2-2.9l-.1-.1a1.7 1.7 0 1 1 2.4-2.4l.1.1a1.7 1.7 0 0 0 2.9-1.2V2a1.7 1.7 0 0 1 3.4 0v.2a1.7 1.7 0 0 0 2.9 1.2l.1-.1a1.7 1.7 0 1 1 2.4 2.4l-.1.1a1.7 1.7 0 0 0 1.2 2.9h.2a1.7 1.7 0 0 1 0 3.4h-.2a1.7 1.7 0 0 0-1.2 2.9Z"/></svg></span>Settings & AI connection</button>
+ </nav></div>
+ <div class="sidebottom"><strong>Your blood pressure companion</strong>Smarter tracking. Better habits. A healthier you. Keep your doctor involved in care decisions.</div>
+</aside>
+<main>
+<header class="top"><div class="top-left"><button class="mobile" id="menu" aria-label="Open menu">☰</button><div><div class="date" id="todayDate"></div><h1 id="pageTitle">Your health at a glance</h1></div></div><div class="user"><div class="avatar" id="avatar">JD</div><span id="userNameTop">Patient profile</span></div></header>
+
+<section class="page active" id="dashboard">
+ <div class="card" style="margin-bottom:16px;background:linear-gradient(120deg,#f4f7ff,#fff);border-color:#e4eaff"><div class="cardhead"><div><span class="tag">YOUR BLOOD PRESSURE COMPANION</span><h2 style="font-size:20px;margin-top:8px">Track your blood pressure with confidence</h2><p class="sub" style="font-size:12px;max-width:850px;line-height:1.7">PRESSURELESS is your blood pressure companion: track your readings, manage your medication, and build healthier habits in one place. It brings prescription reading, medication scheduling, reminders, blood pressure trends, lifestyle journaling and medical reports together in one place.</p></div><div class="sticon" style="width:48px;height:48px;font-size:22px">♥</div></div><div class="divider"></div><div class="cards cols2"><div><b style="font-size:11px">The goal</b><p class="sub" style="font-size:11px;line-height:1.7">Support patients in managing their health, reduce missed medicines and appointments, improve awareness of hypertension and its complications, encourage healthy habits, and make it easier to track progress and communicate with a doctor.</p></div><div><b style="font-size:11px">What makes it different</b><p class="sub" style="font-size:11px;line-height:1.7">Unlike a general wellness tracker, Pressureless is designed around blood pressure care, including high and low readings and connects AI-assisted prescription scanning with medication adherence, blood pressure monitoring, lifestyle patterns and shareable medical history.</p></div></div></div>
+ <div class="cards stats">
+  <div class="card"><div class="stathead">Latest blood pressure <span class="sticon">♡</span></div><div class="statvalue" id="dashBP">—</div><div class="statfoot" id="dashBPnote">Add your first reading</div></div>
+  <div class="card"><div class="stathead">Medication adherence <span class="sticon">◷</span></div><div class="statvalue" id="dashAdherence">—</div><div class="statfoot" id="dashAdherenceNote">Based on logged doses</div></div>
+  <div class="card"><div class="stathead">Average sleep <span class="sticon">☾</span></div><div class="statvalue" id="dashSleep">—</div><div class="statfoot">From your lifestyle journal</div></div>
+  <div class="card"><div class="stathead">Current habit streak <span class="sticon">⚡</span></div><div class="statvalue" id="dashStreak">0 days</div><div class="statfoot">Days with at least one challenge completed</div></div>
+ </div>
+ <div class="cards cols2">
+  <div class="card"><div class="cardhead"><div><h2>Blood pressure trend</h2><div class="sub">Your recorded readings over time</div></div><button class="btn soft" data-go="blood">Open tracker</button></div><div class="kpi"><div><div class="bpnum" id="dashLatest">—</div><div class="bpunit">mmHg · latest reading</div></div><span class="pill gray" id="bpReadingsN">0 readings</span></div><canvas class="chart" id="bpChart" aria-label="Blood pressure trend"></canvas><div class="legend"><span><i class="dot"></i>Systolic</span><span><i class="dot dia"></i>Diastolic</span></div></div>
+  <div class="card"><div class="cardhead"><div><h2>Today's medication schedule</h2><div class="sub">Mark each dose as taken or missed</div></div><button class="btn soft" data-go="medications">Manage</button></div><div id="dashMeds" class="list"><div class="empty">Add your prescribed medicines to build a schedule.</div></div></div>
+ </div>
+ <div class="cards cols2" style="margin-top:16px">
+  <div class="card"><div class="cardhead"><div><h2>Daily health challenges</h2><div class="sub">Simple actions that support a healthy routine</div></div><button class="btn soft" data-go="challenges">View all</button></div><div class="list" id="dashChallenges"></div></div>
+  <div class="card"><div class="cardhead"><div><h2>Quick actions</h2><div class="sub">Keep your health record up to date</div></div></div><div class="btnline"><button class="btn" data-go="blood">＋ Add BP reading</button><button class="btn soft" data-go="scanner">Scan prescription</button><button class="btn light" data-go="lifestyle">Log daily habits</button></div><div class="notice blue">Pressureless helps organize information. It does not diagnose hypertension or replace advice from your doctor or pharmacist.</div></div>
+ </div>
+</section>
+
+<section class="page" id="scanner">
+ <h2 class="sectiontitle">AI prescription scanner</h2><p class="sectiondesc">Upload or photograph a prescription. The AI model reads visible information and prepares a draft for you to review.</p>
+ <div class="cards cols2">
+  <div class="card"><div class="cardhead"><h2>Upload prescription image</h2><span class="pill gray">AI image analysis</span></div>
+   <div class="field"><label for="rxImage">Prescription photo or image</label><input id="rxImage" type="file" accept="image/png,image/jpeg,image/webp,image/gif" capture="environment"></div>
+   <div id="rxPreviewWrap" class="hidden" style="margin-top:12px"><img id="rxPreview" alt="Prescription preview" style="max-width:100%;max-height:240px;border-radius:12px;border:1px solid var(--line)"></div>
+   <label class="consent"><input id="rxConsent" type="checkbox"><span>I understand this image will be sent to the configured OpenAI model for text extraction. I will verify every result against the original prescription before saving.</span></label>
+   <div class="btnline" style="margin-top:13px"><button class="btn" id="scanRx">Scan with AI model</button><span class="status" id="aiStatus"><i></i>Checking AI connection…</span></div>
+   <div class="notice">The scanner transcribes; it does not prescribe. It must not guess unreadable medicine names, doses or timings. Do not rely on an AI extraction as an instruction to take medicine.</div>
+  </div>
+  <div class="card"><div class="cardhead"><h2>Review extracted details</h2><span class="tag">Not saved automatically</span></div><div id="rxResult" class="empty">Your AI extraction will appear here. Check the name, active ingredient, strength, dose, route, frequency, timing and instructions carefully.</div><div id="rxUseWrap" class="hidden btnline" style="margin-top:12px"><button class="btn soft" id="useRx">Use reviewed details in medication form</button></div></div>
+ </div>
+</section>
+
+<section class="page" id="medications">
+ <h2 class="sectiontitle">Medication organizer & smart reminders</h2><p class="sectiondesc">Create the daily schedule exactly as prescribed, receive reminders, and record each dose as taken or missed.</p>
+ <div class="cards cols2">
+  <div class="card"><div class="cardhead"><h2>Add prescribed medication</h2><span class="pill gray">Patient-managed list</span></div><form id="medForm" class="formgrid">
+   <div class="field full"><label for="medName">Medication name</label><input id="medName" required placeholder="Enter the name exactly as on the prescription"></div>
+   <div class="field"><label for="medIngredient">Active ingredient (optional)</label><input id="medIngredient" placeholder="As confirmed by pharmacist"></div>
+   <div class="field"><label for="medStrength">Strength / dosage</label><input id="medStrength" required placeholder="e.g. 5 mg"></div>
+   <div class="field"><label for="medDose">Dose as prescribed</label><input id="medDose" placeholder="e.g. 1 tablet"></div>
+   <div class="field"><label for="medRoute">Route</label><select id="medRoute"><option>Oral</option><option>Topical</option><option>Injection</option><option>Other / as prescribed</option></select></div>
+   <div class="field"><label for="medFrequency">Frequency</label><select id="medFrequency"><option>Once daily</option><option>Twice daily</option><option>Three times daily</option><option>Four times daily</option><option>As needed (PRN)</option><option>Other / as prescribed</option></select></div>
+   <div class="field"><label for="medTimes">Dose time(s)</label><input id="medTimes" required placeholder="08:00, 20:00"></div>
+   <div class="field"><label for="medDuration">Duration (optional)</label><input id="medDuration" placeholder="As written on prescription"></div>
+   <div class="field full"><label for="medInstructions">Special instructions</label><input id="medInstructions" placeholder="e.g. with food — only if written/confirmed"></div>
+   <div class="field full"><label for="medNotes">Notes (optional)</label><textarea id="medNotes" rows="2" placeholder="Pharmacist confirmation, prescriber notes…"></textarea></div>
+   <div class="field full"><label class="consent"><input id="medReminderOn" type="checkbox" checked><span>Enable an in-browser reminder for the dose times while Pressureless is open.</span></label></div>
+   <div class="field full"><button class="btn">Save medication schedule</button></div>
+  </form></div>
+  <div class="card"><div class="cardhead"><div><h2>Today's doses</h2><div class="sub">Taken, missed and still pending</div></div><span class="pill gray" id="medTodayCount">0 logged</span></div><div class="btnline" style="margin-bottom:12px"><button class="btn soft" id="enableNotifications">Enable browser notifications</button><span class="status" id="notifyStatus"><i></i>Notification status</span></div><div class="list" id="medDoseList"><div class="empty">No medication schedule added yet.</div></div><div class="divider"></div><div class="kpi"><span class="tinytext">Adherence from recorded doses</span><strong id="medAdherence">—</strong></div><div class="progress" style="margin-top:8px"><span id="medAdherenceBar" style="width:0%"></span></div></div>
+ </div>
+ <div class="card" style="margin-top:16px"><div class="cardhead"><h2>Saved medication list</h2><span class="sub">Review the schedule with your pharmacist or doctor</span></div><div class="tablebox"><table><thead><tr><th>Medicine</th><th>Strength</th><th>Dose</th><th>Frequency</th><th>Times</th><th>Instructions</th><th></th></tr></thead><tbody id="medRows"></tbody></table></div></div>
+ <div class="cards cols2" style="margin-top:16px"><div class="card"><div class="cardhead"><h2>Doctor appointment reminders</h2><span class="pill gray">Smart reminders</span></div><form id="appointmentForm" class="formgrid"><div class="field full"><label for="apptProvider">Doctor / clinic</label><input id="apptProvider" required placeholder="Doctor or clinic name"></div><div class="field"><label for="apptDate">Appointment date & time</label><input id="apptDate" type="datetime-local" required></div><div class="field"><label for="apptReason">Reason (optional)</label><input id="apptReason" placeholder="Follow-up, review…"></div><div class="field full"><button class="btn">Add appointment reminder</button></div></form><p class="help">A browser notification is scheduled 15 minutes before the appointment while Pressureless is open and notifications are enabled.</p></div><div class="card"><div class="cardhead"><h2>Upcoming appointments</h2><span class="pill gray" id="appointmentCount">0 appointments</span></div><div class="list" id="appointmentList"><div class="empty">No appointments added yet.</div></div></div></div>
+ <div class="notice">Pressureless does not decide how much medicine you should take. Never change or double a dose based on an app reminder. Follow the prescription and ask your pharmacist or prescriber when unsure.</div>
+</section>
+
+<section class="page" id="assistant">
+ <h2 class="sectiontitle">AI medical assistant</h2><p class="sectiondesc">Ask about hypertension, medicine terminology and your saved records. The assistant uses a real model through your server-side OpenAI API key.</p>
+ <div class="cards cols2">
+  <div class="card"><div class="cardhead"><div><h2>Ask Pressureless AI</h2><div class="sub">Plain-language health education</div></div><span class="pill gray" id="assistantModel">Local model not loaded</span></div>
+   <div class="notice blue" id="localModelNotice">Use the small on-device model without an API key. First use downloads the model (about 365 MB); after caching, it can run locally in a compatible browser.</div>
+   <div class="btnline" style="margin:10px 0 12px"><button class="btn teal" type="button" id="loadLocalModel">Download & enable on-device AI</button><span class="status" id="localModelStatus"><i></i>Not downloaded</span></div>
+   <div class="chatbox" id="chatbox"><div class="bubble">Hello. I can explain general hypertension information, help you understand terms on medicine labels and summarize the records you choose to share. I cannot diagnose, prescribe or change a treatment plan.</div></div>
+   <form class="chatinput" id="chatForm"><input id="chatInput" placeholder="Ask about blood pressure or medicines…" required><button class="btn">Send</button></form>
+   <label class="consent" id="apiConsentWrap"><input id="chatConsent" type="checkbox"><span>I consent to sending my message and the selected summary of my saved Pressureless records to the configured OpenAI service. This is required only when using the cloud model.</span></label>
+   <div class="help" style="margin-top:7px">Only the summary displayed by this app is attached to the request. Do not enter information you do not wish to send to the AI provider.</div>
+  </div>
+  <div class="card"><div class="cardhead"><h2>What the assistant can help explain</h2><span class="sticon">✦</span></div><div class="list">
+   <div class="item"><div class="itemicon">♡</div><div class="itemcopy"><strong>Blood pressure basics</strong><span>Understand systolic, diastolic and monitoring terms.</span></div></div>
+   <div class="item"><div class="itemicon">💊</div><div class="itemcopy"><strong>Medication information</strong><span>Explain general terms; verify details with a pharmacist.</span></div></div>
+   <div class="item"><div class="itemicon">▤</div><div class="itemcopy"><strong>Your recorded information</strong><span>Summarize logged readings, medicines and lifestyle entries.</span></div></div>
+   <div class="item"><div class="itemicon">🩺</div><div class="itemcopy"><strong>Prepare for a doctor visit</strong><span>Help organize questions and report highlights.</span></div></div>
+  </div><div class="notice">AI can make mistakes. It is not a doctor and must not be used for diagnosis, emergencies, or treatment decisions. Confirm clinical information with a qualified professional.</div></div>
+ </div>
+</section>
+
+<section class="page" id="blood">
+ <h2 class="sectiontitle">Blood pressure tracker</h2><p class="sectiondesc">Record high and low readings, see changes over time and keep a history to discuss with your healthcare professional.</p>
+ <div class="cards cols2">
+  <div class="card"><div class="cardhead"><h2>Record a blood pressure reading</h2><span class="pill gray">Daily tracking</span></div><form id="bpForm" class="formgrid">
+   <div class="field"><label for="sys">Systolic (mmHg)</label><input id="sys" type="number" min="40" max="300" required placeholder="e.g. 120"></div>
+   <div class="field"><label for="dia">Diastolic (mmHg)</label><input id="dia" type="number" min="20" max="200" required placeholder="e.g. 80"></div>
+   <div class="field"><label for="pulse">Pulse (bpm, optional)</label><input id="pulse" type="number" min="20" max="250" placeholder="e.g. 72"></div>
+   <div class="field"><label for="bpDate">Date and time</label><input id="bpDate" type="datetime-local" required></div>
+   <div class="field full"><label for="bpNotes">Notes / how you felt</label><input id="bpNotes" placeholder="Optional context, e.g. before breakfast"></div>
+   <div class="field full"><button class="btn">Save reading</button></div>
+  </form></div>
+  <div class="card"><div class="cardhead"><h2>Latest recorded reading</h2><span class="pill gray" id="bpStatus">No readings</span></div><div class="bpnum" id="bpLatestBig">—</div><div class="bpunit">mmHg · systolic / diastolic</div><div class="sub" id="bpLatestDate">No reading recorded yet</div><div class="notice blue">For consistent measurements, sit quietly with your back supported and feet flat, use the correct cuff size on a bare arm at heart level, and take at least two readings one minute apart. Record both.</div><div class="notice red hidden" id="bpUrgentNotice">This reading is higher than 180 systolic and/or 120 diastolic. Wait at least one minute and repeat the measurement. If it remains this high, contact a healthcare professional immediately. If you also have chest pain, shortness of breath, back pain, numbness, weakness, vision changes or difficulty speaking, seek emergency medical help now.</div><div class="notice amber hidden" id="bpLowNotice">This reading is in a low range (below 90 systolic and/or below 60 diastolic). Some people naturally have lower readings without symptoms. If you feel dizzy, faint, weak, nauseated or have blurred vision, sit or lie down and contact a healthcare professional for advice. Seek emergency help for fainting, confusion, cold/clammy skin, rapid breathing or other severe symptoms. Do not change prescribed medicines without medical advice.</div></div>
+ </div>
+ <div class="card" style="margin-top:16px"><div class="cardhead"><div><h2>Blood pressure history</h2><div class="sub">Compare systolic and diastolic readings</div></div><span class="pill gray" id="bpCount">0 readings</span></div><canvas class="chart" id="historyChart" aria-label="Blood pressure history chart"></canvas><div class="legend"><span><i class="dot"></i>Systolic</span><span><i class="dot dia"></i>Diastolic</span></div><div class="divider"></div><div class="tablebox"><table><thead><tr><th>Date / time</th><th>Systolic</th><th>Diastolic</th><th>Pulse</th><th>Notes</th><th></th></tr></thead><tbody id="bpRows"></tbody></table></div></div>
+</section>
+
+<section class="page" id="lifestyle">
+ <h2 class="sectiontitle">Health & lifestyle journal</h2><p class="sectiondesc">Record stress, sleep, physical activity, food habits and salt consumption. Look for patterns alongside your blood pressure readings.</p>
+ <div class="card"><div class="cardhead"><h2>Today's lifestyle entry</h2><span class="pill gray">Daily journal</span></div><form id="lifeForm" class="formgrid">
+  <div class="field"><label for="sleepHours">Sleep duration (hours)</label><input id="sleepHours" type="number" min="0" max="24" step="0.1" placeholder="e.g. 7.5" required></div>
+  <div class="field"><label for="stressLevel">Stress level</label><select id="stressLevel"><option>Low</option><option>Moderate</option><option>High</option></select></div>
+  <div class="field"><label for="activityMinutes">Physical activity (minutes)</label><input id="activityMinutes" type="number" min="0" max="1440" placeholder="e.g. 30"></div>
+  <div class="field"><label for="foodHabits">Food habits today</label><select id="foodHabits"><option>Balanced / varied</option><option>More packaged or processed food</option><option>More fruit and vegetables</option><option>Irregular meals</option><option>Other / not sure</option></select></div>
+  <div class="field"><label for="saltIntake">Salt consumption</label><select id="saltIntake"><option>Low</option><option>Moderate</option><option>High</option><option>Not sure</option></select></div>
+  <div class="field"><label for="waterIntake">Water / hydration notes</label><input id="waterIntake" placeholder="Optional"></div>
+  <div class="field full"><label for="lifeNotes">Other notes / possible factors</label><textarea id="lifeNotes" rows="3" placeholder="Meals, mood, symptoms or factors you want to remember…"></textarea></div>
+  <div class="field full"><button class="btn">Save lifestyle entry</button></div>
+ </form></div>
+ <div class="card" style="margin-top:16px"><div class="cardhead"><h2>Recent lifestyle journal</h2><span class="pill gray" id="lifeCount">0 entries</span></div><div class="list" id="lifeEntries"><div class="empty">No entries yet. Add today's lifestyle details above.</div></div></div>
+</section>
+
+<section class="page" id="challenges">
+ <h2 class="sectiontitle">Daily health challenges</h2><p class="sectiondesc">Build healthy routines through small daily actions: physical activity, better sleep, mindful salt consumption and consistent healthy habits.</p>
+ <div class="cards cols3">
+  <div class="card"><div class="sticon">🚶</div><h2 style="margin-top:12px">Move regularly</h2><p class="sub">Choose suitable physical activity that fits your abilities and your clinician's guidance.</p><div class="progress"><span id="moveProgress" style="width:0%"></span></div><div class="sub" id="moveProgressText">0 of 7 days checked this week</div></div>
+  <div class="card"><div class="sticon">🌙</div><h2 style="margin-top:12px">Support healthy sleep</h2><p class="sub">Work toward a consistent sleep and wake routine.</p><div class="progress"><span id="sleepProgress" style="width:0%"></span></div><div class="sub" id="sleepProgressText">0 of 7 days checked this week</div></div>
+  <div class="card"><div class="sticon">🧂</div><h2 style="margin-top:12px">Be mindful of salt</h2><p class="sub">Check food labels and notice how often you choose lower-salt options.</p><div class="progress"><span id="saltProgress" style="width:0%"></span></div><div class="sub" id="saltProgressText">0 of 7 days checked this week</div></div>
+ </div>
+ <div class="card" style="margin-top:16px"><div class="cardhead"><div><h2>Today's simple checklist</h2><div class="sub">Tick a challenge when completed. New day, fresh checklist.</div></div><span class="pill gray" id="challengeCount">0 / 4 completed</span></div><div class="list" id="challengeList"></div></div>
+ <div class="notice">These challenges are general habit prompts, not a prescribed exercise or diet plan. Follow individual advice from your healthcare professional, especially if you have activity restrictions.</div>
+</section>
+
+<section class="page" id="history">
+ <h2 class="sectiontitle">Medical history & reports</h2><p class="sectiondesc">Keep previous blood pressure readings, medication records and treatment-adherence information together. Prepare a summary to share with your doctor.</p>
+ <div class="cards cols2">
+  <div class="card"><div class="cardhead"><h2>Patient and medical profile</h2><span class="pill gray">Editable</span></div><form id="profileForm" class="formgrid">
+   <div class="field"><label for="patientName">Patient name</label><input id="patientName" placeholder="Your name"></div>
+   <div class="field"><label for="doctorName">Doctor / clinic</label><input id="doctorName" placeholder="Optional"></div>
+   <div class="field"><label for="condition">Health condition</label><input id="condition" value="Hypertension"></div>
+   <div class="field"><label for="allergies">Allergies (if any)</label><input id="allergies" placeholder="As recorded by your clinician"></div>
+   <div class="field full"><label for="medicalNotes">Medical notes / relevant history</label><textarea id="medicalNotes" rows="3" placeholder="Previous diagnoses, relevant history, or topics to discuss…"></textarea></div>
+   <div class="field full"><button class="btn">Save medical profile</button></div>
+  </form></div>
+  <div class="card"><div class="cardhead"><h2>Report contents</h2><span class="pill gray">Live summary</span></div><div class="list">
+   <div class="item"><div class="itemicon">♡</div><div class="itemcopy"><strong>Blood pressure history</strong><span id="reportBPCount">0 previous readings</span></div></div>
+   <div class="item"><div class="itemicon">💊</div><div class="itemcopy"><strong>Registered medicines</strong><span id="reportMedCount">0 medications</span></div></div>
+   <div class="item"><div class="itemicon">✓</div><div class="itemcopy"><strong>Treatment adherence</strong><span id="reportAdherence">No doses logged</span></div></div>
+   <div class="item"><div class="itemicon">☀</div><div class="itemcopy"><strong>Lifestyle journal</strong><span id="reportLifeCount">0 entries</span></div></div>
+  </div><div class="divider"></div><div class="btnline no-print"><button class="btn" id="downloadReport">Download health report (.txt)</button><button class="btn soft" id="printReport">Print / Save as PDF</button></div><div class="notice blue">Review the report before sharing it. It contains personal health information stored in this browser.</div></div>
+ </div>
+ <div class="card" style="margin-top:16px"><div class="cardhead"><h2>Recent medical record timeline</h2><span class="sub">Readings, medications and lifestyle</span></div><div class="list" id="timeline"><div class="empty">Your saved records will appear here.</div></div></div>
+</section>
+
+
+<section class="page" id="settings">
+ <h2 class="sectiontitle">Settings & AI connection</h2>
+ <p class="sectiondesc">Connect your own OpenAI API key to enable the AI medical assistant and prescription scanner.</p>
+ <div class="card ai-settings-card">
+  <div class="cardhead">
+   <div style="display:flex;align-items:center;gap:12px">
+    <div class="sticon" style="width:46px;height:46px;background:#e5f3ed;color:#126b68">
+     <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 1.7 6.3L20 10l-6.3 1.7L12 18l-1.7-6.3L4 10l6.3-1.7L12 2Z"/><path d="m19 15 .8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z"/></svg>
+    </div>
+    <div><h2>OpenAI connection</h2><div class="sub">Use your own API account</div></div>
+   </div>
+   <span class="pill amber" id="apiKeyBadge">Not connected</span>
+  </div>
+  <div class="api-status" id="apiKeyStatus"><span class="status-dot"></span><span>No API key entered in this browser session.</span></div>
+  <div class="divider"></div>
+  <div class="field">
+   <label for="openaiApiKey">OpenAI API key</label>
+   <div class="api-key-row">
+    <input id="openaiApiKey" type="password" autocomplete="off" spellcheck="false" placeholder="sk-...">
+    <button class="btn soft" id="toggleApiKey" type="button">Show key</button>
+   </div>
+   <div class="help">Your key is kept in this browser tab's session storage and sent to your local Pressureless server only when you use an AI feature. It is not saved in your medical profile or browser's persistent storage. Closing the tab clears it.</div>
+  </div>
+  <div class="btnline" style="margin-top:14px">
+   <button class="btn" id="saveApiKey" type="button">Save API key for this session</button>
+   <button class="btn light" id="clearApiKey" type="button">Remove key</button>
+   <button class="btn teal" id="testApiKey" type="button">Test connection</button>
+  </div>
+  <div class="notice blue">For safety, use this option only on your own trusted computer. Do not share your API key or publish this app with a key embedded in its HTML. API usage is billed separately by OpenAI.</div>
+ </div>
+ <div class="card ai-settings-card" style="margin-top:16px">
+  <h2>AI features</h2>
+  <div class="list" style="margin-top:14px">
+   <div class="item"><div class="itemicon" style="color:#167b72">✦</div><div class="itemcopy"><strong>AI medical assistant</strong><span>General education and help organizing questions for your clinician.</span></div><span class="pill gray">Uses API key</span></div>
+   <div class="item"><div class="itemicon" style="color:#167b72">▧</div><div class="itemcopy"><strong>AI prescription scanner</strong><span>Reads visible text from a prescription image for you to verify.</span></div><span class="pill gray">Uses API key</span></div>
+  </div>
+ </div>
+ <div class="card ai-settings-card" style="margin-top:16px" id="deviceStorageCard">
+  <div class="cardhead"><div><h2>Automatic saving</h2><p class="sub">Your profile, language, theme and health records are saved on this device automatically.</p></div><span class="pill" id="storageBadge">Saved locally</span></div>
+  <div class="api-status" id="storageStatus" role="status" aria-live="polite"><span class="status-dot"></span><span>Checking browser storage…</span></div>
+  <div class="btnline" style="margin-top:12px"><button class="btn teal" type="button" id="exportBackup">Download full backup</button><button class="btn light" type="button" id="importBackupButton">Restore backup</button><input id="importBackupFile" type="file" accept="application/json,.json" class="hidden"></div>
+  <p class="help" style="margin-top:10px">Saved data stays in this browser on this device. It does not automatically sync to another phone or computer. Use a backup to move your records to another device. API keys are not included.</p>
+ </div>
+ <div class="card ai-settings-card" style="margin-top:16px">
+  <h2>Appearance & language</h2><p class="sub">Choose how Pressureless looks and which language it uses.</p>
+  <div class="formgrid" style="margin-top:14px">
+   <div class="field"><label for="languageSelect">Language / اللغة</label><select id="languageSelect"><option value="en">English</option><option value="ar">العربية</option></select></div>
+   <div class="field"><label for="themeSelect">Appearance</label><select id="themeSelect"><option value="light">Light mode</option><option value="dark">Dark mode</option><option value="system">Follow device setting</option></select></div>
+  </div>
+ </div>
+ <div class="card ai-settings-card" style="margin-top:16px">
+  <h2>Apple Health</h2>
+  <p class="sub">Connect health data through a supported iPhone app or import readings from a blood-pressure monitor.</p>
+  <div class="notice blue">A normal HTML website cannot directly connect to Apple Health or read HealthKit data. This requires a native iOS app with your permission to access HealthKit. Apple Watch does not directly measure blood pressure; readings must come from a compatible blood-pressure cuff or monitor and then be written to Apple Health by its companion app.</div>
+  <div class="btnline" style="margin-top:12px"><button class="btn soft" id="healthImportInfo" type="button">How to bring readings from Apple Health</button><button class="btn light" id="healthCsvImport" type="button">Import BP readings CSV</button><input id="healthCsvFile" type="file" accept=".csv,text/csv" class="hidden"></div>
+  <p class="help" style="margin-top:9px">CSV import expects columns named date, systolic, diastolic and optionally pulse. Check every imported reading for accuracy.</p>
+ </div>
+ <div class="card ai-settings-card" style="margin-top:16px">
+  <h2>On-device AI model (no API key)</h2><p class="sub">Run a compact language model directly in this browser. Your chat stays on this device when local mode is selected.</p>
+  <div class="notice blue">Model: SmolLM2 360M Instruct, a compact general-purpose model. The model files are downloaded from Hugging Face the first time (about 365 MB), then cached by your browser. It may be slower on older phones and needs an internet connection for the initial download. It is not medically trained, cannot read prescription images, and must not be used for diagnosis or treatment decisions.</div>
+  <div class="btnline" style="margin-top:12px"><button class="btn teal" type="button" id="loadLocalModelSettings">Download & enable local AI</button><span class="status" id="localModelSettingsStatus"><i></i>Not downloaded</span></div>
+ </div>
+</section>
+
+<div class="footer">Pressureless · Your blood pressure companion · Local browser storage · Not a medical device or substitute for professional care</div>
+</main></div>
+
+<nav id="mobileTabs" aria-label="App navigation">
+ <button class="active" data-mobile-page="dashboard"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="5" rx="2"/><rect x="13" y="10" width="8" height="11" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/></svg><span>Home</span></button>
+ <button data-mobile-page="blood"><svg viewBox="0 0 24 24"><path d="M3 12h4l2-5 4 10 2-5h6"/><path d="M12 22s-8-4.7-8-12a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 7.3-8 12-8 12Z"/></svg><span>Pressure</span></button>
+ <button data-mobile-page="medications"><svg viewBox="0 0 24 24"><path d="M10.5 3.5a5 5 0 0 1 7.1 7.1l-7 7a5 5 0 0 1-7.1-7.1z"/><path d="m8 8 8 8"/></svg><span>Medicines</span></button>
+ <button data-mobile-page="lifestyle"><svg viewBox="0 0 24 24"><path d="M20 4c-8 0-14 3-14 10a6 6 0 0 0 6 6c7 0 10-8 8-16Z"/><path d="M4 21c3-5 7-8 12-11"/></svg><span>Journal</span></button>
+ <button data-mobile-page="assistant"><svg viewBox="0 0 24 24"><path d="m12 2 1.7 6.3L20 10l-6.3 1.7L12 18l-1.7-6.3L4 10l6.3-1.7L12 2Z"/><path d="m19 15 .8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z"/></svg><span>AI</span></button>\n <button id="mobileMore"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg><span>More</span></button>
+</nav>
+
+<script>
+'use strict';
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const today=()=>new Date().toLocaleDateString('en-CA');
+const uid=()=>Math.random().toString(36).slice(2,10);
+const defaultState=()=>({readings:[],medications:[],doseLogs:[],appointments:[],lifestyle:[],challengeDays:{},profile:{name:'',doctor:'',condition:'Hypertension',allergies:'',notes:''},rxDraft:null,settings:{}});
+let state=defaultState(),chatHistory=[];let notificationTimer=null;
+const titles={dashboard:'Your health at a glance',scanner:'AI prescription scanner',medications:'Medication organizer',assistant:'AI medical assistant',blood:'Blood pressure tracker',lifestyle:'Health & lifestyle journal',challenges:'Daily health challenges',history:'Medical history & reports',settings:'Settings & AI connection'};
+const STATE_STORAGE_KEY='pulsecare_v2';
+let memoryState=null,storageWriteAvailable=true,lastSavedAt=null;
+function mergeState(saved){const base=defaultState();return {...base,...saved,profile:{...base.profile,...(saved.profile||{})},settings:{...base.settings,...(saved.settings||{})},readings:Array.isArray(saved.readings)?saved.readings:base.readings,medications:Array.isArray(saved.medications)?saved.medications:base.medications,doseLogs:Array.isArray(saved.doseLogs)?saved.doseLogs:base.doseLogs,appointments:Array.isArray(saved.appointments)?saved.appointments:base.appointments,lifestyle:Array.isArray(saved.lifestyle)?saved.lifestyle:base.lifestyle,challengeDays:saved.challengeDays&&typeof saved.challengeDays==='object'?saved.challengeDays:base.challengeDays};}
+function load(){try{const raw=localStorage.getItem(STATE_STORAGE_KEY)||localStorage.getItem('pressureless_state_v1')||localStorage.getItem('pulsecare');if(raw){const parsed=JSON.parse(raw);if(parsed&&typeof parsed==='object'){state=mergeState(parsed);memoryState=state;lastSavedAt=localStorage.getItem('pressureless_last_saved')||null;if(!localStorage.getItem(STATE_STORAGE_KEY))save();return}}state=defaultState();memoryState=state}catch(e){storageWriteAvailable=false;state=memoryState?mergeState(memoryState):defaultState()}}
+function updateStorageStatus(ok=storageWriteAvailable){const box=$('#storageStatus'),badge=$('#storageBadge');if(!box||!badge)return;const ar=document.documentElement.lang==='ar';box.classList.toggle('connected',!!ok);badge.textContent=ok?(ar?'يُحفظ تلقائيًا':'Auto-saved'):(ar?'تعذّر الحفظ':'Storage unavailable');const when=lastSavedAt?new Date(lastSavedAt).toLocaleString(ar?'ar-EG':'en-US',{dateStyle:'short',timeStyle:'short'}):'';const msg=ok?(ar?`تُحفظ بياناتك على هذا الجهاز تلقائيًا${when?' · آخر حفظ: '+when:''}`:`Your data is saved automatically on this device${when?' · Last saved: '+when:''}`):(ar?'تعذّر على المتصفح حفظ البيانات. تأكد من السماح بتخزين المواقع وعدم استخدام التصفح الخاص.':'The browser could not save your data. Allow site storage and avoid private browsing.');box.innerHTML=`<span class="status-dot"></span><span>${esc(msg)}</span>`;}
+function save(){memoryState=state;lastSavedAt=new Date().toISOString();try{localStorage.setItem(STATE_STORAGE_KEY,JSON.stringify(state));localStorage.setItem('pressureless_last_saved',lastSavedAt);storageWriteAvailable=true;updateStorageStatus(true);return true}catch(e){storageWriteAvailable=false;updateStorageStatus(false);return false}}
+function esc(x){return String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function dtLabel(v){try{return new Date(v).toLocaleString([], {month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'})}catch{return v}}
+function go(id){$$('.page').forEach(p=>p.classList.toggle('active',p.id===id));$$('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));syncMobileTabs(id);$('#pageTitle').textContent=titles[id]||'Pressureless';$('#sidebar').classList.remove('open');renderAll();if(id==='assistant')checkAIStatus()}
+$$('.nav button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.page)));$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));$('#menu').onclick=()=>$('#sidebar').classList.toggle('open');
+$$('[data-mobile-page]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.mobilePage)));$('#mobileMore').onclick=()=>$('#sidebar').classList.toggle('open');
+$('#welcomeForm').onsubmit=e=>{e.preventDefault();const name=$('#welcomeName').value.trim();if(!name){$('#welcomeName').focus();return}state.profile={...state.profile,name,doctor:$('#welcomeDoctor').value.trim(),condition:$('#welcomeCondition').value,allergies:$('#welcomeAllergies').value.trim(),notes:state.profile.notes||''};save();$('#onboarding').classList.remove('show');renderAll();$('#pageTitle').textContent=`Welcome, ${name.split(/\s+/)[0]}`;};
+function syncMobileTabs(id){$$('[data-mobile-page]').forEach(b=>b.classList.toggle('active',b.dataset.mobilePage===id));} 
+
+$('#todayDate').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+$('#bpDate').value=new Date().toISOString().slice(0,16);
+function todayLogs(){return state.doseLogs.filter(x=>x.date===today())}
+function allAdherence(){const logs=state.doseLogs.filter(x=>x.status==='taken'||x.status==='missed');return logs.length?Math.round(logs.filter(x=>x.status==='taken').length/logs.length*100):null}
+function medDosesForToday(){const arr=[];for(const m of state.medications){(m.times||[]).forEach(time=>arr.push({med:m,time,log:state.doseLogs.find(x=>x.date===today()&&x.medId===m.id&&x.time===time)}))}return arr.sort((a,b)=>a.time.localeCompare(b.time))}
+function challengeItems(){return [{id:'move',icon:'🚶',title:'Do suitable physical activity',desc:'Choose movement that fits your abilities and clinician guidance.'},{id:'sleep',icon:'🌙',title:'Support a regular sleep routine',desc:'Make time for a consistent wind-down routine.'},{id:'salt',icon:'🧂',title:'Make a mindful, lower-salt food choice',desc:'Check labels and notice your salt intake.'},{id:'healthy',icon:'🌿',title:'Practice one healthy daily habit',desc:'Choose a manageable step that supports your wellbeing.'}]}
+function statusPill(status){return status==='taken'?'<span class="pill">Taken</span>':status==='missed'?'<span class="pill red">Missed</span>':'<span class="pill amber">Pending</span>'}
+function bpAssessment(reading){if(!reading)return null;const sys=+reading.sys,dia=+reading.dia;if(sys>180||dia>120)return {kind:'high-critical',label:'Very high reading'};if(sys<90||dia<60)return {kind:'low',label:'Low-range reading'};if(sys>=140||dia>=90)return {kind:'high',label:'High-range reading'};if(sys>=130||dia>=80)return {kind:'above',label:'Above ideal range'};return {kind:'recorded',label:'Reading recorded'};}
+function renderDashboard(){
+ const r=[...state.readings].sort((a,b)=>b.date.localeCompare(a.date)),latest=r[0];$('#dashBP').textContent=latest?`${latest.sys}/${latest.dia}`:'—';$('#dashBPnote').textContent=latest?dtLabel(latest.date):'Add your first reading';$('#dashLatest').textContent=latest?`${latest.sys}/${latest.dia}`:'—';$('#bpReadingsN').textContent=`${r.length} readings`;
+ if(latest){const a=bpAssessment(latest);if(a.kind==='high-critical')$('#dashBPnote').innerHTML='<span class="bad">Very high · repeat and follow urgent guidance</span>';else if(a.kind==='low')$('#dashBPnote').innerHTML='<span style="color:#a66a19;font-weight:700">Low-range reading · check symptoms</span>';else $('#dashBPnote').textContent=a.label+' · '+dtLabel(latest.date)}
+ const adh=allAdherence();$('#dashAdherence').textContent=adh===null?'—':adh+'%';$('#dashAdherenceNote').textContent=state.doseLogs.length?`${state.doseLogs.filter(x=>x.status==='taken').length} taken · ${state.doseLogs.filter(x=>x.status==='missed').length} missed`:'No doses logged yet';
+ const sl=state.lifestyle.slice(-7).filter(x=>Number.isFinite(+x.sleep));$('#dashSleep').textContent=sl.length?(sl.reduce((s,x)=>s+(+x.sleep),0)/sl.length).toFixed(1)+'h':'—';
+ let streak=0;for(let i=0;i<30;i++){const d=new Date();d.setDate(d.getDate()-i);const key=d.toLocaleDateString('en-CA');if((state.challengeDays[key]||[]).length)streak++;else if(i>0)break}$('#dashStreak').textContent=streak+' days';
+ const doses=medDosesForToday();$('#dashMeds').innerHTML=doses.length?doses.map(d=>`<div class="item"><div class="itemicon">💊</div><div class="itemcopy"><strong>${esc(d.med.name)} · ${esc(d.time)}</strong><span>${esc(d.med.strength||'')} ${d.med.dose?'· '+esc(d.med.dose):''}</span></div>${statusPill(d.log?.status||'pending')}</div>`).join(''):'<div class="empty">No medicine schedule yet. Add prescribed medicines in Medication Organizer.</div>';
+ const done=state.challengeDays[today()]||[];$('#dashChallenges').innerHTML=challengeItems().slice(0,3).map(x=>`<div class="item"><div class="itemicon">${x.icon}</div><div class="itemcopy"><strong>${x.title}</strong><span>${x.desc}</span></div><span class="tag">${done.includes(x.id)?'Done':'Today'}</span></div>`).join('');
+ drawChart($('#bpChart'),r.slice(0,7).reverse());
+}
+function drawChart(canvas,data){if(!canvas)return;const ctx=canvas.getContext('2d'),w=canvas.clientWidth||400,h=canvas.clientHeight||190,dpr=window.devicePixelRatio||1;canvas.width=w*dpr;canvas.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);const pad=25,low=40,high=200;for(let i=0;i<5;i++){const y=pad+(h-pad*2)*i/4;ctx.strokeStyle='#edf1f6';ctx.beginPath();ctx.moveTo(pad,y);ctx.lineTo(w-10,y);ctx.stroke();ctx.fillStyle='#9aa5b6';ctx.font='11px sans-serif';ctx.fillText(String(Math.round(high-(high-low)*i/4)),2,y+3)}if(!data.length){ctx.fillStyle='#9aa5b6';ctx.font='14px sans-serif';ctx.fillText('Add readings to see your chart',pad,h/2);return}function line(k,color){ctx.beginPath();ctx.strokeStyle=color;ctx.lineWidth=2.5;data.forEach((v,i)=>{const x=pad+(w-pad-15)*(data.length===1?.5:i/(data.length-1)),y=h-pad-(Math.max(low,Math.min(high,+v[k]))-low)/(high-low)*(h-2*pad);i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke();data.forEach((v,i)=>{const x=pad+(w-pad-15)*(data.length===1?.5:i/(data.length-1)),y=h-pad-(Math.max(low,Math.min(high,+v[k]))-low)/(high-low)*(h-2*pad);ctx.fillStyle=color;ctx.beginPath();ctx.arc(x,y,3.5,0,Math.PI*2);ctx.fill()})}line('sys','#4169e1');line('dia','#159b89')}
+function renderBP(){const rows=[...state.readings].sort((a,b)=>b.date.localeCompare(a.date)),latest=rows[0];$('#bpCount').textContent=`${rows.length} readings`;$(`#bpRows`).innerHTML=rows.map(r=>`<tr><td>${esc(dtLabel(r.date))}</td><td>${r.sys} mmHg</td><td>${r.dia} mmHg</td><td>${r.pulse||'—'}</td><td>${esc(r.notes||'—')}</td><td><button class="btn red tiny" data-delbp="${r.id}">Delete</button></td></tr>`).join('')||'<tr><td colspan="6" class="muted">No readings saved yet.</td></tr>';
+ $('#bpLatestBig').textContent=latest?`${latest.sys}/${latest.dia}`:'—';$('#bpLatestDate').textContent=latest?dtLabel(latest.date):'No reading recorded yet';const assessment=bpAssessment(latest);$('#bpStatus').textContent=assessment?assessment.label:'No readings';$('#bpUrgentNotice').classList.toggle('hidden',!(assessment&&assessment.kind==='high-critical'));$('#bpLowNotice').classList.toggle('hidden',!(assessment&&assessment.kind==='low'));drawChart($('#historyChart'),rows.slice(0,14).reverse());$$('[data-delbp]').forEach(b=>b.onclick=()=>{if(confirm('Delete this blood pressure reading?')){state.readings=state.readings.filter(x=>x.id!==b.dataset.delbp);save();renderAll()}})
+}
+function renderMeds(){const doses=medDosesForToday();$('#medTodayCount').textContent=`${todayLogs().length} logged`;
+ $('#medDoseList').innerHTML=doses.length?doses.map(d=>`<div class="remindline"><div style="min-width:0;flex:1"><strong>${esc(d.med.name)} · ${esc(d.time)}</strong><br><span>${esc(d.med.strength||'')} ${d.med.dose?'· '+esc(d.med.dose):''} ${d.med.instructions?'· '+esc(d.med.instructions):''}</span><br>${statusPill(d.log?.status||'pending')}</div><div class="btnline">${d.log?'<button class="btn light tiny" data-undo="'+d.med.id+'|'+d.time+'">Undo</button>':'<button class="btn teal tiny" data-dose="'+d.med.id+'|'+d.time+'|taken">Taken</button><button class="btn red tiny" data-dose="'+d.med.id+'|'+d.time+'|missed">Missed</button>'}</div></div>`).join(''):'<div class="empty">No active dose times for today. Add your medicines and their prescribed dose times.</div>';
+ const adh=allAdherence();$('#medAdherence').textContent=adh===null?'—':adh+'%';$('#medAdherenceBar').style.width=(adh||0)+'%';
+ $('#medRows').innerHTML=state.medications.map(m=>`<tr><td><b>${esc(m.name)}</b><br><span class="tinytext">${esc(m.ingredient||'')}</span></td><td>${esc(m.strength||'—')}</td><td>${esc(m.dose||'—')}</td><td>${esc(m.frequency||'—')}</td><td>${(m.times||[]).map(esc).join(', ')}</td><td>${esc(m.instructions||'—')}</td><td><button class="btn red tiny" data-delmed="${m.id}">Remove</button></td></tr>`).join('')||'<tr><td colspan="7" class="muted">No saved medicines.</td></tr>';
+ $$('[data-dose]').forEach(b=>b.onclick=()=>{const [medId,time,status]=b.dataset.dose.split('|');state.doseLogs.push({id:uid(),medId,time,status,date:today(),loggedAt:new Date().toISOString()});save();renderAll()});$$('[data-undo]').forEach(b=>b.onclick=()=>{const [id,time]=b.dataset.undo.split('|');state.doseLogs=state.doseLogs.filter(x=>!(x.date===today()&&x.medId===id&&x.time===time));save();renderAll()});$$('[data-delmed]').forEach(b=>b.onclick=()=>{if(confirm('Remove this medication from your schedule? Previous dose logs will remain in the report.')){state.medications=state.medications.filter(x=>x.id!==b.dataset.delmed);save();renderAll()}});
+ $('#reportMedCount').textContent=`${state.medications.length} medications`;$('#reportAdherence').textContent=adh===null?'No doses logged':`${adh}% from ${state.doseLogs.length} dose records`;
+}
+function renderAppointments(){const entries=[...state.appointments].sort((a,b)=>a.at.localeCompare(b.at));$('#appointmentCount').textContent=`${entries.filter(x=>x.status==='scheduled').length} appointments`;$('#appointmentList').innerHTML=entries.length?entries.map(a=>{const overdue=a.status==='scheduled'&&new Date(a.at)<new Date();return `<div class="remindline"><div style="min-width:0;flex:1"><strong>${esc(a.provider)}</strong><br><span>${esc(dtLabel(a.at))}${a.reason?' · '+esc(a.reason):''}</span><br>${a.status==='completed'?'<span class="pill">Completed</span>':a.status==='cancelled'?'<span class="pill gray">Cancelled</span>':overdue?'<span class="pill amber">Past appointment</span>':'<span class="pill amber">Scheduled</span>'}</div>${a.status==='scheduled'?`<div class="btnline"><button class="btn teal tiny" data-apptdone="${a.id}">Done</button><button class="btn red tiny" data-apptcancel="${a.id}">Cancel</button></div>`:''}</div>`}).join(''):'<div class="empty">No appointments added yet.</div>';$$('[data-apptdone]').forEach(b=>b.onclick=()=>{const a=state.appointments.find(x=>x.id===b.dataset.apptdone);if(a)a.status='completed';save();renderAll()});$$('[data-apptcancel]').forEach(b=>b.onclick=()=>{const a=state.appointments.find(x=>x.id===b.dataset.apptcancel);if(a)a.status='cancelled';save();renderAll()})}
+function renderLife(){ $('#lifeCount').textContent=`${state.lifestyle.length} entries`;$('#lifeEntries').innerHTML=state.lifestyle.slice().reverse().map(x=>`<div class="item"><div class="itemicon">☀</div><div class="itemcopy"><strong>${esc(x.date)} · ${esc(x.sleep)} hours sleep · ${esc(x.activity||'0')} min activity</strong><span>Stress: ${esc(x.stress)} · Food: ${esc(x.food)} · Salt: ${esc(x.salt)}${x.notes?' · '+esc(x.notes):''}</span></div></div>`).join('')||'<div class="empty">No entries yet.</div>';$('#reportLifeCount').textContent=`${state.lifestyle.length} entries`}
+function renderChallenges(){const done=state.challengeDays[today()]||[];$('#challengeCount').textContent=`${done.length} / 4 completed`;$('#challengeList').innerHTML=challengeItems().map(x=>`<div class="challenge"><div class="itemicon">${x.icon}</div><div class="itemcopy"><strong>${x.title}</strong><span>${x.desc}</span></div><button class="check ${done.includes(x.id)?'done':''}" data-challenge="${x.id}" aria-label="Toggle ${x.title}">${done.includes(x.id)?'✓':'○'}</button></div>`).join('');$$('[data-challenge]').forEach(b=>b.onclick=()=>{const id=b.dataset.challenge,arr=state.challengeDays[today()]||[];state.challengeDays[today()]=arr.includes(id)?arr.filter(x=>x!==id):[...arr,id];save();renderAll()});
+ const dayCount=key=>Object.values({[key]:state.challengeDays[key]||[]})[key].length;const d7=[];for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);d7.push(d.toLocaleDateString('en-CA'))}for(const [id,el,text] of [['move','#moveProgress','#moveProgressText'],['sleep','#sleepProgress','#sleepProgressText'],['salt','#saltProgress','#saltProgressText']]){const n=d7.filter(k=>(state.challengeDays[k]||[]).includes(id)).length;$(el).style.width=(n/7*100)+'%';$(text).textContent=`${n} of 7 days checked this week`}}
+function renderHistory(){const p=state.profile;$('#patientName').value=p.name||'';$('#doctorName').value=p.doctor||'';$('#condition').value=p.condition||'Hypertension';$('#allergies').value=p.allergies||'';$('#medicalNotes').value=p.notes||'';$('#reportBPCount').textContent=`${state.readings.length} previous readings`;const events=[...state.readings.map(x=>({date:x.date,icon:'♡',title:`Blood pressure: ${x.sys}/${x.dia} mmHg`,detail:x.notes||'Reading recorded'})),...state.lifestyle.map(x=>({date:x.created||x.date,icon:'☀',title:'Lifestyle journal entry',detail:`${x.sleep}h sleep · ${x.activity||0} min activity · ${x.stress} stress`})),...state.doseLogs.map(x=>({date:x.loggedAt||x.date,icon:'💊',title:`Dose ${x.status}`,detail:(state.medications.find(m=>m.id===x.medId)?.name||'Medication')+' · '+x.time})),...state.appointments.map(x=>({date:x.at,icon:'🩺',title:`Doctor appointment ${x.status}`,detail:x.provider+' · '+(x.reason||'Appointment')}))].sort((a,b)=>String(b.date).localeCompare(String(a.date))).slice(0,15);$('#timeline').innerHTML=events.map(x=>`<div class="item"><div class="itemicon">${x.icon}</div><div class="itemcopy"><strong>${esc(x.title)}</strong><span>${esc(x.detail)} · ${esc(x.date)}</span></div></div>`).join('')||'<div class="empty">Your saved records will appear here.</div>';}
+function renderAll(){if(state.profile.name){$('#userNameTop').textContent=state.profile.name;$('#avatar').textContent=state.profile.name.split(/\s+/).slice(0,2).map(x=>x[0]).join('').toUpperCase()}renderDashboard();renderBP();renderMeds();renderAppointments();renderLife();renderChallenges();renderHistory();updateNotificationStatus()}
+$('#bpForm').onsubmit=e=>{e.preventDefault();const sys=+$('#sys').value,dia=+$('#dia').value;if(sys<=0||dia<=0)return;state.readings.push({id:uid(),sys,dia,pulse:+$('#pulse').value||null,date:$('#bpDate').value,notes:$('#bpNotes').value});save();e.target.reset();$('#bpDate').value=new Date().toISOString().slice(0,16);renderAll();if(sys>180||dia>120)alert('Very high reading: wait at least one minute and repeat it. If it remains this high, contact a healthcare professional immediately. If you have chest pain, shortness of breath, back pain, numbness, weakness, vision changes or difficulty speaking, seek emergency medical help now.');else if(sys<90||dia<60)alert('Low-range reading saved. Some people naturally have lower readings. If you have dizziness, faintness, weakness, nausea or blurred vision, sit or lie down and contact a healthcare professional for advice. Seek emergency help for fainting, confusion, cold/clammy skin or severe symptoms. Do not change medicines without medical advice.');else alert('Blood pressure reading saved.');};
+$('#medForm').onsubmit=e=>{e.preventDefault();const times=$('#medTimes').value.split(',').map(x=>x.trim()).filter(Boolean);if(!times.length||times.some(t=>!/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(t))){alert('Enter dose times in 24-hour format, separated by commas (example: 08:00, 20:00).');return}state.medications.push({id:uid(),name:$('#medName').value.trim(),ingredient:$('#medIngredient').value.trim(),strength:$('#medStrength').value.trim(),dose:$('#medDose').value.trim(),route:$('#medRoute').value,frequency:$('#medFrequency').value,times:[...new Set(times)].sort(),duration:$('#medDuration').value.trim(),instructions:$('#medInstructions').value.trim(),notes:$('#medNotes').value.trim(),reminder:$('#medReminderOn').checked,created:new Date().toISOString()});save();e.target.reset();$('#medReminderOn').checked=true;renderAll();alert('Medication schedule saved. Please confirm it matches the original prescription.')};
+$('#appointmentForm').onsubmit=e=>{e.preventDefault();const at=$('#apptDate').value;if(!at||new Date(at)<=new Date()){alert('Choose a future appointment date and time.');return}state.appointments.push({id:uid(),provider:$('#apptProvider').value.trim(),at,reason:$('#apptReason').value.trim(),status:'scheduled',created:new Date().toISOString()});save();e.target.reset();renderAll();alert('Appointment reminder saved. Enable browser notifications to receive the 15-minute reminder while Pressureless is open.')};
+$('#lifeForm').onsubmit=e=>{e.preventDefault();state.lifestyle.push({id:uid(),date:today(),created:new Date().toISOString(),sleep:$('#sleepHours').value,stress:$('#stressLevel').value,activity:$('#activityMinutes').value||0,food:$('#foodHabits').value,salt:$('#saltIntake').value,water:$('#waterIntake').value,notes:$('#lifeNotes').value});save();e.target.reset();renderAll();alert('Lifestyle journal entry saved.')};
+$('#profileForm').onsubmit=e=>{e.preventDefault();state.profile={name:$('#patientName').value.trim(),doctor:$('#doctorName').value.trim(),condition:$('#condition').value.trim(),allergies:$('#allergies').value.trim(),notes:$('#medicalNotes').value.trim()};save();renderAll();alert('Medical profile saved in this browser.')};
+function updateNotificationStatus(){const el=$('#notifyStatus');if(!('Notification'in window)){el.innerHTML='<i></i>Not supported by this browser';return}el.innerHTML=Notification.permission==='granted'?'<i></i>Notifications enabled':Notification.permission==='denied'?'<i></i>Notifications blocked':'<i></i>Permission not yet granted';el.classList.toggle('online',Notification.permission==='granted')}
+$('#enableNotifications').onclick=async()=>{if(!('Notification'in window)){alert('This browser does not support notifications.');return}const p=await Notification.requestPermission();updateNotificationStatus();if(p==='granted')new Notification('Pressureless reminders enabled',{body:'Dose reminders can appear while Pressureless is open.'})};
+function checkDoseReminders(){if(!('Notification'in window)||Notification.permission!=='granted')return;const now=new Date();const todayKey=today();for(const m of state.medications.filter(x=>x.reminder)){for(const time of m.times||[]){const [h,mi]=time.split(':').map(Number);const due=new Date();due.setHours(h,mi,0,0);const diff=Math.abs(now-due);const key=`${todayKey}|${m.id}|${time}`;if(diff<45_000&&!state.settings[key]){const already=state.doseLogs.find(x=>x.date===todayKey&&x.medId===m.id&&x.time===time);if(!already){new Notification(`Medication reminder: ${m.name}`,{body:`Scheduled dose time: ${time}. Follow your prescription and record this dose in Pressureless.`});state.settings[key]=true;save()}}}}for(const a of state.appointments.filter(x=>x.status==='scheduled')){const remaining=new Date(a.at).getTime()-now.getTime(),key=`appointment|${a.id}`;if(remaining>0&&remaining<=15*60_000&&!state.settings[key]){new Notification(`Appointment reminder: ${a.provider}`,{body:`Your appointment is at ${dtLabel(a.at)}${a.reason?' · '+a.reason:''}.`});state.settings[key]=true;save()}}}
+notificationTimer=setInterval(checkDoseReminders,15_000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkDoseReminders()});
+let selectedImageData=null;$('#rxImage').onchange=()=>{const f=$('#rxImage').files[0];selectedImageData=null;$('#rxPreviewWrap').classList.add('hidden');$('#rxResult').textContent='';$('#rxUseWrap').classList.add('hidden');if(!f)return;if(!['image/jpeg','image/png','image/webp','image/gif'].includes(f.type)){alert('Please choose a JPEG, PNG, WEBP or GIF image.');$('#rxImage').value='';return}if(f.size>5*1024*1024){alert('Please choose an image smaller than 5 MB.');$('#rxImage').value='';return}const reader=new FileReader();reader.onload=()=>{selectedImageData=reader.result;$('#rxPreview').src=reader.result;$('#rxPreviewWrap').classList.remove('hidden')};reader.readAsDataURL(f)};
+async function checkAIStatus(){try{const r=await fetch('/api/status',{headers:aiHeaders()}),d=await r.json();const text=d.configured?`AI connected · ${d.model} / image ${d.visionModel}`:`API key needed · ${d.model}`;$('#aiStatus').innerHTML=`<i></i>${esc(text)}`;$('#aiStatus').classList.toggle('online',d.configured);$('#assistantModel').textContent=d.configured?d.model+' connected':'Model not configured';$('#assistantModel').className=d.configured?'pill':'pill amber'}catch{$('#aiStatus').innerHTML='<i></i>Start the Pressureless server';$('#assistantModel').textContent='Server unavailable';$('#assistantModel').className='pill red'}}
+$('#scanRx').onclick=async()=>{if(!selectedImageData){alert('Choose a prescription image first.');return}if(!$('#rxConsent').checked){alert('Please confirm that you understand the prescription image will be sent to the configured AI model.');return}const btn=$('#scanRx');btn.disabled=true;btn.textContent='AI is reading image…';$('#rxResult').innerHTML='<div class="empty">Sending image to the configured AI model. It may take a moment…</div>';$('#rxUseWrap').classList.add('hidden');try{const mime=$('#rxImage').files[0].type;const resp=await fetch('/api/scan-prescription',{method:'POST',headers:{'Content-Type':'application/json',...aiHeaders()},body:JSON.stringify({imageData:selectedImageData,mimeType:mime})});const data=await resp.json();if(!resp.ok)throw new Error(data.error||'Scan failed');let parsed;try{const match=data.output_text.match(/\{[\s\S]*\}/);if(match)parsed=JSON.parse(match[0])}catch{}state.rxDraft=parsed||{visible_text:data.output_text,confidence:'low',uncertain_or_unreadable:['AI output could not be parsed into fields. Please enter details manually.']};save();renderRxDraft(data.output_text); }catch(err){$('#rxResult').innerHTML=`<div class="notice red">${esc(err.message)}</div>`}finally{btn.disabled=false;btn.textContent='Scan with AI model'}};
+function renderRxDraft(raw){const d=state.rxDraft;if(d?.medicines?.length){$('#rxResult').innerHTML=`<div class="notice amber">AI extraction only. Review each medicine against the original document. This is not a prescription verification.</div>`+d.medicines.map((m,i)=>`<div class="extract"><b>Medicine ${i+1}: ${esc(m.medication_name||'Not clear')}</b><div class="extractgrid">${[['Active ingredient',m.active_ingredient],['Strength',m.strength],['Dose as written',m.dose_as_written],['Route',m.route],['Frequency',m.frequency],['Schedule',m.times_or_schedule],['Duration',m.duration],['Instructions',m.special_instructions],['Prescriber',m.prescriber],['Confidence',m.confidence]].map(([k,v])=>`<div class="extractrow"><b>${k}</b>${esc(v||'Not visible')}</div>`).join('')}</div></div>`).join('')+`<p class="help">${esc(d.general_notes||'Check every field with your pharmacist or doctor.')}</p>`}else{const fields=d||{};$('#rxResult').innerHTML=`<div class="notice">AI extraction confidence: ${esc(fields.confidence||'low')}. Verify every detail with the original prescription.</div><div class="extractgrid">${[['Medication name',fields.medication_name],['Active ingredient',fields.active_ingredient],['Strength',fields.strength],['Dose as written',fields.dose_as_written],['Route',fields.route],['Frequency',fields.frequency],['Times / schedule',fields.times_or_schedule],['Duration',fields.duration],['Special instructions',fields.special_instructions],['Prescriber',fields.prescriber]].map(([k,v])=>`<div class="extractrow"><b>${k}</b>${esc(v||'Not clearly visible')}</div>`).join('')}</div><p class="help">${esc(fields.visible_text||'') } ${esc((fields.uncertain_or_unreadable||[]).join('; '))}</p>`}$('#rxUseWrap').classList.remove('hidden')}
+$('#useRx').onclick=()=>{const d=state.rxDraft;if(!d)return;const m=d.medicines?.[0]||d;$('#medName').value=m.medication_name||'';$('#medIngredient').value=m.active_ingredient||'';$('#medStrength').value=m.strength||'';$('#medDose').value=m.dose_as_written||'';$('#medRoute').value=['Oral','Topical','Injection'].includes(m.route)?m.route:'Other / as prescribed';$('#medFrequency').value=['Once daily','Twice daily','Three times daily','Four times daily','As needed (PRN)'].includes(m.frequency)?m.frequency:'Other / as prescribed';const times=(m.times_or_schedule||'').match(/(?:[01]\d|2[0-3]):[0-5]\d/g);$('#medTimes').value=times?times.join(', '):'';$('#medDuration').value=m.duration||'';$('#medInstructions').value=m.special_instructions||'';go('medications');alert('Fields copied as an editable draft. Verify all details against the original prescription before saving.');};
+function patientContext(){const r=[...state.readings].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,10),m=state.medications.map(x=>({name:x.name,strength:x.strength,dose:x.dose,frequency:x.frequency,times:x.times,instructions:x.instructions})),l=state.lifestyle.slice(-7).map(x=>({date:x.date,sleep:x.sleep,stress:x.stress,activity:x.activity,food:x.food,salt:x.salt,notes:x.notes})),p=state.profile;return JSON.stringify({profile:{name:p.name,condition:p.condition,allergies:p.allergies,medicalNotes:p.notes},recentBloodPressureReadings:r,medicationSchedule:m,recentDoseLogs:state.doseLogs.slice(-20),recentLifestyleEntries:l});}
+// Compact in-browser language model. No API key is used in local mode.
+let localTextGenerator=null,localModelLoading=null;
+const LOCAL_MODEL_ID='HuggingFaceTB/SmolLM2-360M-Instruct';
+function setLocalModelStatus(message,ready=false){['#localModelStatus','#localModelSettingsStatus'].forEach(sel=>{const el=$(sel);if(el){el.textContent=message;el.classList.toggle('online',ready)}});const badge=$('#assistantModel');if(badge){badge.textContent=ready?'On-device AI ready':'Local model not loaded';badge.className=ready?'pill':'pill gray'};const b=$('#loadLocalModel');if(b){b.disabled=!!localModelLoading;b.textContent=ready?'On-device AI ready':'Download & enable on-device AI'};const bs=$('#loadLocalModelSettings');if(bs){bs.disabled=!!localModelLoading;bs.textContent=ready?'On-device AI ready':'Download & enable local AI'}}
+async function loadLocalTextModel(){if(localTextGenerator)return localTextGenerator;if(localModelLoading)return localModelLoading;localModelLoading=(async()=>{setLocalModelStatus('Loading model files…');const mod=await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2');mod.env.allowLocalModels=false;mod.env.useBrowserCache=true;const device=(navigator.gpu)?'webgpu':'wasm';const generator=await mod.pipeline('text-generation',LOCAL_MODEL_ID,{quantized:true,device,progress_callback:(x)=>{if(x.status==='progress'&&x.total)setLocalModelStatus(`Downloading ${Math.round(x.progress||0)}%`);else if(x.status==='done')setLocalModelStatus('Preparing model…')}});localTextGenerator=generator;setLocalModelStatus('Ready on this device',true);$('#localModelNotice').textContent='On-device model ready. Messages are generated locally in your browser; no API key is used.';return generator})().catch(err=>{setLocalModelStatus('Could not load: '+err.message);throw err}).finally(()=>{localModelLoading=null});return localModelLoading}
+async function answerWithLocalModel(question){const gen=await loadLocalTextModel();const system='You are Pressureless, a cautious health education assistant. You are not a doctor. Do not diagnose, prescribe, recommend changing medication, or make emergency decisions. Give general educational information only. For urgent symptoms such as chest pain, trouble breathing, fainting, severe weakness, confusion or stroke signs, tell the user to seek emergency medical help. Encourage users to confirm medicine details with a doctor or pharmacist. Be concise and clear.';const history=chatHistory.slice(-6).map(m=>`${m.role==='assistant'?'Assistant':'User'}: ${m.content}`).join('\n');const prompt=`<|im_start|>system\n${system}<|im_end|>\n<|im_start|>user\n${history}\nAssistant:<|im_end|>\n<|im_start|>assistant\n`;const out=await gen(prompt,{max_new_tokens:180,do_sample:true,temperature:.65,top_p:.9,return_full_text:false});let text=out?.[0]?.generated_text||'I could not generate a response. Please try again.';return text.replace(/<\|im_end\|>[\s\S]*$/,'').trim()}
+$('#loadLocalModel').onclick=()=>loadLocalTextModel().catch(e=>alert('Local AI could not start: '+e.message));$('#loadLocalModelSettings').onclick=()=>loadLocalTextModel().catch(e=>alert('Local AI could not start: '+e.message));
+$('#chatForm').onsubmit=async e=>{e.preventDefault();const q=$('#chatInput').value.trim();if(!q)return;const useLocal=!!localTextGenerator||$('#localModelStatus')?.classList.contains('online');if(!useLocal&&!$('#chatConsent').checked){alert('Please enable the on-device model or provide consent before sending your message to the cloud AI service.');return}const box=$('#chatbox');box.insertAdjacentHTML('beforeend',`<div class="bubble user">${esc(q)}</div>`);$('#chatInput').value='';const loading=document.createElement('div');loading.className='bubble';loading.textContent=useLocal?'On-device model is thinking…':'Pressureless AI is thinking…';box.appendChild(loading);box.scrollTop=box.scrollHeight;chatHistory.push({role:'user',content:q});const btn=$('#chatForm button');btn.disabled=true;try{let response;if(useLocal){response=await answerWithLocalModel(q)}else{const resp=await fetch('/api/assistant',{method:'POST',headers:{'Content-Type':'application/json',...aiHeaders()},body:JSON.stringify({messages:chatHistory,context:patientContext()})});const d=await resp.json();if(!resp.ok)throw new Error(d.error||'AI request failed');response=d.output_text}chatHistory.push({role:'assistant',content:response});loading.textContent=response;loading.className='bubble'}catch(err){loading.className='bubble';loading.textContent='AI could not respond: '+err.message;chatHistory.pop()}finally{btn.disabled=false;box.scrollTop=box.scrollHeight}};
+function reportText(){const p=state.profile,adh=allAdherence();return ['PRESSURELESS — HYPERTENSION HEALTH SUMMARY','Generated: '+new Date().toLocaleString(),'','PATIENT PROFILE',`Name: ${p.name||'Not provided'}`,`Doctor / clinic: ${p.doctor||'Not provided'}`,`Condition: ${p.condition||'Not provided'}`,`Allergies: ${p.allergies||'Not provided'}`,`Medical notes: ${p.notes||'None'}`,'','BLOOD PRESSURE READINGS',...(state.readings.length?state.readings.slice().sort((a,b)=>a.date.localeCompare(b.date)).map(x=>`${x.date}: ${x.sys}/${x.dia} mmHg; pulse ${x.pulse||'not recorded'}; ${x.notes||''}`):['No readings recorded.']),'','MEDICATIONS',...(state.medications.length?state.medications.map(m=>`${m.name}; ingredient ${m.ingredient||'not entered'}; strength ${m.strength}; dose ${m.dose||'not entered'}; route ${m.route}; frequency ${m.frequency}; times ${(m.times||[]).join(', ')}; instructions ${m.instructions||'not entered'}`):['No medications recorded.']),'','DOSE ADHERENCE',`Calculated from dose entries marked taken or missed: ${adh===null?'No dose logs':adh+'%'}`,...state.doseLogs.map(x=>`${x.date} ${x.time}: ${x.status} — ${state.medications.find(m=>m.id===x.medId)?.name||'Medication'}`),'','LIFESTYLE JOURNAL',...(state.lifestyle.length?state.lifestyle.map(x=>`${x.date}: sleep ${x.sleep}h; stress ${x.stress}; activity ${x.activity} minutes; food ${x.food}; salt ${x.salt}; notes ${x.notes||''}`):['No lifestyle entries.']),'','DOCTOR APPOINTMENTS',...state.appointments.map(x=>`${x.at}: ${x.provider} — ${x.reason||'Appointment'} (${x.status})`),'','DAILY CHALLENGES',...Object.entries(state.challengeDays).map(([d,a])=>`${d}: ${(a||[]).join(', ')}`),'','This report is a patient-entered record for discussion with a healthcare professional. It is not a diagnosis or treatment recommendation. Verify all information before sharing.'].join('\n')}
+$('#downloadReport').onclick=()=>{const blob=new Blob([reportText()],{type:'text/plain;charset=utf-8'}),a=document.createElement('a'),url=URL.createObjectURL(blob);a.href=url;a.download='Pressureless-medical-history-report.txt';a.click();URL.revokeObjectURL(url)};$('#printReport').onclick=()=>window.print();
+
+function getSessionApiKey(){try{return sessionStorage.getItem('pressureless_openai_key')||''}catch{return ''}}
+function aiHeaders(){const key=getSessionApiKey();return key?{'x-openai-api-key':key}:{}}
+function updateApiKeyUI(){const key=getSessionApiKey(),status=$('#apiKeyStatus'),badge=$('#apiKeyBadge');if(!status||!badge)return;status.classList.toggle('connected',!!key);status.innerHTML=`<span class="status-dot"></span><span>${key?'An API key is saved for this tab session.':'No API key entered in this browser session.'}</span>`;badge.textContent=key?'Key saved':'Not connected';badge.className=key?'pill':'pill amber';$('#openaiApiKey').value=key}
+$('#saveApiKey').onclick=()=>{const key=$('#openaiApiKey').value.trim();if(!key){alert('Paste your OpenAI API key first.');return}if(!/^sk-[A-Za-z0-9_-]{10,}$/.test(key)){alert('That key does not look like a valid OpenAI secret key. Please check it.');return}try{sessionStorage.setItem('pressureless_openai_key',key)}catch{alert('Your browser could not store the key for this session.');return}updateApiKeyUI();checkAIStatus();alert('API key saved for this browser tab session. Test the connection before using AI features.')};
+$('#clearApiKey').onclick=()=>{try{sessionStorage.removeItem('pressureless_openai_key')}catch{}$('#openaiApiKey').value='';updateApiKeyUI();checkAIStatus()};
+$('#toggleApiKey').onclick=()=>{const i=$('#openaiApiKey');i.type=i.type==='password'?'text':'password';$('#toggleApiKey').textContent=i.type==='password'?'Show key':'Hide key'};
+$('#testApiKey').onclick=async()=>{const key=getSessionApiKey();if(!key){alert('Save your API key first.');return}const b=$('#testApiKey');b.disabled=true;b.textContent='Testing…';try{const r=await fetch('/api/status',{headers:aiHeaders()}),d=await r.json();if(!r.ok||!d.configured)throw new Error(d.error||'The server did not accept the key.');alert('Connection configured. Model: '+d.model+'. A real response test is available by sending a message to the AI assistant.')}catch(e){alert('Connection test failed: '+e.message)}finally{b.disabled=false;b.textContent='Test connection'}};
+
+// Language, theme, Health export import, and offline educational helper.
+const UI_PREF_KEY='pressureless_ui_preferences';
+let memoryPrefs={};
+function getPrefs(){try{return {...memoryPrefs,...JSON.parse(localStorage.getItem(UI_PREF_KEY)||'{}')}}catch{return {...memoryPrefs}}}
+function setPrefs(prefs){memoryPrefs={...prefs};try{localStorage.setItem(UI_PREF_KEY,JSON.stringify(memoryPrefs));storageWriteAvailable=true;updateStorageStatus(true);return true}catch(e){storageWriteAvailable=false;updateStorageStatus(false);return false}}
+function applyTheme(theme){const effective=theme==='system'?(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):theme;document.documentElement.dataset.theme=effective;const sel=$('#themeSelect');if(sel)sel.value=theme}
+const AR_TEXT={
+'PRESSURELESS — Your Blood Pressure Companion':'PRESSURELESS — رفيقك لمتابعة ضغط الدم','Choose your language':'اختر لغتك','Choose your language to continue.':'اختر لغتك للمتابعة.','You can change this later in Settings.':'يمكنك تغيير ذلك لاحقًا من الإعدادات.','Your health, in your hands.':'صحتك بين يديك.','A calmer way to keep track of blood pressure, medicines and everyday habits — all in one place.':'طريقة أسهل لمتابعة ضغط الدم والأدوية والعادات اليومية — كل ذلك في مكان واحد.','YOUR BLOOD PRESSURE COMPANION · PRIVATE BY DESIGN':'رفيقك لمتابعة ضغط الدم · خصوصيتك أولًا',"Let's get started · 1 minute":'لنبدأ · دقيقة واحدة','First, what should we call you?':'أولًا، ما الاسم الذي نستخدمه؟','Set up your profile so Pressureless can greet you and organize your health records. You can edit these details any time.':'أنشئ ملفك الشخصي ليتمكن PRESSURELESS من الترحيب بك وتنظيم سجلاتك الصحية. يمكنك تعديل هذه البيانات في أي وقت.','Your name *':'اسمك *','Enter your name':'أدخل اسمك','What brings you here?':'ما الذي تريد متابعته؟','High blood pressure (hypertension)':'ارتفاع ضغط الدم','Low blood pressure (hypotension)':'انخفاض ضغط الدم','Monitoring both high and low blood pressure':'متابعة ارتفاع وانخفاض ضغط الدم','Diabetes':'السكري','Heart disease':'أمراض القلب','Other / supporting someone':'أخرى / أتابع حالة شخص آخر','Doctor or clinic':'الطبيب أو العيادة','Allergies':'الحساسية','(optional)':'(اختياري)','Your care provider':'اسم الطبيب أو مقدم الرعاية','Create my profile':'إنشاء ملفي الشخصي','Hypertension care':'رعاية ضغط الدم','Dashboard':'لوحة التحكم','AI prescription scanner':'ماسح الوصفات بالذكاء الاصطناعي','Medication organizer':'منظم الأدوية','AI medical assistant':'المساعد الطبي الذكي','Blood pressure tracker':'متابعة ضغط الدم','Health & lifestyle journal':'سجل الصحة ونمط الحياة','Daily health challenges':'تحديات صحية يومية','Medical history & reports':'السجل الطبي والتقارير','Settings & AI connection':'الإعدادات والذكاء الاصطناعي','Your blood pressure companion':'رفيقك لمتابعة ضغط الدم','Smarter tracking. Better habits. A healthier you. Keep your doctor involved in care decisions.':'متابعة أدق. عادات أفضل. صحة أقوى. احرص على إشراك طبيبك في القرارات الصحية.','Your health at a glance':'نظرة عامة على صحتك','Patient profile':'الملف الشخصي','Track your blood pressure with confidence':'تابع ضغط دمك بثقة','Latest blood pressure':'آخر قراءة لضغط الدم','Add your first reading':'أضف أول قراءة','Medication adherence':'الالتزام بالأدوية','Based on logged doses':'بناءً على الجرعات المسجلة','Average sleep':'متوسط النوم','From your lifestyle journal':'من سجل نمط حياتك','Current habit streak':'سلسلة العادات الحالية','Blood pressure trend':'اتجاه ضغط الدم','Your recorded readings over time':'قراءاتك المسجلة بمرور الوقت','Open tracker':'فتح المتابعة','mmHg · latest reading':'ملم زئبق · آخر قراءة','Systolic':'الانقباضي','Diastolic':'الانبساطي','Today\'s medication schedule':'جدول أدوية اليوم','Mark each dose as taken or missed':'سجّل كل جرعة تم تناولها أو تفويتها','Manage':'إدارة','Add your prescribed medicines to build a schedule.':'أضف أدويتك الموصوفة لإنشاء جدول.','Daily health challenges':'تحديات صحية يومية','Simple actions that support a healthy routine':'خطوات بسيطة تدعم نمط حياة صحيًا','View all':'عرض الكل','Quick actions':'إجراءات سريعة','Keep your health record up to date':'حافظ على تحديث سجلك الصحي','＋ Add BP reading':'＋ إضافة قراءة ضغط','Scan prescription':'مسح وصفة طبية','Log daily habits':'تسجيل العادات اليومية','AI prescription scanner':'ماسح الوصفات بالذكاء الاصطناعي','Upload or photograph a prescription. The AI model reads visible information and prepares a draft for you to review.':'ارفع صورة الوصفة أو التقطها. يقرأ نموذج الذكاء الاصطناعي المعلومات الظاهرة ويجهز مسودة لمراجعتها.','Upload prescription image':'رفع صورة الوصفة الطبية','AI image analysis':'تحليل الصورة بالذكاء الاصطناعي','Prescription photo or image':'صورة الوصفة الطبية','Scan with AI model':'فحص باستخدام نموذج الذكاء الاصطناعي','Checking AI connection…':'جارٍ التحقق من اتصال الذكاء الاصطناعي…','Review extracted details':'مراجعة التفاصيل المستخرجة','Not saved automatically':'لا يتم الحفظ تلقائيًا','Use reviewed details in medication form':'استخدام التفاصيل التي تمت مراجعتها في نموذج الدواء','Medication organizer & smart reminders':'منظم الأدوية والتذكيرات الذكية','Create the daily schedule exactly as prescribed, receive reminders, and record each dose as taken or missed.':'أنشئ الجدول اليومي وفق الوصفة تمامًا، واستقبل التذكيرات، وسجّل كل جرعة تم تناولها أو تفويتها.','Add prescribed medication':'إضافة دواء موصوف','Patient-managed list':'قائمة يديرها المريض','Medication name':'اسم الدواء','Active ingredient (optional)':'المادة الفعالة (اختياري)','Strength / dosage':'التركيز / القوة','Dose as prescribed':'الجرعة حسب الوصفة','Route':'طريقة الاستخدام','Oral':'عن طريق الفم','Topical':'موضعي','Injection':'حقن','Other / as prescribed':'أخرى / حسب الوصفة','Frequency':'عدد مرات الاستخدام','Once daily':'مرة يوميًا','Twice daily':'مرتين يوميًا','Three times daily':'ثلاث مرات يوميًا','Four times daily':'أربع مرات يوميًا','As needed (PRN)':'عند الحاجة','Dose time(s)':'موعد/مواعيد الجرعة','Duration (optional)':'المدة (اختياري)','Special instructions':'تعليمات خاصة','Notes (optional)':'ملاحظات (اختياري)','Save medication schedule':'حفظ جدول الدواء','Today\'s doses':'جرعات اليوم','Taken, missed and still pending':'تم تناولها أو تفويتها أو ما زالت مستحقة','Enable browser notifications':'تفعيل إشعارات المتصفح','Notification status':'حالة الإشعارات','Saved medication list':'قائمة الأدوية المحفوظة','Doctor appointment reminders':'تذكيرات مواعيد الطبيب','Smart reminders':'تذكيرات ذكية','Doctor / clinic':'الطبيب / العيادة','Appointment date & time':'تاريخ ووقت الموعد','Reason (optional)':'السبب (اختياري)','Add appointment reminder':'إضافة تذكير بالموعد','Upcoming appointments':'المواعيد القادمة','AI medical assistant':'المساعد الطبي الذكي','Ask Pressureless AI':'اسأل مساعد PRESSURELESS','Plain-language health education':'معلومات صحية بلغة واضحة','Checking model…':'جارٍ التحقق من النموذج…','Send':'إرسال','What the assistant can help explain':'ما الذي يمكن للمساعد شرحه؟','Blood pressure basics':'أساسيات ضغط الدم','Understand systolic, diastolic and monitoring terms.':'افهم مصطلحات الضغط الانقباضي والانبساطي والمتابعة.','Medication information':'معلومات الأدوية','Your recorded information':'معلوماتك المسجلة','Prepare for a doctor visit':'الاستعداد لزيارة الطبيب','Blood pressure tracker':'متابعة ضغط الدم','Record high and low readings, see changes over time and keep a history to discuss with your healthcare professional.':'سجّل القراءات المرتفعة والمنخفضة، وتابع التغيرات بمرور الوقت واحتفظ بسجل لمناقشته مع مقدم الرعاية الصحية.','Record a blood pressure reading':'تسجيل قراءة ضغط الدم','Daily tracking':'متابعة يومية','Systolic (mmHg)':'الضغط الانقباضي (ملم زئبق)','Diastolic (mmHg)':'الضغط الانبساطي (ملم زئبق)','Pulse (bpm, optional)':'النبض (نبضة/دقيقة، اختياري)','Date and time':'التاريخ والوقت','Notes / how you felt':'ملاحظات / كيف كان شعورك','Save reading':'حفظ القراءة','Latest recorded reading':'آخر قراءة مسجلة','No readings':'لا توجد قراءات','No reading recorded yet':'لم يتم تسجيل أي قراءة بعد','Blood pressure history':'سجل ضغط الدم','Compare systolic and diastolic readings':'قارن القراءات الانقباضية والانبساطية','Date / time':'التاريخ / الوقت','Pulse':'النبض','Notes':'ملاحظات','Health & lifestyle journal':'سجل الصحة ونمط الحياة','Record stress, sleep, physical activity, food habits and salt consumption. Look for patterns alongside your blood pressure readings.':'سجّل التوتر والنوم والنشاط البدني والعادات الغذائية واستهلاك الملح. لاحظ الأنماط بالتزامن مع قراءات ضغط الدم.','Today\'s lifestyle entry':'إدخال نمط الحياة اليوم','Daily journal':'سجل يومي','Sleep duration (hours)':'مدة النوم (بالساعات)','Stress level':'مستوى التوتر','Low':'منخفض','Moderate':'متوسط','High':'مرتفع','Physical activity (minutes)':'النشاط البدني (بالدقائق)','Food habits today':'العادات الغذائية اليوم','Balanced / varied':'متوازن / متنوع','More packaged or processed food':'مزيد من الأطعمة المعبأة أو المصنعة','More fruit and vegetables':'مزيد من الفواكه والخضروات','Irregular meals':'وجبات غير منتظمة','Other / not sure':'أخرى / غير متأكد','Salt consumption':'استهلاك الملح','Not sure':'غير متأكد','Water / hydration notes':'ملاحظات الماء والترطيب','Other notes / possible factors':'ملاحظات أخرى / عوامل محتملة','Save lifestyle entry':'حفظ سجل نمط الحياة','Recent lifestyle journal':'سجل نمط الحياة الأخير','No entries yet. Add today\'s lifestyle details above.':'لا توجد إدخالات بعد. أضف تفاصيل نمط حياتك اليوم أعلاه.','Build healthy routines through small daily actions: physical activity, better sleep, mindful salt consumption and consistent healthy habits.':'أنشئ عادات صحية من خلال خطوات يومية بسيطة: النشاط البدني، والنوم الأفضل، والانتباه لاستهلاك الملح، والاستمرار على العادات الصحية.','Move regularly':'تحرك بانتظام','Support healthy sleep':'ادعم نومًا صحيًا','Be mindful of salt':'انتبه لاستهلاك الملح','Today\'s simple checklist':'قائمة مهام اليوم','Medical history & reports':'السجل الطبي والتقارير','Patient and medical profile':'الملف الشخصي والطبي','Editable':'قابل للتعديل','Patient name':'اسم المريض','Health condition':'الحالة الصحية','Allergies (if any)':'الحساسية (إن وجدت)','Medical notes / relevant history':'ملاحظات طبية / تاريخ مرضي مهم','Save medical profile':'حفظ الملف الطبي','Report contents':'محتويات التقرير','Live summary':'ملخص مباشر','Blood pressure history':'سجل ضغط الدم','Registered medicines':'الأدوية المسجلة','Treatment adherence':'الالتزام بالعلاج','Lifestyle journal':'سجل نمط الحياة','Download health report (.txt)':'تنزيل التقرير الصحي (.txt)','Print / Save as PDF':'طباعة / حفظ كملف PDF','Settings & AI connection':'الإعدادات واتصال الذكاء الاصطناعي','Connect your own OpenAI API key to enable the AI medical assistant and prescription scanner.':'اربط مفتاح OpenAI API الخاص بك لتفعيل المساعد الطبي الذكي وماسح الوصفات.','OpenAI connection':'اتصال OpenAI','Use your own API account':'استخدم حساب API الخاص بك','Not connected':'غير متصل','OpenAI API key':'مفتاح OpenAI API','Show key':'إظهار المفتاح','Hide key':'إخفاء المفتاح','Save API key for this session':'حفظ مفتاح API لهذه الجلسة','Remove key':'إزالة المفتاح','Test connection':'اختبار الاتصال','AI features':'ميزات الذكاء الاصطناعي','Uses API key':'يستخدم مفتاح API','Appearance & language':'المظهر واللغة','Choose how Pressureless looks and which language it uses.':'اختر مظهر PRESSURELESS واللغة المستخدمة.','Language / اللغة':'اللغة','Appearance':'المظهر','Light mode':'الوضع الفاتح','Dark mode':'الوضع الداكن','Follow device setting':'اتباع إعداد الجهاز','Apple Health':'Apple Health','Connect health data through a supported iPhone app or import readings from a blood-pressure monitor.':'اربط البيانات الصحية من خلال تطبيق iPhone مدعوم أو استورد القراءات من جهاز قياس ضغط الدم.','How to bring readings from Apple Health':'كيفية نقل القراءات من Apple Health','Import BP readings CSV':'استيراد قراءات الضغط من ملف CSV','Private on-device health helper':'مساعد صحي خاص على الجهاز','Open offline health helper':'فتح المساعد الصحي دون اتصال','Home':'الرئيسية','Pressure':'الضغط','Medicines':'الأدوية','Journal':'السجل','AI':'الذكاء الاصطناعي','More':'المزيد',
+'Your profile is saved in this browser on this device. This standalone HTML does not create an online account or sync data between devices.':'يُحفظ ملفك الشخصي في هذا المتصفح على هذا الجهاز. ملف HTML المستقل هذا لا ينشئ حسابًا عبر الإنترنت ولا يزامن البيانات بين الأجهزة.','YOUR BLOOD PRESSURE COMPANION':'رفيقك لمتابعة ضغط الدم','PRESSURELESS is your blood pressure companion: track your readings, manage your medication, and build healthier habits in one place. It brings prescription reading, medication scheduling, reminders, blood pressure history and lifestyle tracking together.':'PRESSURELESS هو رفيقك لمتابعة ضغط الدم: سجّل قراءاتك، ونظّم أدويتك، وابنِ عادات صحية في مكان واحد. يجمع قراءة الوصفات وجدولة الأدوية والتذكيرات وسجل ضغط الدم ومتابعة نمط الحياة.','The goal':'الهدف','Support patients in managing their health, reduce missed medicines and appointments, improve awareness of hypertension and its complications, encourage healthy habits, and make it easier to share organized records with healthcare professionals.':'مساعدة المرضى على إدارة صحتهم، وتقليل نسيان الأدوية والمواعيد، وزيادة الوعي بارتفاع ضغط الدم ومضاعفاته، وتشجيع العادات الصحية، وتسهيل مشاركة السجلات المنظمة مع المختصين.','What makes it different':'ما الذي يميّزه','Unlike a general wellness tracker, Pressureless is designed around blood pressure care, including high and low readings, and connects AI-assisted prescription scanning with medication scheduling and personal health records.':'على عكس تطبيقات العافية العامة، صُمم PRESSURELESS لمتابعة ضغط الدم بما يشمل القراءات المرتفعة والمنخفضة، ويربط مسح الوصفات بمساعدة الذكاء الاصطناعي بجدولة الأدوية والسجلات الصحية الشخصية.','Days with at least one challenge completed':'عدد الأيام التي أُنجز فيها تحدٍ واحد على الأقل',"Today's medication schedule":'جدول أدوية اليوم','Pressureless helps organize information. It does not diagnose hypertension or replace advice from your doctor or pharmacist.':'يساعد PRESSURELESS على تنظيم المعلومات، لكنه لا يشخّص ارتفاع ضغط الدم ولا يغني عن نصيحة الطبيب أو الصيدلي.','I understand this image will be sent to the configured OpenAI model for text extraction. I will verify every result against the original prescription before saving.':'أفهم أن هذه الصورة ستُرسل إلى نموذج OpenAI المُعدّ لاستخراج النص. سأتحقق من كل نتيجة بمقارنتها بالوصفة الأصلية قبل الحفظ.','The scanner transcribes; it does not prescribe. It must not guess unreadable medicine names, doses or timings. Do not rely on an AI extraction as an instruction to take medicine.':'تقوم أداة المسح بنسخ النص ولا تصف العلاج. يجب ألا تخمّن أسماء الأدوية أو الجرعات أو المواعيد غير الواضحة. لا تعتمد على الاستخراج الآلي باعتباره تعليمات لتناول الدواء.','Your AI extraction will appear here. Check the name, active ingredient, strength, dose, route, frequency, timing and instructions carefully.':'ستظهر هنا المعلومات المستخرجة بالذكاء الاصطناعي. تحقّق بعناية من الاسم والمادة الفعالة والتركيز والجرعة وطريقة الاستخدام والتكرار والتوقيت والتعليمات.','Enable an in-browser reminder for the dose times while Pressureless is open.':'فعّل تذكيرًا عبر المتصفح بمواعيد الجرعات أثناء بقاء PRESSURELESS مفتوحًا.','0 logged':'لم تُسجّل أي جرعات','No medication schedule added yet.':'لم تتم إضافة جدول للأدوية بعد.','Adherence from recorded doses':'الالتزام وفق الجرعات المسجلة','Review the schedule with your pharmacist or doctor':'راجع الجدول مع الصيدلي أو الطبيب','Medicine':'الدواء','Strength':'التركيز','Dose':'الجرعة','Times':'المواعيد','Instructions':'التعليمات','A browser notification is scheduled 15 minutes before the appointment while Pressureless is open and notifications are enabled.':'يُجدول إشعار من المتصفح قبل الموعد بـ15 دقيقة عندما يكون PRESSURELESS مفتوحًا وتكون الإشعارات مفعّلة.','0 appointments':'لا توجد مواعيد','No appointments added yet.':'لم تتم إضافة مواعيد بعد.','Pressureless does not decide how much medicine you should take. Never change or double a dose based on an app reminder. Follow the prescription and ask your pharmacist or prescriber if unsure.':'لا يحدد PRESSURELESS مقدار الدواء الذي ينبغي تناوله. لا تغيّر الجرعة ولا تضاعفها بناءً على تذكير التطبيق. اتبع الوصفة واسأل الصيدلي أو الطبيب الواصف عند الشك.','Ask about hypertension, medicine terminology and your saved records. The assistant uses a real model through your server-side OpenAI API key.':'اسأل عن ارتفاع ضغط الدم ومصطلحات الأدوية وسجلاتك المحفوظة. يستخدم المساعد نموذجًا فعليًا من خلال مفتاح OpenAI API المحفوظ على الخادم.','Hello. I can explain general hypertension information, help you understand terms on medicine labels and summarize the records you choose to share. I cannot diagnose, prescribe or provide emergency care.':'مرحبًا. يمكنني شرح معلومات عامة عن ارتفاع ضغط الدم ومساعدتك على فهم المصطلحات الموجودة على عبوات الأدوية وتلخيص السجلات التي تختار مشاركتها. لا أستطيع التشخيص أو وصف العلاج أو تقديم رعاية طارئة.','I consent to sending my message and the selected summary of my saved Pressureless records to the OpenAI model configured by the site owner.':'أوافق على إرسال رسالتي والملخص المحدد من سجلات PRESSURELESS المحفوظة إلى نموذج OpenAI الذي أعدّه مالك الموقع.','Only the summary displayed by this app is attached to the request. Do not enter information you do not wish to send to the AI provider.':'يُرفق بالطلب الملخص المعروض في التطبيق فقط. لا تُدخل معلومات لا ترغب في إرسالها إلى مزود الذكاء الاصطناعي.','Explain general terms; verify details with a pharmacist.':'شرح المصطلحات العامة؛ تحقّق من التفاصيل مع الصيدلي.','Summarize logged readings, medicines and lifestyle entries.':'تلخيص القراءات والأدوية وإدخالات نمط الحياة المسجلة.','Help organize questions and report highlights.':'المساعدة في تنظيم الأسئلة وأهم نقاط التقرير.','AI can make mistakes. It is not a doctor and must not be used for diagnosis, emergencies, or treatment decisions. Confirm clinical information with a qualified professional.':'قد يخطئ الذكاء الاصطناعي. فهو ليس طبيبًا ولا يجوز استخدامه للتشخيص أو حالات الطوارئ أو قرارات العلاج. تحقّق من المعلومات الطبية مع مختص مؤهل.','mmHg · systolic / diastolic':'ملم زئبق · انقباضي / انبساطي','For consistent measurements, sit quietly with your back supported and feet flat, use the correct cuff size on a bare arm at heart level, and take at least two readings one minute apart.':'للحصول على قياسات متسقة، اجلس بهدوء مع إسناد ظهرك ووضع قدميك على الأرض، واستخدم مقاس الكُم المناسب على ذراع مكشوفة بمستوى القلب، وخذ قراءتين على الأقل بفاصل دقيقة.','This reading is higher than 180 systolic and/or 120 diastolic. Wait at least one minute and repeat the measurement. If it remains this high, contact a healthcare professional immediately. If you have chest pain, shortness of breath, weakness, vision changes or difficulty speaking, seek emergency care.':'هذه القراءة أعلى من 180 للضغط الانقباضي و/أو 120 للضغط الانبساطي. انتظر دقيقة واحدة على الأقل ثم أعد القياس. إذا بقيت القراءة بهذا الارتفاع، فاتصل بمختص صحي فورًا. وإذا شعرت بألم في الصدر أو ضيق التنفس أو ضعف أو تغير في الرؤية أو صعوبة في الكلام، فاطلب الإسعاف فورًا.','This reading is in a low range (below 90 systolic and/or below 60 diastolic). Some people naturally have lower readings without symptoms. If you feel dizzy, faint, weak, nauseated or confused, sit or lie down and seek medical advice. Severe symptoms need urgent care.':'تقع هذه القراءة ضمن النطاق المنخفض (أقل من 90 للانقباضي و/أو أقل من 60 للانبساطي). تكون القراءات المنخفضة طبيعية لدى بعض الأشخاص دون أعراض. إذا شعرت بالدوار أو الإغماء أو الضعف أو الغثيان أو الارتباك، فاجلس أو استلقِ واطلب المشورة الطبية. الأعراض الشديدة تستلزم رعاية عاجلة.','0 entries':'لا توجد إدخالات',"No entries yet. Add today's lifestyle details above.":'لا توجد إدخالات بعد. أضف تفاصيل نمط حياتك اليوم أعلاه.',"Choose suitable physical activity that fits your abilities and your clinician's guidance.":'اختر نشاطًا بدنيًا مناسبًا لقدراتك ووفق إرشادات المختص الصحي.','0 of 7 days checked this week':'لم يُسجّل أي يوم من أصل 7 هذا الأسبوع','Work toward a consistent sleep and wake routine.':'حافظ على مواعيد منتظمة للنوم والاستيقاظ.','Check food labels and notice how often you choose lower-salt options.':'اقرأ الملصقات الغذائية ولاحظ مدى اختيارك للأطعمة الأقل ملحًا.','Tick a challenge when completed. New day, fresh checklist.':'ضع علامة على التحدي عند إتمامه. كل يوم بداية جديدة.','0 / 4 completed':'0 / 4 مكتملة','These challenges are general habit prompts, not a prescribed exercise or diet plan. Follow individual advice from your healthcare professional, especially if you have activity restrictions.':'هذه التحديات تذكيرات عامة بالعادات الصحية وليست خطة تمارين أو نظامًا غذائيًا موصوفًا. اتبع نصيحة مختص الرعاية الصحية الخاصة بك، خاصة إذا كانت لديك قيود على النشاط.','Keep previous blood pressure readings, medication records and treatment-adherence information together. Prepare a summary to share with your doctor.':'احتفظ بقراءات ضغط الدم السابقة وسجلات الأدوية ومعلومات الالتزام بالعلاج في مكان واحد. أعد ملخصًا لمشاركته مع طبيبك.','0 previous readings':'لا توجد قراءات سابقة','0 medications':'لا توجد أدوية مسجلة','No doses logged':'لم تُسجّل جرعات','Review the report before sharing it. It contains personal health information stored in this browser.':'راجع التقرير قبل مشاركته. فهو يحتوي على معلومات صحية شخصية محفوظة في هذا المتصفح.','Recent medical record timeline':'التسلسل الزمني للسجل الطبي','Readings, medications and lifestyle':'القراءات والأدوية ونمط الحياة','Your saved records will appear here.':'ستظهر سجلاتك المحفوظة هنا.','No API key entered in this browser session.':'لم يتم إدخال مفتاح API في جلسة المتصفح هذه.',"Your key is kept in this browser tab's session storage and sent to your local Pressureless server only when you use an AI feature. It is not saved in your medical profile or browser's permanent storage.":'يُحفظ مفتاحك في مساحة تخزين الجلسة الخاصة بعلامة تبويب المتصفح، ولا يُرسل إلى خادم PRESSURELESS المحلي إلا عند استخدام إحدى ميزات الذكاء الاصطناعي. ولا يُحفظ ضمن ملفك الطبي أو التخزين الدائم للمتصفح.','For safety, use this option only on your own trusted computer. Do not share your API key or publish this app with a key embedded in its HTML. API usage is billed separately by OpenAI.':'لأمانك، استخدم هذا الخيار على جهازك الشخصي الموثوق فقط. لا تشارك مفتاح API ولا تنشر التطبيق ومفتاحك مضمّن في ملف HTML. تُحاسب OpenAI على استخدام API بشكل منفصل.','General education and help organizing questions for your clinician.':'معلومات تثقيفية عامة ومساعدة في تنظيم الأسئلة لمختص الرعاية الصحية.','Reads visible text from a prescription image for you to verify.':'يقرأ النص الظاهر في صورة الوصفة لتتمكن من التحقق منه.','CSV import expects columns named date, systolic, diastolic and optionally pulse. Check every imported reading for accuracy.':'يتطلب استيراد CSV أعمدة باسم date وsystolic وdiastolic، وعمود pulse اختياري. تحقّق من دقة كل قراءة مستوردة.','A basic offline helper is available without an API key. It is not a locally trained medical AI model.':'يتوفر مساعد أساسي دون اتصال ولا يحتاج إلى مفتاح API. لكنه ليس نموذج ذكاء اصطناعي طبيًا مدرّبًا محليًا.','The offline helper can explain common terms and show general safety information using built-in rules. A capable conversational AI model running fully on your device would require downloading a large model and suitable hardware.':'يمكن للمساعد دون اتصال شرح المصطلحات الشائعة وعرض معلومات السلامة العامة باستخدام قواعد مدمجة. أما تشغيل نموذج محادثة متقدم بالكامل على جهازك فيتطلب تنزيل نموذج كبير وتوفر عتاد مناسب.','Pressureless · Your blood pressure companion · Local browser storage · Not a medical device or substitute for professional care':'PRESSURELESS · رفيقك لمتابعة ضغط الدم · تخزين محلي في المتصفح · ليس جهازًا طبيًا ولا بديلًا عن الرعاية المتخصصة','An API key is saved for this tab session.':'تم حفظ مفتاح API لجلسة علامة التبويب هذه.','Key saved':'تم حفظ المفتاح','Testing…':'جارٍ الاختبار…','Show key':'إظهار المفتاح','Hide key':'إخفاء المفتاح',
+'YOUR BLOOD PRESSURE COMPANION':'رفيقك لمتابعة ضغط الدم',
+'PRIVATE BY DESIGN':'خصوصيتك في صميم التصميم',
+'YOUR BLOOD PRESSURE COMPANION · PRIVATE BY DESIGN':'رفيقك لمتابعة ضغط الدم · خصوصيتك أولًا',
+'Track your blood pressure with confidence':'تابع ضغط دمك بثقة',
+'PRESSURELESS is your blood pressure companion: track your readings, manage your medication, and build healthier habits in one place. It brings prescription reading, medication scheduling, reminders, blood pressure trends, lifestyle journaling and medical reports together in one place.':'يجمع PRESSURELESS قراءات ضغط الدم وإدارة الأدوية والتذكيرات والعادات الصحية في مكان واحد، مع قراءة الوصفات ومتابعة الاتجاهات وسجل نمط الحياة والتقارير الطبية.',
+'The goal':'الهدف',
+'Support patients in managing their health, reduce missed medicines and appointments, improve awareness of hypertension and its complications, encourage healthy habits, and make it easier to track progress and communicate with a doctor.':'مساعدة المستخدمين على متابعة صحتهم وتقليل نسيان الأدوية والمواعيد وزيادة الوعي بارتفاع ضغط الدم ومضاعفاته وتشجيع العادات الصحية وتسهيل متابعة التقدم والتواصل مع الطبيب.',
+'What makes it different':'ما الذي يميّزه',
+'Unlike a general wellness tracker, Pressureless is designed around blood pressure care, including high and low readings and connects AI-assisted prescription scanning with medication adherence, blood pressure monitoring, lifestyle patterns and shareable medical history.':'على عكس تطبيقات الصحة العامة، صُمم PRESSURELESS لمتابعة ضغط الدم المرتفع والمنخفض، ويربط مسح الوصفات بمساعدة الذكاء الاصطناعي والالتزام بالأدوية ومراقبة الضغط وأنماط الحياة والسجل الطبي القابل للمشاركة.',
+'Smarter tracking. Better habits. A healthier you. Keep your doctor involved in care decisions.':'متابعة أدق. عادات أفضل. صحة أقوى. احرص على إشراك طبيبك في القرارات الصحية.',
+'Do suitable physical activity':'مارس نشاطًا بدنيًا مناسبًا',
+'Choose movement that fits your abilities and clinician guidance.':'اختر حركة تناسب قدراتك وإرشادات مختص الرعاية الصحية.',
+'Support a regular sleep routine':'حافظ على روتين منتظم للنوم',
+'Make time for a consistent wind-down routine.':'خصص وقتًا لروتين هادئ ومنتظم قبل النوم.',
+'Make a mindful, lower-salt food choice':'اختر طعامًا أقل ملحًا بوعي',
+'Check labels and notice your salt intake.':'اقرأ الملصقات وانتبه إلى كمية الملح التي تتناولها.',
+'Practice one healthy daily habit':'مارس عادة صحية يومية',
+'Choose a manageable step that supports your wellbeing.':'اختر خطوة بسيطة يمكن الالتزام بها وتدعم صحتك.',
+'Move regularly':'تحرّك بانتظام',
+"Choose suitable physical activity that fits your abilities and your clinician\'s guidance.":'اختر نشاطًا بدنيًا مناسبًا لقدراتك ووفق إرشادات مختص الرعاية الصحية.',
+'Support healthy sleep':'ادعم نومًا صحيًا',
+'Work toward a consistent sleep and wake routine.':'حافظ على مواعيد منتظمة للنوم والاستيقاظ.',
+'Be mindful of salt':'انتبه إلى كمية الملح',
+'Check food labels and notice how often you choose lower-salt options.':'اقرأ الملصقات الغذائية ولاحظ مدى اختيارك للأطعمة الأقل ملحًا.',
+'Build healthy routines through small daily actions: physical activity, better sleep, mindful salt consumption and consistent healthy habits.':'كوّن عادات صحية من خلال خطوات يومية بسيطة: النشاط البدني والنوم الجيد والانتباه إلى استهلاك الملح والمواظبة على العادات الصحية.',
+"Today's simple checklist":"قائمة مهام اليوم البسيطة",
+'Tick a challenge when completed. New day, fresh checklist.':'ضع علامة على التحدي عند إتمامه. كل يوم بداية جديدة.',
+'Simple actions that support a healthy routine':'خطوات بسيطة تدعم نمط حياة صحيًا',
+'Days with at least one challenge completed':'عدد الأيام التي أتممت فيها تحديًا واحدًا على الأقل',
+'0 days':'0 يوم','On-device AI model (no API key)':'نموذج ذكاء اصطناعي على الجهاز (بدون مفتاح API)','Run a compact language model directly in this browser. Your chat stays on this device when local mode is selected.':'شغّل نموذجًا لغويًا صغيرًا مباشرةً في هذا المتصفح. تبقى محادثاتك على هذا الجهاز عند اختيار الوضع المحلي.','Download & enable on-device AI':'تنزيل وتفعيل الذكاء الاصطناعي المحلي','Download & enable local AI':'تنزيل وتفعيل الذكاء الاصطناعي المحلي','On-device AI ready':'الذكاء الاصطناعي المحلي جاهز','Local model not loaded':'لم يتم تحميل النموذج المحلي','Not downloaded':'لم يتم التنزيل','Ready on this device':'جاهز على هذا الجهاز','Loading model files…':'جارٍ تحميل ملفات النموذج…','Preparing model…':'جارٍ تجهيز النموذج…','On-device model is thinking…':'النموذج المحلي يفكر…','On-device model ready. Messages are generated locally in your browser; no API key is used.':'النموذج المحلي جاهز. تُنشأ الرسائل داخل المتصفح ولا يُستخدم مفتاح API.','Model: SmolLM2 360M Instruct, a compact general-purpose model. The model files are downloaded from Hugging Face the first time (about 365 MB), then cached by your browser. It may be slower on older phones and needs an internet connection for the initial download. It is not medically trained, cannot read prescription images, and must not be used for diagnosis or treatment decisions.':'النموذج: SmolLM2 360M Instruct، نموذج عام صغير. يتم تنزيل ملفات النموذج من Hugging Face عند الاستخدام الأول (بضع مئات من الميغابايت تقريبًا)، ثم يحفظها المتصفح مؤقتًا. قد يكون أبطأ على الهواتف القديمة ويتطلب اتصالًا بالإنترنت عند التنزيل الأول. هذا النموذج غير مدرّب طبيًا ولا يقرأ صور الوصفات ولا يُستخدم للتشخيص أو قرارات العلاج.','Use the small on-device model without an API key. First use downloads the model (about 365 MB); after caching, it can run locally in a compatible browser.':'استخدم النموذج الصغير على الجهاز دون مفتاح API. يتطلب الاستخدام الأول تنزيل النموذج (نحو 365 ميغابايت)، وبعد حفظه مؤقتًا يمكن تشغيله محليًا في متصفح متوافق.','This is required only when using the cloud model.':'هذا مطلوب فقط عند استخدام النموذج السحابي.','AI could not respond:':'تعذّر على الذكاء الاصطناعي الرد:',
+'View all':'عرض الكل'
+};
+Object.assign(AR_TEXT,{
+'Automatic saving':'الحفظ التلقائي',
+'Your profile, language, theme and health records are saved on this device automatically.':'يتم حفظ ملفك الشخصي واللغة والمظهر والسجلات الصحية تلقائيًا على هذا الجهاز.',
+'Saved locally':'محفوظ محليًا',
+'Checking browser storage…':'جارٍ التحقق من مساحة تخزين المتصفح…',
+'Download full backup':'تنزيل نسخة احتياطية كاملة',
+'Restore backup':'استعادة نسخة احتياطية',
+'Saved data stays in this browser on this device. It does not automatically sync to another phone or computer. Use a backup to move your records to another device. API keys are not included.':'تبقى البيانات المحفوظة في هذا المتصفح على هذا الجهاز، ولا تتم مزامنتها تلقائيًا مع هاتف أو كمبيوتر آخر. استخدم نسخة احتياطية لنقل سجلاتك إلى جهاز آخر. لا تتضمن النسخة مفاتيح API.',
+'Auto-saved':'يُحفظ تلقائيًا',
+'Storage unavailable':'التخزين غير متاح',
+'Your data is saved automatically on this device':'يتم حفظ بياناتك تلقائيًا على هذا الجهاز',
+'Last saved:':'آخر حفظ:',
+'The browser could not save your data. Allow site storage and avoid private browsing.':'تعذّر على المتصفح حفظ بياناتك. اسمح بتخزين بيانات المواقع وتجنب التصفح الخاص.',
+'Backup downloaded. Keep it somewhere private because it contains personal health information.':'تم تنزيل النسخة الاحتياطية. احتفظ بها في مكان خاص لأنها تحتوي على معلومات صحية شخصية.',
+'Choose a PRESSURELESS backup JSON file.':'اختر ملف نسخة احتياطية بصيغة JSON من PRESSURELESS.',
+'This will replace the health data saved in this browser. Continue?':'سيؤدي ذلك إلى استبدال البيانات الصحية المحفوظة في هذا المتصفح. هل تريد المتابعة؟',
+'The backup file is not valid PRESSURELESS data.':'ملف النسخة الاحتياطية لا يحتوي على بيانات PRESSURELESS صالحة.',
+'Backup restored successfully.':'تمت استعادة النسخة الاحتياطية بنجاح.',
+'Could not restore the backup:':'تعذرت استعادة النسخة الاحتياطية:',
+'Could not download backup:':'تعذّر تنزيل النسخة الاحتياطية:'
+});
+const EN_TEXT=Object.fromEntries(Object.entries(AR_TEXT).map(([k,v])=>[v,k]));
+function translateTree(root,lang){const dict=lang==='ar'?AR_TEXT:EN_TEXT;const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=walker.nextNode()){if(!n.parentElement||['SCRIPT','STYLE'].includes(n.parentElement.tagName))continue;const raw=n.nodeValue,trim=raw.trim();if(!trim)continue;let translated=dict[trim];
+if(!translated&&lang==='ar'){
+ let m=trim.match(/^(\d+) of 7 days checked this week$/);if(m)translated=`${m[1]} من 7 أيام تم تسجيلها هذا الأسبوع`;
+ m=trim.match(/^(\d+) \/ 4 completed$/);if(m)translated=`${m[1]} / 4 مكتملة`;
+ m=trim.match(/^(\d+) days$/);if(m)translated=`${m[1]} أيام`;
+}
+if(translated)n.nodeValue=raw.replace(trim,translated)}root.querySelectorAll('[placeholder],[title],[aria-label]').forEach(el=>['placeholder','title','aria-label'].forEach(a=>{const v=el.getAttribute(a);if(v&&dict[v])el.setAttribute(a,dict[v])}))}
+function applyLanguage(lang){document.title=lang==='ar'?'PRESSURELESS — رفيقك لمتابعة ضغط الدم':'PRESSURELESS — Your Blood Pressure Companion';document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';const sel=$('#languageSelect');if(sel)sel.value=lang;const ar=lang==='ar';$('#languageTitle').textContent=ar?'اختر لغتك':'Choose your language';$('#languageGate p').textContent=ar?'اختر لغتك للمتابعة':'Choose your language to continue.';$('#chooseEnglish').textContent='English';$('#chooseArabic').textContent='العربية';document.querySelectorAll('.nav-label').forEach(x=>x.textContent=ar?'الرعاية الصحية':'Hypertension care');translateTree(document.body,lang);const d=$('#todayDate');if(d)d.textContent=new Date().toLocaleDateString(ar?'ar-EG':'en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});$('#healthImportInfo')?.setAttribute('aria-label',ar?'كيفية استيراد القراءات من Apple Health':'How to bring readings from Apple Health');}
+const languageObserver=new MutationObserver(records=>{const lang=document.documentElement.lang||'en';if(lang==='ar')for(const r of records)for(const n of r.addedNodes){if(n.nodeType===1)translateTree(n,'ar');else if(n.nodeType===3){const t=n.nodeValue.trim();if(AR_TEXT[t])n.nodeValue=n.nodeValue.replace(t,AR_TEXT[t])}}});
+languageObserver.observe(document.body,{childList:true,subtree:true});
+function chooseLanguage(lang){const prefs=getPrefs();prefs.language=lang;setPrefs(prefs);applyLanguage(lang);$('#languageGate').style.display='none';if(!state.profile.name){$('#onboarding').classList.add('show');setTimeout(()=>$('#welcomeName').focus(),100)}}
+$('#chooseEnglish').onclick=()=>chooseLanguage('en');$('#chooseArabic').onclick=()=>chooseLanguage('ar');
+$('#languageSelect').onchange=e=>{const p=getPrefs();p.language=e.target.value;setPrefs(p);applyLanguage(p.language)};
+$('#themeSelect').onchange=e=>{const p=getPrefs();p.theme=e.target.value;setPrefs(p);applyTheme(p.theme)};
+function downloadFullBackup(){try{const backup={application:'PRESSURELESS',formatVersion:1,exportedAt:new Date().toISOString(),state,prefs:getPrefs()};const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='pressureless-backup-'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);alert(document.documentElement.lang==='ar'?'تم تنزيل النسخة الاحتياطية. احتفظ بها في مكان خاص لأنها تحتوي على معلومات صحية شخصية.':'Backup downloaded. Keep it somewhere private because it contains personal health information.')}catch(e){alert((document.documentElement.lang==='ar'?'تعذّر تنزيل النسخة الاحتياطية: ':'Could not download backup: ')+e.message)}}
+$('#exportBackup').onclick=downloadFullBackup;
+$('#importBackupButton').onclick=()=>$('#importBackupFile').click();
+$('#importBackupFile').onchange=async e=>{const file=e.target.files?.[0];if(!file)return;try{const backup=JSON.parse(await file.text());if(backup.application!=='PRESSURELESS'||!backup.state||typeof backup.state!=='object')throw new Error(document.documentElement.lang==='ar'?'ملف النسخة الاحتياطية لا يحتوي على بيانات PRESSURELESS صالحة.':'The backup file is not valid PRESSURELESS data.');if(!confirm(document.documentElement.lang==='ar'?'سيؤدي ذلك إلى استبدال البيانات الصحية المحفوظة في هذا المتصفح. هل تريد المتابعة؟':'This will replace the health data saved in this browser. Continue?'))return;state=mergeState(backup.state);if(backup.prefs&&typeof backup.prefs==='object')setPrefs({...getPrefs(),...backup.prefs});save();applyTheme(getPrefs().theme||'light');applyLanguage(getPrefs().language||'en');renderAll();$('#onboarding').classList.toggle('show',!state.profile.name);alert(document.documentElement.lang==='ar'?'تمت استعادة النسخة الاحتياطية بنجاح.':'Backup restored successfully.')}catch(err){alert((document.documentElement.lang==='ar'?'تعذرت استعادة النسخة الاحتياطية: ':'Could not restore the backup: ')+err.message)}finally{e.target.value=''}};
+window.addEventListener('pagehide',()=>save());document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')save()});
+window.addEventListener('storage',e=>{if(e.key===STATE_STORAGE_KEY&&e.newValue){try{state=mergeState(JSON.parse(e.newValue));memoryState=state;renderAll()}catch{}}if(e.key===UI_PREF_KEY&&e.newValue){try{memoryPrefs=JSON.parse(e.newValue)||{};applyTheme(memoryPrefs.theme||'light');applyLanguage(memoryPrefs.language||'en')}catch{}}});
+async function requestPersistentBrowserStorage(){try{if(navigator.storage?.persisted&&navigator.storage?.persist){let persisted=await navigator.storage.persisted();if(!persisted)persisted=await navigator.storage.persist();} }catch{}updateStorageStatus(storageWriteAvailable)}
+$('#healthImportInfo').onclick=()=>alert('On iPhone: use a blood-pressure monitor whose companion app writes readings to Apple Health. Then use an eventual native Pressureless iOS app with HealthKit permission to read those values. This HTML version cannot request HealthKit access directly. Apple Watch itself does not measure blood pressure.');
+$('#healthCsvImport').onclick=()=>$('#healthCsvFile').click();
+$('#healthCsvFile').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const rows=(await f.text()).trim().split(/\r?\n/);const headers=rows.shift().split(',').map(x=>x.trim().toLowerCase());const idx=k=>headers.indexOf(k);if(idx('date')<0||idx('systolic')<0||idx('diastolic')<0)throw new Error('CSV needs date, systolic and diastolic columns.');let count=0;for(const row of rows){const c=row.split(',').map(x=>x.trim()),date=c[idx('date')],sys=Number(c[idx('systolic')]),dia=Number(c[idx('diastolic')]),pulse=idx('pulse')>=0?Number(c[idx('pulse')])||null:null;if(date&&sys>0&&dia>0){state.readings.push({id:uid(),date,sys,dia,pulse,notes:'Imported from CSV'});count++}}save();renderAll();alert(`Imported ${count} readings. Please review them for accuracy.`)}catch(err){alert(err.message)}finally{e.target.value=''}};
+$('#openOfflineHelper').onclick=()=>{const q=prompt('Offline helper: ask about blood pressure terms, low readings, high readings, or symptoms.');if(!q)return;const t=q.toLowerCase();let answer='I can explain general blood-pressure concepts, but I cannot diagnose, interpret your personal risk, or recommend medication changes. Please contact your clinician for personal advice.';if(/systolic|diastolic/.test(t))answer='Systolic is the top number: pressure when the heart beats. Diastolic is the bottom number: pressure between beats.';else if(/low|hypotension|90|60/.test(t))answer='A reading below 90 systolic OR below 60 diastolic is commonly considered low. Symptoms such as fainting, confusion, chest pain, or trouble breathing need urgent medical attention. A single reading alone does not establish a diagnosis.';else if(/high|hypertension|180|120/.test(t))answer='Repeated readings at or above 130/80 may be considered high under some guidelines. If a reading is above 180 systolic and/or 120 diastolic, wait one minute and recheck. If it remains that high, contact a healthcare professional immediately; with chest pain, shortness of breath, weakness, vision changes, or difficulty speaking, seek emergency care.';else if(/dizz|faint|weak/.test(t))answer='Dizziness or fainting can have many causes. Sit or lie down to reduce fall risk. Seek urgent help for fainting with chest pain, breathing difficulty, confusion, severe weakness, or other severe symptoms.';alert(answer+'\n\nOffline educational helper — not a medical AI model.');};
+
+async function init(){load();const prefs=getPrefs();applyTheme(prefs.theme||'light');applyLanguage(prefs.language||'en');if(!prefs.language)$('#languageGate').style.display='flex';else $('#languageGate').style.display='none';$('#todayDate').textContent=new Date().toLocaleDateString(prefs.language==='ar'?'ar-EG':'en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});$('#bpDate').value=new Date().toISOString().slice(0,16);renderAll();updateApiKeyUI();updateStorageStatus(storageWriteAvailable);requestPersistentBrowserStorage();if(!state.profile.name&&prefs.language){$('#onboarding').classList.add('show');setTimeout(()=>$('#welcomeName').focus(),120)}checkAIStatus();if(state.rxDraft)renderRxDraft('');setInterval(checkDoseReminders,15_000);window.addEventListener('resize',()=>{drawChart($('#bpChart'),[...state.readings].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,7).reverse());drawChart($('#historyChart'),[...state.readings].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,14).reverse())})}init();
+</script>
+</body></html>
