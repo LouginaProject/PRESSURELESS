@@ -714,7 +714,7 @@ html.pressureless-auth-open #onboarding.show{display:grid!important}
    <div class="notice blue" id="localModelNotice">On-device AI starts automatically when you open the AI assistant. Phones use a smaller model (about 120–180 MB); larger devices use a stronger model (about 270–390 MB). The files are fetched automatically from Hugging Face and cached by the browser when storage is available. No manual download or API key is required.</div>
    <div class="btnline" style="margin:10px 0 12px"><button class="btn teal" type="button" id="loadLocalModel">Retry AI loading</button><span class="status" id="localModelStatus"><i></i>Starts automatically when AI opens</span></div>
    <div class="chatbox" id="chatbox"><div class="bubble">Hello. I can explain general hypertension information, help you understand terms on medicine labels and summarize the records you choose to share. I cannot diagnose, prescribe or change a treatment plan.</div></div>
-   <form class="chatinput" id="chatForm"><input id="chatInput" placeholder="Ask about blood pressure or medicines…" required><button class="btn">Send</button></form>
+   <form class="chatinput" id="chatForm"><input id="chatInput" placeholder="Ask about blood pressure or medicines…" autocomplete="off" required><button class="btn" type="submit">Send</button></form>
    <label class="consent" id="apiConsentWrap"><input id="chatConsent" type="checkbox"><span>I consent to sending my message and the selected summary of my saved Pressureless records to the configured OpenAI service. This is required only when using the cloud model.</span></label>
    <div class="help" style="margin-top:7px">Only the summary displayed by this app is attached to the request. Do not enter information you do not wish to send to the AI provider.</div>
   </div>
@@ -973,80 +973,90 @@ $('#useRx').onclick=()=>{const d=state.rxDraft;if(!d)return;const m=d.medicines?
 function patientContext(){const r=[...state.readings].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,10),m=state.medications.map(x=>({name:x.name,strength:x.strength,dose:x.dose,frequency:x.frequency,times:x.times,instructions:x.instructions})),l=state.lifestyle.slice(-7).map(x=>({date:x.date,sleep:x.sleep,stress:x.stress,activity:x.activity,food:x.food,salt:x.salt,notes:x.notes})),p=state.profile;return JSON.stringify({profile:{name:p.name,condition:p.condition,allergies:p.allergies,medicalNotes:p.notes},recentBloodPressureReadings:r,medicationSchedule:m,recentDoseLogs:state.doseLogs.slice(-20),recentLifestyleEntries:l});}
 // Compact in-browser language model. No API key is used in local mode.
 let localTextGenerator=null,localModelLoading=null;
+let localAIWorker=null,localAIWorkerReady=false,localAIWorkerReadyResolve=null,localAIWorkerReadyReject=null;
+let localAIRequestId=0;
+const localAIRequests=new Map();
+let localAIErrorMessage='';
 const LOCAL_MODEL_ID='HuggingFaceTB/SmolLM2-360M-Instruct';
 const LOCAL_MODEL_ID_MOBILE='onnx-community/SmolLM2-135M-Instruct-ONNX-MHA';
-function setLocalModelStatus(message,ready=false){['#localModelStatus','#localModelSettingsStatus'].forEach(sel=>{const el=$(sel);if(el){el.textContent=message;el.classList.toggle('online',ready)}});const badge=$('#assistantModel');if(badge){badge.textContent=ready?'On-device AI ready':'Local model not loaded';badge.className=ready?'pill':'pill gray'};const b=$('#loadLocalModel');if(b){b.disabled=!!localModelLoading;b.textContent=ready?'On-device AI ready':'Retry AI loading'};const bs=$('#loadLocalModelSettings');if(bs){bs.disabled=!!localModelLoading;bs.textContent=ready?'On-device AI ready':'Retry AI loading'}}
+function setLocalModelStatus(message,ready=false){
+ ['#localModelStatus','#localModelSettingsStatus'].forEach(sel=>{const el=$(sel);if(el){el.textContent=message;el.classList.toggle('online',ready)}});
+ const badge=$('#assistantModel');
+ if(badge){badge.textContent=ready?'On-device AI ready':'Local model not loaded';badge.className=ready?'pill':'pill gray'}
+ const b=$('#loadLocalModel');if(b){b.disabled=!!localModelLoading||ready;b.textContent=ready?'On-device AI ready':'Retry AI loading'}
+ const bs=$('#loadLocalModelSettings');if(bs){bs.disabled=!!localModelLoading||ready;bs.textContent=ready?'On-device AI ready':'Retry AI loading'}
+}
 function isSmallDeviceForAI(){return window.matchMedia('(max-width:760px)').matches||/iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1)}
+function handleLocalAIWorkerMessage(event){
+ const data=event.data||{};
+ if(data.type==='status'){setLocalModelStatus(data.message||'Preparing on-device AI…');return}
+ if(data.type==='ready'){
+  localAIWorkerReady=true;localTextGenerator=true;localAIErrorMessage='';
+  setLocalModelStatus('Ready · '+(data.model||'on-device model'),true);
+  const notice=$('#localModelNotice');if(notice)notice.textContent='On-device AI is ready. Model loading and answers run in a background worker so the page stays responsive. Safari caches model files when storage is available.';
+  if(localAIWorkerReadyResolve){localAIWorkerReadyResolve(true);localAIWorkerReadyResolve=null;localAIWorkerReadyReject=null}
+  return;
+ }
+ if(data.type==='load-error'){
+  const error=new Error(data.error||'The on-device model could not load.');
+  localAIErrorMessage=error.message;
+  setLocalModelStatus('Could not load: '+error.message);
+  const notice=$('#localModelNotice');if(notice)notice.textContent='The local AI could not start. Check the connection and available Safari storage, then tap Retry AI loading. '+error.message;
+  if(localAIWorkerReadyReject){localAIWorkerReadyReject(error);localAIWorkerReadyResolve=null;localAIWorkerReadyReject=null}
+  return;
+ }
+ if(data.type==='result'||data.type==='generation-error'){
+  const pending=localAIRequests.get(data.id);if(!pending)return;localAIRequests.delete(data.id);
+  if(data.type==='result')pending.resolve(data.text||'');else pending.reject(new Error(data.error||'AI generation failed.'));
+ }
+}
+function createLocalAIWorker(){
+ if(localAIWorker)return localAIWorker;
+ if(!('Worker' in window))throw new Error('This browser does not support background workers. Update Safari and try again.');
+ const workerUrl=new URL('ai-worker.js',document.baseURI);
+ localAIWorker=new Worker(workerUrl,{type:'module',name:'pressureless-ai'});
+ localAIWorker.onmessage=handleLocalAIWorkerMessage;
+ localAIWorker.onerror=event=>{
+  const error=new Error(event.message||'The AI background worker stopped unexpectedly.');
+  setLocalModelStatus('AI worker stopped: '+error.message);
+  if(localAIWorkerReadyReject){localAIWorkerReadyReject(error);localAIWorkerReadyResolve=null;localAIWorkerReadyReject=null}
+  for(const pending of localAIRequests.values())pending.reject(error);
+  localAIRequests.clear();localAIWorker.terminate();localAIWorker=null;localAIWorkerReady=false;localTextGenerator=null;
+ };
+ return localAIWorker;
+}
 async function loadLocalTextModel(){
- if(localTextGenerator)return localTextGenerator;
+ if(localAIWorkerReady)return true;
  if(localModelLoading)return localModelLoading;
  localModelLoading=(async()=>{
-  setLocalModelStatus('Preparing on-device AI…');
-  const {pipeline,env}=await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.2');
-  env.allowLocalModels=false;
-  env.allowRemoteModels=true;
-  env.useBrowserCache=true;
-  env.useWasmCache=true;
-  const smallDevice=isSmallDeviceForAI();
-  const modelId=smallDevice?LOCAL_MODEL_ID_MOBILE:LOCAL_MODEL_ID;
-  const modelLabel=smallDevice?'phone-optimized SmolLM2 135M':'SmolLM2 360M';
-  const choices=[];
-  let adapter=null;
-  if(navigator.gpu?.requestAdapter){try{adapter=await navigator.gpu.requestAdapter()}catch{adapter=null}}
-  if(adapter)choices.push({device:'webgpu',dtype:'q4f16',label:'WebGPU'});
-  choices.push({device:'wasm',dtype:'q4',label:'Safari-compatible CPU'});
-  let generator=null,lastError=null;
-  for(let i=0;i<choices.length;i++){
-   const choice=choices[i];
-   try{
-    setLocalModelStatus(i===0&&choice.device==='webgpu'?'Starting WebGPU…':'Loading with '+choice.label+'…');
-    generator=await pipeline('text-generation',modelId,{
-     device:choice.device,
-     dtype:choice.dtype,
-     progress_callback:(event)=>{
-      if(event.status==='progress'&&event.total){const pct=Math.max(0,Math.min(100,Math.round(event.progress||0)));setLocalModelStatus('Loading '+modelLabel+' · '+pct+'%')}
-      else if(event.status==='done')setLocalModelStatus('Finalizing '+modelLabel+'…');
-     }
-    });
-    break;
-   }catch(err){
-    lastError=err;
-    if(choice.device==='webgpu')setLocalModelStatus('WebGPU unavailable; switching to CPU…');
-   }
-  }
-  if(!generator)throw lastError||new Error('No supported local inference engine is available in this browser.');
-  localTextGenerator=generator;
-  setLocalModelStatus('Ready · '+modelLabel,true);
-  const notice=$('#localModelNotice');
-  if(notice)notice.textContent='On-device AI is ready ('+modelLabel+'). Messages are generated locally in your browser. The model is cached by Safari when storage is available.';
-  return generator;
- })().catch(err=>{
-  setLocalModelStatus('Could not load: '+(err?.message||String(err)));
-  const notice=$('#localModelNotice');
-  if(notice)notice.textContent='The local AI could not start in this browser. Check the internet connection, make sure Safari has enough free storage, then tap Retry AI loading. Details: '+(err?.message||String(err));
-  throw err;
+  setLocalModelStatus('Starting AI in the background…');
+  const worker=createLocalAIWorker();
+  const ready=new Promise((resolve,reject)=>{localAIWorkerReadyResolve=resolve;localAIWorkerReadyReject=reject});
+  worker.postMessage({type:'load',smallDevice:isSmallDeviceForAI()});
+  return ready;
+ })().catch(error=>{
+  setLocalModelStatus('Could not load: '+(error?.message||String(error)));
+  throw error;
  }).finally(()=>{localModelLoading=null});
  return localModelLoading;
 }
 async function answerWithLocalModel(question){
- const gen=await loadLocalTextModel();
+ await loadLocalTextModel();
+ if(!localAIWorker||!localAIWorkerReady)throw new Error('The local AI worker is not ready. Tap Retry AI loading.');
  const system='You are Pressureless, a cautious health education assistant. You are not a doctor. Give general health education only. Do not diagnose, prescribe, recommend changing medicine doses, or make emergency decisions. For chest pain, trouble breathing, fainting, severe weakness, confusion, or stroke signs, tell the user to seek emergency medical help. Ask users to verify medicine information with a doctor or pharmacist. Be concise, clear, and use the same language as the user.';
  const recent=chatHistory.slice(-6).map(message=>({role:message.role==='assistant'?'assistant':'user',content:String(message.content||'')}));
  if(!recent.length||recent[recent.length-1].role!=='user')recent.push({role:'user',content:question});
  const messages=[{role:'system',content:system},...recent];
- const maxTokens=isSmallDeviceForAI()?112:160;
- const output=await gen(messages,{max_new_tokens:maxTokens,do_sample:false,repetition_penalty:1.08});
- const generated=output?.[0]?.generated_text;
- let reply='';
- if(Array.isArray(generated)){
-  for(let i=generated.length-1;i>=0;i--){if(generated[i]?.role==='assistant'&&generated[i]?.content){reply=generated[i].content;break}}
- }else if(typeof generated==='string')reply=generated;
- reply=String(reply||'').replace(/<\|im_end\|>[\s\S]*$/,'').trim();
- if(!reply)throw new Error('The model loaded but returned an empty answer. Please retry with a shorter question.');
- return reply;
+ const id=++localAIRequestId;
+ return new Promise((resolve,reject)=>{
+  localAIRequests.set(id,{resolve,reject});
+  try{localAIWorker.postMessage({type:'generate',id,messages,smallDevice:isSmallDeviceForAI(),maxTokens:isSmallDeviceForAI()?72:112})}
+  catch(error){localAIRequests.delete(id);reject(error)}
+ });
 }
-$('#loadLocalModel').onclick=()=>loadLocalTextModel().catch(e=>console.warn('Local AI load failed:',e));$('#loadLocalModelSettings').onclick=()=>loadLocalTextModel().catch(e=>console.warn('Local AI load failed:',e));
-$('#chatForm').onsubmit=async e=>{e.preventDefault();const q=$('#chatInput').value.trim();if(!q)return;const staticGitHubPages=/\.github\.io$/i.test(location.hostname)||location.protocol==='file:';const useLocal=staticGitHubPages||!!localTextGenerator||!!localModelLoading||$('#localModelStatus')?.classList.contains('online');if(!useLocal&&!$('#chatConsent').checked){alert('Please enable the on-device model or provide consent before sending your message to the cloud AI service.');return}const box=$('#chatbox');box.insertAdjacentHTML('beforeend',`<div class="bubble user">${esc(q)}</div>`);$('#chatInput').value='';const loading=document.createElement('div');loading.className='bubble';loading.textContent=useLocal?'Preparing on-device AI…':'Pressureless AI is thinking…';box.appendChild(loading);box.scrollTop=box.scrollHeight;chatHistory.push({role:'user',content:q});const btn=$('#chatForm button');btn.disabled=true;try{let response;if(useLocal){response=await answerWithLocalModel(q)}else{const resp=await fetch('/api/assistant',{method:'POST',headers:{'Content-Type':'application/json',...aiHeaders()},body:JSON.stringify({messages:chatHistory,context:patientContext()})});const d=await resp.json();if(!resp.ok)throw new Error(d.error||'AI request failed');response=d.output_text}chatHistory.push({role:'assistant',content:response});loading.textContent=response;loading.className='bubble'}catch(err){loading.className='bubble';loading.textContent='AI could not respond: '+(err?.message||String(err));chatHistory.pop()}finally{btn.disabled=false;box.scrollTop=box.scrollHeight}};
+$('#loadLocalModel').onclick=()=>loadLocalTextModel().catch(e=>console.warn('Local AI load failed:',e));
+$('#loadLocalModelSettings').onclick=()=>loadLocalTextModel().catch(e=>console.warn('Local AI load failed:',e));
+$('#chatForm').onsubmit=async e=>{e.preventDefault();const q=$('#chatInput').value.trim();if(!q)return;const staticGitHubPages=/\.github\.io$/i.test(location.hostname)||location.protocol==='file:';const useLocal=staticGitHubPages||!!localAIWorker||!!localModelLoading||localAIWorkerReady;if(!useLocal&&!$('#chatConsent').checked){alert('Please enable the on-device model or provide consent before sending your message to the cloud AI service.');return}const box=$('#chatbox');box.insertAdjacentHTML('beforeend',`<div class="bubble user">${esc(q)}</div>`);$('#chatInput').value='';const loading=document.createElement('div');loading.className='bubble';loading.textContent=useLocal?'Preparing on-device AI in the background…':'Pressureless AI is thinking…';box.appendChild(loading);box.scrollTop=box.scrollHeight;chatHistory.push({role:'user',content:q});const btn=$('#chatForm button');btn.disabled=true;try{let response;if(useLocal){response=await answerWithLocalModel(q)}else{const resp=await fetch('/api/assistant',{method:'POST',headers:{'Content-Type':'application/json',...aiHeaders()},body:JSON.stringify({messages:chatHistory,context:patientContext()})});const d=await resp.json();if(!resp.ok)throw new Error(d.error||'AI request failed');response=d.output_text}chatHistory.push({role:'assistant',content:response});loading.textContent=response;loading.className='bubble'}catch(err){loading.className='bubble';loading.textContent='AI could not respond: '+(err?.message||String(err));chatHistory.pop()}finally{btn.disabled=false;box.scrollTop=box.scrollHeight}};
 function reportText(){const p=state.profile,adh=allAdherence();return ['PRESSURELESS — HYPERTENSION HEALTH SUMMARY','Generated: '+new Date().toLocaleString(),'','PATIENT PROFILE',`Name: ${p.name||'Not provided'}`,`Doctor / clinic: ${p.doctor||'Not provided'}`,`Condition: ${p.condition||'Not provided'}`,`Allergies: ${p.allergies||'Not provided'}`,`Medical notes: ${p.notes||'None'}`,'','BLOOD PRESSURE READINGS',...(state.readings.length?state.readings.slice().sort((a,b)=>a.date.localeCompare(b.date)).map(x=>`${x.date}: ${x.sys}/${x.dia} mmHg; pulse ${x.pulse||'not recorded'}; ${x.notes||''}`):['No readings recorded.']),'','MEDICATIONS',...(state.medications.length?state.medications.map(m=>`${m.name}; ingredient ${m.ingredient||'not entered'}; strength ${m.strength}; dose ${m.dose||'not entered'}; route ${m.route}; frequency ${m.frequency}; times ${(m.times||[]).join(', ')}; instructions ${m.instructions||'not entered'}`):['No medications recorded.']),'','DOSE ADHERENCE',`Calculated from dose entries marked taken or missed: ${adh===null?'No dose logs':adh+'%'}`,...state.doseLogs.map(x=>`${x.date} ${x.time}: ${x.status} — ${state.medications.find(m=>m.id===x.medId)?.name||'Medication'}`),'','LIFESTYLE JOURNAL',...(state.lifestyle.length?state.lifestyle.map(x=>`${x.date}: sleep ${x.sleep}h; stress ${x.stress}; activity ${x.activity} minutes; food ${x.food}; salt ${x.salt}; notes ${x.notes||''}`):['No lifestyle entries.']),'','DOCTOR APPOINTMENTS',...state.appointments.map(x=>`${x.at}: ${x.provider} — ${x.reason||'Appointment'} (${x.status})`),'','DAILY CHALLENGES',...Object.entries(state.challengeDays).map(([d,a])=>`${d}: ${(a||[]).join(', ')}`),'','This report is a patient-entered record for discussion with a healthcare professional. It is not a diagnosis or treatment recommendation. Verify all information before sharing.'].join('\n')}
 $('#downloadReport').onclick=()=>{const blob=new Blob([reportText()],{type:'text/plain;charset=utf-8'}),a=document.createElement('a'),url=URL.createObjectURL(blob);a.href=url;a.download='Pressureless-medical-history-report.txt';a.click();URL.revokeObjectURL(url)};$('#printReport').onclick=()=>window.print();
 
