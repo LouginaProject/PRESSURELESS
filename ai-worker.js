@@ -21,30 +21,66 @@ function send(type, extra = {}) {
 async function loadModel(isSmallDevice) {
   if (generator) return generator;
   if (loadingPromise) return loadingPromise;
+
   const modelId = isSmallDevice ? PHONE_MODEL : DESKTOP_MODEL;
   loadedLabel = isSmallDevice ? 'SmolLM2 135M (phone)' : 'SmolLM2 360M';
 
   loadingPromise = (async () => {
     send('status', { message: 'Preparing ' + loadedLabel + ' in the background…' });
-    const device = 'wasm'; // Most consistent cross-browser backend, including iOS Safari workers.
-    generator = await pipeline('text-generation', modelId, {
-      device,
-      dtype: 'q4',
-      progress_callback(event) {
-        if (event.status === 'progress' && event.total) {
-          const loaded = Number(event.loaded || 0);
-          const total = Number(event.total || 0);
-          const percent = Math.max(0, Math.min(100, Math.round(event.progress || (total ? loaded / total * 100 : 0))));
-          send('status', { message: 'Downloading ' + loadedLabel + ' · ' + percent + '%' });
-        } else if (event.status === 'initiate') {
-          send('status', { message: 'Connecting to the model files…' });
-        } else if (event.status === 'done') {
-          send('status', { message: 'Preparing the ' + loadedLabel + ' runtime…' });
+    const choices = [];
+    let adapter = null;
+    try {
+      if (self.navigator?.gpu?.requestAdapter) {
+        adapter = await self.navigator.gpu.requestAdapter();
+      }
+    } catch (error) {
+      send('status', { message: 'Checking graphics acceleration…' });
+    }
+
+    if (adapter) {
+      const supportsFloat16 = !!adapter.features?.has?.('shader-f16');
+      choices.push({
+        device: 'webgpu',
+        dtype: supportsFloat16 ? 'q4f16' : 'q4',
+        label: 'WebGPU accelerated'
+      });
+    }
+    choices.push({ device: 'wasm', dtype: 'q4', label: 'CPU compatibility mode' });
+
+    let lastError = null;
+    for (const choice of choices) {
+      try {
+        send('status', { message: 'Loading ' + loadedLabel + ' · ' + choice.label + '…' });
+        generator = await pipeline('text-generation', modelId, {
+          device: choice.device,
+          dtype: choice.dtype,
+          progress_callback(event) {
+            if (event.status === 'progress_total') {
+              const percent = Math.max(0, Math.min(100, Math.round((event.progress || 0) * 100)));
+              send('status', { message: 'Downloading ' + loadedLabel + ' · ' + percent + '%' });
+            } else if (event.status === 'progress' && event.total) {
+              const loaded = Number(event.loaded || 0);
+              const total = Number(event.total || 0);
+              const percent = Math.max(0, Math.min(100, Math.round(event.progress || (total ? loaded / total * 100 : 0))));
+              send('status', { message: 'Downloading ' + loadedLabel + ' · ' + percent + '%' });
+            } else if (event.status === 'initiate') {
+              send('status', { message: 'Connecting to the model files…' });
+            } else if (event.status === 'done') {
+              send('status', { message: 'Preparing the ' + loadedLabel + ' runtime…' });
+            }
+          }
+        });
+        send('ready', { model: loadedLabel, device: choice.label, dtype: choice.dtype });
+        return generator;
+      } catch (error) {
+        lastError = error;
+        generator = null;
+        if (choice.device === 'webgpu') {
+          send('status', { message: 'Graphics acceleration unavailable; switching to compatibility mode…' });
         }
       }
-    });
-    send('ready', { model: loadedLabel });
-    return generator;
+    }
+    throw lastError || new Error('No supported inference engine is available in this browser.');
   })().catch(error => {
     generator = null;
     loadingPromise = null;
@@ -90,9 +126,10 @@ self.onmessage = async event => {
         }
       });
       const output = await model(messages, {
-        max_new_tokens: Math.max(48, Math.min(112, Number(data.maxTokens) || 72)),
+        max_new_tokens: Math.max(40, Math.min(88, Number(data.maxTokens) || (data.smallDevice ? 56 : 80))),
         do_sample: false,
-        repetition_penalty: 1.05,
+        repetition_penalty: 1.02,
+        use_cache: true,
         streamer
       });
       const text = extractAssistantText(output);

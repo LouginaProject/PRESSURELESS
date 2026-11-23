@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f4f7fb">
+<meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f4f7fb"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="PRESSURELESS"><meta name="mobile-web-app-capable" content="yes">
 <title>PRESSURELESS — Your Blood Pressure Companion</title>
 <style>
 :root{--bg:#f4f7fb;--panel:#fff;--ink:#17243b;--muted:#75829a;--line:#e6ebf3;--blue:#4169e1;--blue2:#eef2ff;--teal:#159b89;--red:#d95364;--amber:#bd8121;--shadow:0 12px 32px rgba(33,54,94,.055)}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}.layout{min-height:100vh;display:grid;grid-template-columns:258px 1fr}aside{background:#fff;border-right:1px solid var(--line);padding:23px 16px;display:flex;flex-direction:column;gap:25px;z-index:15}.brand{display:flex;gap:11px;align-items:center;padding:0 10px;font-size:21px;font-weight:850;letter-spacing:-.7px}.brandmark{background:var(--blue);color:#fff;width:38px;height:38px;border-radius:13px;display:grid;place-items:center;font-size:24px;box-shadow:0 6px 15px #4169e133}.nav-label{font-size:10px;text-transform:uppercase;letter-spacing:1.4px;color:#a0aabc;font-weight:800;padding:0 12px;margin-bottom:8px}.nav{display:grid;gap:4px}.nav button{border:0;background:transparent;color:#687791;padding:11px 12px;border-radius:11px;text-align:left;display:flex;align-items:center;gap:12px;font-weight:650}.nav button:hover,.nav button.active{background:var(--blue2);color:var(--blue)}.nav .ni{width:20px;font-size:16px;text-align:center}.sidebottom{margin-top:auto;background:#f2f5ff;border:1px solid #e4eaff;border-radius:15px;padding:14px;color:#64718c;font-size:11px}.sidebottom strong{color:var(--ink);font-size:13px;display:block;margin-bottom:3px}main{width:100%;max-width:1550px;margin:0 auto;padding:28px clamp(16px,3.5vw,46px)}.top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:24px}.top-left{display:flex;align-items:center;gap:12px}.date{font-size:11px;letter-spacing:.7px;color:var(--muted);font-weight:750}.top h1{font-size:27px;letter-spacing:-.9px;margin:2px 0 0}.user{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:750}.avatar{width:38px;height:38px;display:grid;place-items:center;background:#e5ebff;color:#3154b6;border-radius:50%;font-weight:850}.mobile{display:none;border:1px solid var(--line);background:#fff;width:40px;height:40px;border-radius:11px}.page{display:none}.page.active{display:block}.cards{display:grid;gap:16px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:16px}.cols2{grid-template-columns:1.45fr 1fr}.cols3{grid-template-columns:repeat(3,1fr)}.card{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:19px;box-shadow:var(--shadow);min-width:0}.stathead,.cardhead{display:flex;justify-content:space-between;align-items:center;gap:10px}.stathead{font-size:11px;color:var(--muted);font-weight:750}.sticon{width:34px;height:34px;border-radius:11px;background:var(--blue2);display:grid;place-items:center;font-size:16px}.statvalue{font-size:28px;font-weight:850;letter-spacing:-1.2px;margin:12px 0 1px}.statfoot{color:var(--muted);font-size:11px}.good{color:var(--teal)}.warn{color:var(--amber)}.bad{color:var(--red)}h2{font-size:15px;letter-spacing:-.2px;margin:0}.sub{font-size:11px;color:var(--muted);margin-top:3px}.cardhead{margin-bottom:15px}.btn{border:0;border-radius:10px;background:var(--blue);color:white;padding:10px 13px;font-size:11px;font-weight:800}.btn:hover{filter:brightness(.97)}.btn.soft{background:var(--blue2);color:var(--blue)}.btn.light{background:#f1f4f8;color:#596780}.btn.red{background:#fff0f1;color:var(--red)}.btn.teal{background:#e7f7f3;color:var(--teal)}.btn.tiny{padding:7px 9px;font-size:10px}.btnline{display:flex;gap:8px;flex-wrap:wrap}.pill{display:inline-flex;align-items:center;padding:5px 9px;border-radius:20px;background:#e9f8f3;color:var(--teal);font-size:10px;font-weight:850}.pill.gray{background:#f0f3f8;color:#6e7a90}.pill.amber{background:#fff6e6;color:var(--amber)}.pill.red{background:#fff0f1;color:var(--red)}.bpnum{font-weight:900;font-size:38px;letter-spacing:-1.6px;margin:0}.bpunit{font-size:11px;color:var(--muted)}.chart{width:100%;height:190px;display:block}.legend{font-size:10px;color:var(--muted);display:flex;gap:14px}.dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:5px;background:var(--blue)}.dot.dia{background:var(--teal)}.list{display:grid;gap:11px}.item{display:flex;align-items:center;gap:10px;min-width:0}.itemicon{width:37px;height:37px;border-radius:12px;background:#f2f5fb;display:grid;place-items:center;flex:none}.itemcopy{flex:1;min-width:0}.itemcopy strong{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.itemcopy span{display:block;color:var(--muted);font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.check{width:26px;height:26px;border:1px solid #dce3ee;background:#fff;color:#92a0b6;border-radius:8px}.check.done{background:#e7f7f3;color:var(--teal);border-color:#c4e9e0}.sectiontitle{font-size:20px;letter-spacing:-.5px;margin:2px 0 4px}.sectiondesc{font-size:12px;color:var(--muted);margin:0 0 18px}.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field{display:grid;gap:5px;min-width:0}.field.full{grid-column:1/-1}.field label{font-size:10px;font-weight:800;color:#64718a}.field input,.field select,.field textarea{width:100%;min-width:0;border:1px solid #dfe5ef;border-radius:10px;padding:10px 11px;background:#fff;color:var(--ink);outline:none;font-size:12px}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px #4169e116}.field textarea{resize:vertical}.muted{color:var(--muted)}.tinytext{font-size:10px;color:var(--muted)}.tablebox{overflow:auto}table{border-collapse:collapse;width:100%;font-size:11px}th,td{padding:10px 9px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}th{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px}.notice{border-radius:12px;background:#fff8e9;border:1px solid #f2e4c4;padding:11px 13px;color:#775f30;font-size:10px;margin-top:13px}.notice.amber{background:#fff6e8;border:1px solid #f2d7a9;color:#80551b}.notice.red{background:#fff0f1;border-color:#ffd8dc;color:#9f3545}.notice.blue{background:#f0f4ff;border-color:#dfe6ff;color:#536797}.pagegrid{display:grid;gap:16px}.tag{font-size:10px;font-weight:800;background:#f0f3f9;color:#60708a;border-radius:7px;padding:4px 7px}.progress{height:7px;background:#edf1f6;border-radius:20px;overflow:hidden}.progress span{display:block;height:100%;border-radius:20px;background:var(--teal)}.challenge{border:1px solid var(--line);border-radius:13px;padding:13px;display:flex;align-items:center;gap:10px}.challenge .itemcopy{flex:1}.chatbox{height:385px;overflow:auto;background:#f8faff;border:1px solid var(--line);border-radius:13px;padding:13px;display:flex;flex-direction:column;gap:10px}.bubble{max-width:88%;background:#fff;border:1px solid var(--line);border-radius:13px;padding:10px 12px;font-size:12px;white-space:pre-wrap}.bubble.user{align-self:flex-end;background:var(--blue);border-color:var(--blue);color:#fff}.chatinput{display:flex;gap:7px;margin-top:9px}.chatinput input{flex:1;min-width:0;border:1px solid var(--line);border-radius:10px;padding:11px;font-size:12px}.consent{display:flex;gap:8px;align-items:flex-start;font-size:10px;color:#68758c;margin-top:10px}.consent input{margin-top:2px}.status{display:flex;align-items:center;gap:7px;font-size:10px;color:var(--muted)}.status i{width:7px;height:7px;border-radius:50%;background:#d5a54d}.status.online i{background:#17aa91}.extract{background:#f9faff;border:1px solid #e4eaf6;border-radius:13px;padding:13px;margin-top:13px}.extractgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.extractrow{font-size:10px}.extractrow b{display:block;color:#64718a;margin-bottom:2px}.empty{padding:18px;text-align:center;color:var(--muted);font-size:11px}.kpi{display:flex;justify-content:space-between;gap:10px;align-items:center}.divider{height:1px;background:var(--line);margin:13px 0}.footer{padding:26px 0 8px;text-align:center;color:#98a3b5;font-size:10px}.hidden{display:none!important}.help{font-size:10px;color:var(--muted);line-height:1.6}.remindline{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#f8faff;padding:10px;border-radius:10px}.remindline strong{font-size:11px}.remindline span{font-size:10px;color:var(--muted)}
@@ -1073,13 +1073,13 @@ async function answerWithLocalModel(question){
  await loadLocalTextModel();
  if(!localAIWorker||!localAIWorkerReady)throw new Error('The local AI worker is not ready. Tap Retry AI loading.');
  const system='You are Pressureless, a cautious health education assistant. You are not a doctor. Give general health education only. Do not diagnose, prescribe, recommend changing medicine doses, or make emergency decisions. For chest pain, trouble breathing, fainting, severe weakness, confusion, or stroke signs, tell the user to seek emergency medical help. Ask users to verify medicine information with a doctor or pharmacist. Be concise, clear, and use the same language as the user.';
- const recent=chatHistory.slice(-6).map(message=>({role:message.role==='assistant'?'assistant':'user',content:String(message.content||'')}));
+ const recent=chatHistory.slice(-4).map(message=>({role:message.role==='assistant'?'assistant':'user',content:String(message.content||'').slice(-420)}));
  if(!recent.length||recent[recent.length-1].role!=='user')recent.push({role:'user',content:question});
  const messages=[{role:'system',content:system},...recent];
  const id=++localAIRequestId;
  return new Promise((resolve,reject)=>{
   localAIRequests.set(id,{resolve,reject,onToken:chunk=>{if(localAIProgressBubble?.isConnected){localAIProgressBubble.textContent+=chunk;const box=$('#chatbox');box.scrollTop=box.scrollHeight}}});
-  try{localAIWorker.postMessage({type:'generate',id,messages,smallDevice:isSmallDeviceForAI(),maxTokens:isSmallDeviceForAI()?72:112})}
+  try{localAIWorker.postMessage({type:'generate',id,messages,smallDevice:isSmallDeviceForAI(),maxTokens:isSmallDeviceForAI()?56:88})}
   catch(error){localAIRequests.delete(id);reject(error)}
  });
 }
@@ -1173,18 +1173,170 @@ Object.assign(AR_TEXT,{
 'Local AI · automatic setup':'الذكاء الاصطناعي المحلي · إعداد تلقائي',
 'On-device AI is ready. Messages are generated locally in your browser; no API key is used.':'الذكاء الاصطناعي المحلي جاهز. تتم صياغة الرسائل داخل متصفحك ولا يُستخدم مفتاح API.'
 });
-const EN_TEXT=Object.fromEntries(Object.entries(AR_TEXT).map(([k,v])=>[v,k]));
-function translateTree(root,lang){const dict=lang==='ar'?AR_TEXT:EN_TEXT;const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=walker.nextNode()){if(!n.parentElement||['SCRIPT','STYLE'].includes(n.parentElement.tagName))continue;const raw=n.nodeValue,trim=raw.trim();if(!trim)continue;let translated=dict[trim];
-if(!translated&&lang==='ar'){
- let m=trim.match(/^(\d+) of 7 days checked this week$/);if(m)translated=`${m[1]} من 7 أيام تم تسجيلها هذا الأسبوع`;
- m=trim.match(/^(\d+) \/ 4 completed$/);if(m)translated=`${m[1]} / 4 مكتملة`;
- m=trim.match(/^(\d+) days$/);if(m)translated=`${m[1]} أيام`;
+
+Object.assign(AR_TEXT, {
+  "Automatic saving": "حفظ تلقائي",
+  "Checking browser storage…": "جارٍ التحقق من مساحة تخزين المتصفح…",
+  "Download full backup": "تنزيل نسخة احتياطية كاملة",
+  "Encrypted": "مشفّر",
+  "For consistent measurements, sit quietly with your back supported and feet flat, use the correct cuff size on a bare arm at heart level, and take at least two readings one minute apart. Record both.": "للحصول على قياسات متسقة، اجلس بهدوء مع إسناد ظهرك ووضع قدميك بشكل مسطح، واستخدم مقاس الكُفّة الصحيح على ذراع مكشوفة بمستوى القلب، وخذ قراءتين على الأقل يفصل بينهما دقيقة واحدة. سجّل القراءتين.",
+  "For privacy, your password is never stored. You will enter it again when you reopen PRESSURELESS. If you forget it, the encrypted health records cannot be recovered without a password you know.": "حفاظًا على خصوصيتك، لا يتم تخزين كلمة المرور. ستحتاج إلى إدخالها مجددًا عند فتح PRESSURELESS. إذا نسيتها، فلن يمكن استعادة السجلات الصحية المشفّرة دون كلمة المرور الصحيحة.",
+  "Health records are encrypted and saved in this browser on this device. They do not sync to another phone or computer. Download an encrypted backup to move records between devices. Keep your password safe. API keys are not included.": "تُشفّر السجلات الصحية وتُحفظ في هذا المتصفح على هذا الجهاز. لا تتم مزامنتها مع هاتف أو حاسوب آخر. لتنقل سجلاتك بين الأجهزة، نزّل نسخة احتياطية مشفّرة. احتفظ بكلمة المرور في مكان آمن. لا تتضمن النسخة مفاتيح API.",
+  "Hello. I can explain general hypertension information, help you understand terms on medicine labels and summarize the records you choose to share. I cannot diagnose, prescribe or change a treatment plan.": "مرحبًا. يمكنني شرح المعلومات العامة عن ارتفاع ضغط الدم، ومساعدتك على فهم المصطلحات الموجودة على ملصقات الأدوية، وتلخيص السجلات التي تختار مشاركتها. لا يمكنني تشخيص الحالات أو وصف الأدوية أو تغيير خطة العلاج.",
+  "I consent to sending my message and the selected summary of my saved Pressureless records to the configured OpenAI service. This is required only when using the cloud model.": "أوافق على إرسال رسالتي والملخص المحدد من سجلات PRESSURELESS المحفوظة إلى خدمة OpenAI المُعدّة. هذا مطلوب فقط عند استخدام النموذج السحابي.",
+  "No API key entered in this browser session.": "لم يتم إدخال مفتاح API في جلسة المتصفح هذه.",
+  "Restore backup": "استعادة نسخة احتياطية",
+  "Saved locally": "محفوظ على هذا الجهاز",
+  "Signed in as": "تم تسجيل الدخول باسم",
+  "Starts automatically when AI opens": "يبدأ تلقائيًا عند فتح المساعد الذكي",
+  "The key is kept in this tab session only. Do not enter a real API key on this public GitHub Pages demo: it has no private server endpoint, and browser storage is not a secure secret vault. Use a separately hosted backend for cloud AI.": "يظل المفتاح محفوظًا في ذاكرة علامة التبويب الحالية فقط. لا تُدخل مفتاح API حقيقيًا في نسخة GitHub Pages العامة هذه؛ فهي لا تحتوي على خادم خاص، كما أن تخزين المتصفح ليس خزنة آمنة للأسرار. استخدم خادمًا خلفيًا مستضافًا بشكل منفصل لتفعيل الذكاء الاصطناعي السحابي.",
+  "This reading is higher than 180 systolic and/or 120 diastolic. Wait at least one minute and repeat the measurement. If it remains this high, contact a healthcare professional immediately. If you also have chest pain, shortness of breath, back pain, numbness, weakness, vision changes or difficulty speaking, seek emergency medical help now.": "هذه القراءة أعلى من 180 للضغط الانقباضي و/أو 120 للضغط الانبساطي. انتظر دقيقة واحدة على الأقل ثم أعد القياس. إذا ظلت القراءة بهذا الارتفاع، فتواصل فورًا مع مختص رعاية صحية. وإذا صاحبها ألم في الصدر أو ضيق في التنفس أو ألم في الظهر أو تنميل أو ضعف أو تغيرات في الرؤية أو صعوبة في الكلام، فاطلب المساعدة الطبية الطارئة الآن.",
+  "This reading is in a low range (below 90 systolic and/or below 60 diastolic). Some people naturally have lower readings without symptoms. If you feel dizzy, faint, weak, nauseated or have blurred vision, sit or lie down and contact a healthcare professional for advice. Seek emergency help for fainting, confusion, cold/clammy skin, rapid breathing or other severe symptoms. Do not change prescribed medicines without medical advice.": "هذه القراءة في النطاق المنخفض (أقل من 90 للضغط الانقباضي و/أو أقل من 60 للضغط الانبساطي). تكون قراءات بعض الأشخاص منخفضة بطبيعتها دون أعراض. إذا شعرت بالدوار أو قرب الإغماء أو الضعف أو الغثيان أو تشوش الرؤية، فاجلس أو استلقِ وتواصل مع مختص رعاية صحية للحصول على المشورة. اطلب المساعدة الطارئة عند الإغماء أو الارتباك أو برودة/تعرق الجلد أو سرعة التنفس أو ظهور أعراض شديدة أخرى. لا تغيّر الأدوية الموصوفة دون استشارة طبية.",
+  "Your profile, language, theme and health records are saved on this device automatically.": "يتم حفظ ملفك الشخصي واللغة والمظهر والسجلات الصحية تلقائيًا على هذا الجهاز.",
+  "App navigation": "التنقل داخل التطبيق",
+  "Blood pressure history chart": "مخطط سجل ضغط الدم",
+  "Open menu": "فتح القائمة",
+  "PRESSURELESS home": "العودة إلى الصفحة الرئيسية",
+  "08:00, 20:00": "08:00، 20:00",
+  "As confirmed by pharmacist": "كما أكد الصيدلي",
+  "As recorded by your clinician": "كما سجّلها الطبيب",
+  "As written on prescription": "كما هو مكتوب في الوصفة الطبية",
+  "Ask about blood pressure or medicines…": "اسأل عن ضغط الدم أو الأدوية…",
+  "Doctor or clinic name": "اسم الطبيب أو العيادة",
+  "Enter the name exactly as on the prescription": "أدخل الاسم تمامًا كما هو مكتوب في الوصفة الطبية",
+  "Follow-up, review…": "متابعة، مراجعة…",
+  "Meals, mood, symptoms or factors you want to remember…": "الوجبات أو الحالة المزاجية أو الأعراض أو العوامل التي تريد تذكرها…",
+  "Optional": "اختياري",
+  "Optional context, e.g. before breakfast": "معلومات إضافية، مثل قبل الإفطار",
+  "Pharmacist confirmation, prescriber notes…": "تأكيد الصيدلي أو ملاحظات الطبيب الواصف…",
+  "Previous diagnoses, relevant history, or topics to discuss…": "التشخيصات السابقة أو التاريخ الصحي ذي الصلة أو موضوعات تريد مناقشتها…",
+  "Your name": "اسمك",
+  "e.g. 1 tablet": "مثال: قرص واحد",
+  "e.g. 120": "مثال: 120",
+  "e.g. 30": "مثال: 30",
+  "e.g. 5 mg": "مثال: 5 ملغ",
+  "e.g. 7.5": "مثال: 7.5",
+  "e.g. 72": "مثال: 72",
+  "e.g. 80": "مثال: 80",
+  "e.g. with food — only if written/confirmed": "مثال: مع الطعام — فقط إذا ورد ذلك في الوصفة أو تم تأكيده",
+  "Go to Home": "الانتقال إلى الرئيسية",
+  "Home": "الرئيسية",
+  "Pressure": "الضغط",
+  "Medicines": "الأدوية",
+  "Journal": "اليوميات",
+  "AI": "الذكاء الاصطناعي",
+  "More": "المزيد",
+  "Preparing on-device AI in the background…": "جارٍ تجهيز الذكاء الاصطناعي على الجهاز في الخلفية…",
+  "Preparing on-device AI…": "جارٍ تجهيز الذكاء الاصطناعي على الجهاز…",
+  "Starting AI in the background…": "جارٍ تشغيل الذكاء الاصطناعي في الخلفية…",
+  "Starting WebGPU…": "جارٍ تشغيل WebGPU…",
+  "Starting accelerated AI…": "جارٍ تشغيل الذكاء الاصطناعي المُسرّع…",
+  "Switching to CPU mode…": "جارٍ التبديل إلى وضع المعالج…",
+  "Switching to Safari-compatible mode…": "جارٍ التبديل إلى وضع متوافق مع Safari…",
+  "Generating your answer…": "جارٍ إنشاء إجابتك…",
+  "The model returned an empty answer. Try a shorter question.": "أعاد النموذج إجابة فارغة. جرّب سؤالًا أقصر.",
+  "Please enter a question first.": "يرجى كتابة سؤال أولًا.",
+  "On-device AI is ready. Model loading and answers run in a background worker so the page stays responsive. Safari caches model files when storage is available.": "الذكاء الاصطناعي المحلي جاهز. يتم تحميل النموذج وإنشاء الإجابات في مهمة خلفية حتى تظل الصفحة سريعة الاستجابة. يحفظ Safari ملفات النموذج مؤقتًا عند توفر مساحة تخزين.",
+  "AI can make mistakes. It is not a doctor and must not be used for diagnosis, emergencies, or treatment decisions. Confirm clinical information with a qualified professional.": "قد يخطئ الذكاء الاصطناعي. فهو ليس طبيبًا ولا ينبغي استخدامه للتشخيص أو في حالات الطوارئ أو لاتخاذ قرارات العلاج. تحقّق من المعلومات الطبية مع مختص مؤهل.",
+  "A normal HTML website cannot directly connect to Apple Health or read HealthKit data. This requires a native iOS app with your permission to access HealthKit. Apple Watch does not directly measure blood pressure; readings must come from a compatible blood-pressure cuff or monitor and then be written to Apple Health by its companion app.": "لا يستطيع موقع HTML عادي الاتصال مباشرةً بتطبيق Apple Health أو قراءة بيانات HealthKit. يتطلب ذلك تطبيق iOS أصليًا تمنحه إذن الوصول إلى HealthKit. لا تقيس Apple Watch ضغط الدم مباشرةً؛ بل يجب أن تأتي القراءات من جهاز متوافق لقياس ضغط الدم، ثم يرسلها التطبيق المصاحب للجهاز إلى Apple Health.",
+  "Pressureless does not decide how much medicine you should take. Never change or double a dose based on an app reminder. Follow the prescription and ask your pharmacist or prescriber when unsure.": "لا يحدد PRESSURELESS مقدار الدواء الذي ينبغي لك تناوله. لا تغيّر الجرعة ولا تضاعفها اعتمادًا على تذكير من التطبيق. اتبع الوصفة واسأل الصيدلي أو الطبيب الواصف إذا لم تكن متأكدًا.",
+  "اختر لغتك للمتابعة": "اختر لغتك للمتابعة",
+  "0 readings": "لا توجد قراءات",
+  "Log out": "تسجيل الخروج",
+  "PRESSURELESS home": "العودة إلى الصفحة الرئيسية",
+  "Signed in as": "تم تسجيل الدخول باسم"
+});
+const EN_TEXT=Object.create(null);
+for(const [english,arabic] of Object.entries(AR_TEXT))if(!(arabic in EN_TEXT))EN_TEXT[arabic]=english;
+EN_TEXT['رفيقك لمتابعة ضغط الدم']='Your blood pressure companion';
+EN_TEXT['اختر لغتك للمتابعة']='Choose your language to continue';
+const translationTextRecords=new WeakMap();
+const translationAttributeRecords=new WeakMap();
+const translationEntries={
+ ar:Object.entries(AR_TEXT).filter(([key])=>key.length>=7).sort((a,b)=>b[0].length-a[0].length),
+ en:Object.entries(EN_TEXT).filter(([key])=>key.length>=7).sort((a,b)=>b[0].length-a[0].length)
+};
+function translateValue(value,lang){
+ const raw=String(value??''),trim=raw.trim();if(!trim)return raw;
+ const dict=lang==='ar'?AR_TEXT:EN_TEXT;
+ let translated=dict[trim];
+ if(!translated){
+  let match;
+  if(lang==='ar'){
+   if((match=trim.match(/^(\d+) readings?$/i)))translated=Number(match[1])===1?'قراءة واحدة':`${match[1]} قراءات`;
+   else if((match=trim.match(/^Welcome, (.+)$/)))translated=`مرحبًا، ${match[1]}`;
+   else if((match=trim.match(/^(Loading|Downloading) (.+) · (\d+)%$/)))translated=`${match[1]==='Loading'?'جارٍ تحميل':'جارٍ تنزيل'} ${match[2]} · ${match[3]}٪`;
+   else if((match=trim.match(/^Ready · (.+)$/)))translated=`جاهز · ${match[1]}`;
+   else if((match=trim.match(/^Preparing (.+) in the background…$/)))translated=`جارٍ تجهيز ${match[1]} في الخلفية…`;
+   else if((match=trim.match(/^Could not load: (.+)$/)))translated=`تعذّر التحميل: ${match[1]}`;
+   else if((match=trim.match(/^(\d+) of 7 days checked this week$/)))translated=`تم تسجيل ${match[1]} من أصل 7 أيام هذا الأسبوع`;
+   else if((match=trim.match(/^(\d+) \/ 4 completed$/)))translated=`${match[1]} / 4 مكتملة`;
+   else if((match=trim.match(/^(\d+) days$/)))translated=`${match[1]} أيام`;
+  }else{
+   if((match=trim.match(/^مرحبًا، (.+)$/)))translated=`Welcome, ${match[1]}`;
+   else if((match=trim.match(/^(جارٍ تحميل|جارٍ تنزيل) (.+) · (\d+)[٪%]$/)))translated=`${match[1]==='جارٍ تحميل'?'Loading':'Downloading'} ${match[2]} · ${match[3]}%`;
+   else if((match=trim.match(/^جاهز · (.+)$/)))translated=`Ready · ${match[1]}`;
+   else if((match=trim.match(/^جارٍ تجهيز (.+) في الخلفية…$/)))translated=`Preparing ${match[1]} in the background…`;
+   else if((match=trim.match(/^تعذّر التحميل: (.+)$/)))translated=`Could not load: ${match[1]}`;
+   else if((match=trim.match(/^تم تسجيل (\d+) من أصل 7 أيام هذا الأسبوع$/)))translated=`${match[1]} of 7 days checked this week`;
+   else if((match=trim.match(/^(\d+) \/ 4 مكتملة$/)))translated=`${match[1]} / 4 completed`;
+  }
+  if(!translated){
+   let partial=trim;
+   for(const [from,to] of translationEntries[lang]){
+    if(partial.includes(from))partial=partial.split(from).join(to);
+   }
+   if(partial!==trim)translated=partial;
+  }
+ }
+ if(!translated)return raw;
+ const left=raw.match(/^\s*/)?.[0]||'',right=raw.match(/\s*$/)?.[0]||'';
+ return left+translated+right;
 }
-if(translated)n.nodeValue=raw.replace(trim,translated)}root.querySelectorAll('[placeholder],[title],[aria-label]').forEach(el=>['placeholder','title','aria-label'].forEach(a=>{const v=el.getAttribute(a);if(v&&dict[v])el.setAttribute(a,dict[v])}))}
+function translateTextNode(node,lang){
+ const current=node.nodeValue||'';let record=translationTextRecords.get(node);
+ const source=record&&current===record.output?record.source:current;
+ const output=translateValue(source,lang);
+ if(output!==current)node.nodeValue=output;
+ translationTextRecords.set(node,{source,output});
+}
+function translateAttributes(el,lang){
+ if(!el||el.nodeType!==1)return;
+ let records=translationAttributeRecords.get(el);if(!records){records=new Map();translationAttributeRecords.set(el,records)}
+ for(const name of ['placeholder','title','aria-label']){
+  if(!el.hasAttribute(name))continue;
+  const current=el.getAttribute(name)||'',record=records.get(name);
+  const source=record&&current===record.output?record.source:current;
+  const output=translateValue(source,lang);
+  if(output!==current)el.setAttribute(name,output);
+  records.set(name,{source,output});
+ }
+}
+function translateTree(root,lang){
+ if(!root)return;
+ if(root.nodeType===3){translateTextNode(root,lang);return}
+ if(root.nodeType!==1&&root.nodeType!==9&&root.nodeType!==11)return;
+ if(root.nodeType===1)translateAttributes(root,lang);
+ const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+ let node;while((node=walker.nextNode())){
+  if(!node.parentElement||['SCRIPT','STYLE','NOSCRIPT'].includes(node.parentElement.tagName))continue;
+  translateTextNode(node,lang);
+ }
+ if(root.querySelectorAll)root.querySelectorAll('[placeholder],[title],[aria-label]').forEach(el=>translateAttributes(el,lang));
+}
+
+
 function applyLanguage(lang){document.title=lang==='ar'?'PRESSURELESS — رفيقك لمتابعة ضغط الدم':'PRESSURELESS — Your Blood Pressure Companion';document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';const sel=$('#languageSelect');if(sel)sel.value=lang;const ar=lang==='ar';if($('#languageTitle'))$('#languageTitle').textContent=ar?'اختر لغتك':'Choose your language';if($('#languageGate p'))$('#languageGate p').textContent=ar?'اختر لغتك للمتابعة':'Choose your language to continue.';if($('#chooseEnglish'))$('#chooseEnglish').textContent='English';if($('#chooseArabic'))$('#chooseArabic').textContent='العربية';document.querySelectorAll('.nav-label').forEach(x=>x.textContent=ar?'الرعاية الصحية':'Hypertension care');translateTree(document.body,lang);const d=$('#todayDate');if(d)d.textContent=new Date().toLocaleDateString(ar?'ar-EG':'en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});$('#healthImportInfo')?.setAttribute('aria-label',ar?'كيفية استيراد القراءات من Apple Health':'How to bring readings from Apple Health');}
-Object.assign(AR_TEXT,{'Signed in as':'تم تسجيل الدخول باسم','Log out':'تسجيل الخروج','PRESSURELESS home':'العودة إلى الرئيسية'});
-const languageObserver=new MutationObserver(records=>{const lang=document.documentElement.lang||'en';if(lang==='ar')for(const r of records)for(const n of r.addedNodes){if(n.nodeType===1)translateTree(n,'ar');else if(n.nodeType===3){const t=n.nodeValue.trim();if(AR_TEXT[t])n.nodeValue=n.nodeValue.replace(t,AR_TEXT[t])}}});
-languageObserver.observe(document.body,{childList:true,subtree:true});
+
+const languageObserver=new MutationObserver(records=>{
+ const lang=document.documentElement.lang||'en';
+ for(const record of records){
+  if(record.type==='childList')for(const node of record.addedNodes)translateTree(node,lang);
+  else if(record.type==='characterData')translateTextNode(record.target,lang);
+  else if(record.type==='attributes')translateAttributes(record.target,lang);
+ }
+});
+languageObserver.observe(document.body,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['placeholder','title','aria-label']});
 function chooseLanguage(lang){const prefs=getPrefs();prefs.language=lang;setPrefs(prefs);applyLanguage(lang);$('#languageGate').style.display='none'}
 $('#chooseEnglish')?.addEventListener('click',()=>chooseLanguage('en'));$('#chooseArabic')?.addEventListener('click',()=>chooseLanguage('ar'));
 $('#languageSelect').onchange=e=>{const p=getPrefs();p.language=e.target.value;setPrefs(p);applyLanguage(p.language)};
@@ -1288,6 +1440,93 @@ html,body{width:100%;max-width:100%;min-width:0;overflow-x:hidden;-webkit-text-s
 :root[dir="rtl"] .user-dropdown{right:auto;left:0;transform-origin:top left}
 @media(max-width:760px){.page.active{animation-duration:.22s}.user-menu-wrap{max-width:42vw}.user-menu-button{max-width:42vw;gap:6px}.user-dropdown{right:0;top:calc(100% + 8px)}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+
+<style id="pressureless-arabic-mobile-app-fix">
+/* Unified RTL translation and native-feeling mobile shell. */
+html[lang="ar"],html[lang="ar"] body{font-family:system-ui,-apple-system,"Geeza Pro","SF Arabic","Noto Sans Arabic",Tahoma,Arial,sans-serif}
+html[lang="ar"] body,html[lang="ar"] input,html[lang="ar"] select,html[lang="ar"] textarea,html[lang="ar"] button{font-family:system-ui,-apple-system,"Geeza Pro","SF Arabic","Noto Sans Arabic",Tahoma,Arial,sans-serif}
+html[dir="rtl"] .brand-home{text-align:right}
+html[dir="rtl"] .user-dropdown{text-align:right}
+html[dir="rtl"] .logout-action{text-align:right;flex-direction:row-reverse}
+html[dir="rtl"] .chatinput{direction:rtl}
+html[dir="rtl"] .chatinput input{text-align:right;direction:rtl}
+html[dir="rtl"] .api-key-row{direction:rtl}
+html[dir="rtl"] .tablebox{direction:rtl}
+html[dir="rtl"] th,html[dir="rtl"] td{text-align:right}
+html[dir="rtl"] .date{text-align:right}
+@media screen and (max-width:760px){
+ html,body{width:100%;max-width:100%;min-width:0;min-height:100%;overflow-x:hidden;overscroll-behavior-x:none;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+ body{padding-bottom:0!important;min-height:100dvh;background:var(--bg);overscroll-behavior-y:contain}
+ .layout,html.pressureless-auth-open .layout{display:block!important;direction:ltr!important;grid-template-columns:minmax(0,1fr)!important;width:100%!important;max-width:none!important;min-width:0!important;min-height:100dvh!important;margin:0!important;overflow:clip!important}
+ .layout>main{display:block!important;width:100%!important;max-width:none!important;min-width:0!important;min-height:100dvh!important;margin:0!important;padding:calc(8px + env(safe-area-inset-top,0px)) 12px calc(88px + env(safe-area-inset-bottom,0px))!important;box-sizing:border-box!important;grid-column:auto!important;grid-row:auto!important}
+ .top{position:sticky!important;top:env(safe-area-inset-top,0px)!important;z-index:24!important;display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:center!important;gap:8px!important;width:calc(100% + 24px)!important;max-width:none!important;margin:-8px -12px 15px!important;padding:10px 12px 11px!important;box-sizing:border-box!important;background:color-mix(in srgb,var(--bg) 91%,transparent)!important;border-bottom:1px solid var(--line)!important;-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+ .top-left{display:flex!important;flex-direction:row!important;align-items:center!important;gap:8px!important;min-width:0!important;width:auto!important}
+ .top-left>div{min-width:0!important;flex:1 1 auto!important}
+ .top h1{font-size:clamp(19px,5.4vw,24px)!important;line-height:1.2!important;letter-spacing:-.35px!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:normal!important;margin:3px 0 0!important}
+ .date{font-size:10px!important;line-height:1.35!important;letter-spacing:.25px!important;white-space:normal!important;max-width:100%!important}
+ .mobile{display:grid!important;place-items:center!important;flex:0 0 38px!important;width:38px!important;height:40px!important;border-radius:13px!important}
+ .user-menu-wrap{min-width:0!important;max-width:42vw!important}
+ .user-menu-button{display:flex!important;align-items:center!important;gap:5px!important;max-width:42vw!important;padding:3px 6px!important;border-radius:999px!important}
+ .user-menu-button span{display:block!important;max-width:22vw!important;min-width:0!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;font-size:10px!important}
+ .avatar{width:32px!important;height:32px!important;flex:0 0 32px!important;font-size:11px!important}
+ .user-caret{width:12px!important;height:12px!important;flex-basis:12px!important}
+ .user-dropdown{top:calc(100% + 7px)!important;width:min(245px,calc(100vw - 20px))!important}
+ .cards,.page,.card,.cardhead,.formgrid,.field{min-width:0!important;max-width:100%!important}
+ .page.active{animation:pressurelessMobilePage .2s cubic-bezier(.2,.75,.25,1) both!important}
+ @keyframes pressurelessMobilePage{from{opacity:0;transform:translate3d(0,7px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+ .stats{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+ .cols2{grid-template-columns:minmax(0,1fr)!important}
+ .cols3{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .card{width:auto!important;max-width:100%!important;min-width:0!important;padding:14px!important;border-radius:19px!important;overflow-wrap:anywhere!important}
+ .formgrid{grid-template-columns:minmax(0,1fr)!important}
+ .field input,.field select,.field textarea{width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important;font-size:16px!important}
+ .btn,button{touch-action:manipulation}
+ #mobileTabs{position:fixed!important;display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:2px!important;left:0!important;right:0!important;bottom:0!important;width:100%!important;max-width:none!important;height:calc(70px + env(safe-area-inset-bottom,0px))!important;min-width:0!important;padding:6px 5px calc(6px + env(safe-area-inset-bottom,0px))!important;box-sizing:border-box!important;z-index:90!important;border:0!important;border-top:1px solid var(--line)!important;border-radius:20px 20px 0 0!important;background:color-mix(in srgb,var(--panel) 93%,transparent)!important;box-shadow:0 -8px 28px rgba(16,55,50,.09)!important;-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}
+ #mobileTabs button{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:3px!important;width:100%!important;min-width:0!important;max-width:100%!important;min-height:54px!important;padding:3px 1px!important;border:0!important;border-radius:14px!important;background:transparent!important;overflow:hidden!important;white-space:nowrap!important;font-size:clamp(8px,2.15vw,10px)!important;line-height:1.05!important;font-weight:750!important;color:var(--muted)!important}
+ #mobileTabs button.active{background:var(--blue2)!important;color:var(--blue)!important}
+ #mobileTabs button span{display:block!important;max-width:100%!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+ #mobileTabs button svg{display:block!important;width:19px!important;height:19px!important;flex:0 0 19px!important}
+ .footer{display:none!important}
+ #onboarding{position:fixed!important;inset:0!important;width:100%!important;max-width:100%!important;padding:calc(8px + env(safe-area-inset-top,0px)) 8px calc(8px + env(safe-area-inset-bottom,0px))!important;box-sizing:border-box!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch!important;align-items:flex-start!important}
+ .onboard-shell{display:grid!important;grid-template-columns:minmax(0,1fr)!important;width:100%!important;max-width:520px!important;min-width:0!important;min-height:0!important;height:auto!important;margin:auto!important;border-radius:22px!important}
+ .onboard-art{min-height:142px!important;padding:19px!important}
+ .onboard-form{padding:20px 18px 24px!important;min-width:0!important}
+ .onboard-form h2{font-size:clamp(21px,5.8vw,25px)!important;line-height:1.25!important}
+ #secureGate{position:fixed!important;inset:0!important;width:100%!important;max-width:100%!important;padding:calc(10px + env(safe-area-inset-top,0px)) 10px calc(10px + env(safe-area-inset-bottom,0px))!important;box-sizing:border-box!important;overflow-y:auto!important}
+ .secure-shell{width:100%!important;max-width:470px!important;margin:auto!important}
+}
+@media screen and (max-width:390px){
+ .layout>main{padding-left:9px!important;padding-right:9px!important}
+ .top{gap:5px!important;padding-left:9px!important;padding-right:9px!important}
+ .top-left{gap:6px!important}
+ .mobile{flex-basis:35px!important;width:35px!important;height:38px!important}
+ .user-menu-wrap,.user-menu-button{max-width:39vw!important}
+ .user-menu-button span{max-width:18vw!important;font-size:9px!important}
+ .avatar{width:30px!important;height:30px!important;flex-basis:30px!important}
+ #mobileTabs{grid-template-columns:repeat(6,minmax(0,1fr))!important}
+ #mobileTabs button{font-size:8px!important}
+ #mobileTabs button svg{width:18px!important;height:18px!important;flex-basis:18px!important}
+}
+@media screen and (max-width:760px) and (orientation:landscape){
+ #mobileTabs{height:calc(58px + env(safe-area-inset-bottom,0px))!important}
+ #mobileTabs button{min-height:44px!important}
+ .layout>main{padding-bottom:calc(75px + env(safe-area-inset-bottom,0px))!important}
+}
+@media screen and (max-width:760px) and (prefers-reduced-motion:no-preference){
+ #sidebar{transition:transform .24s cubic-bezier(.2,.75,.25,1)!important}
+}
+@media screen and (max-width:760px){
+ html[dir="rtl"] .layout,html[dir="rtl"].pressureless-auth-open .layout{direction:rtl!important}
+ html[dir="rtl"] .layout>aside{left:auto!important;right:0!important;inset:0 0 0 auto!important;border-left:1px solid var(--line)!important;border-right:0!important;transform:translateX(105%)!important}
+ html[dir="rtl"] .layout>aside.open{transform:translateX(0)!important}
+ html[dir="rtl"] .layout>main{direction:rtl!important}
+ html[dir="rtl"] .top,html[dir="rtl"] .top-left{direction:rtl!important}
+ html[dir="rtl"] .nav button{direction:rtl!important;text-align:right!important}
+ html[dir="rtl"] #mobileTabs{direction:rtl!important}
+ html[dir="rtl"] .user-dropdown{right:auto!important;left:0!important;transform-origin:top left!important}
+}
+@media(prefers-reduced-motion:reduce){.page.active{animation:none!important}}
 </style>
 
 </body></html>
