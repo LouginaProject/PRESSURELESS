@@ -118,20 +118,31 @@ self.onmessage = async event => {
       const messages = Array.isArray(data.messages) ? data.messages : [];
       if (!messages.length) throw new Error('Please enter a question first.');
       send('status', { message: 'Generating your answer…' });
+      let tokenBuffer = '';
+      let lastTokenFlush = 0;
+      const flushTokens = () => {
+        if (!tokenBuffer) return;
+        send('token', { id, text: tokenBuffer });
+        tokenBuffer = '';
+        lastTokenFlush = Date.now();
+      };
       const streamer = new TextStreamer(model.tokenizer, {
         skip_prompt: true,
         skip_special_tokens: true,
         callback_function: chunk => {
-          if (chunk) send('token', { id, text: chunk });
+          if (!chunk) return;
+          tokenBuffer += chunk;
+          if (Date.now() - lastTokenFlush >= 45) flushTokens();
         }
       });
       const output = await model(messages, {
-        max_new_tokens: Math.max(40, Math.min(88, Number(data.maxTokens) || (data.smallDevice ? 56 : 80))),
+        max_new_tokens: Math.max(32, Math.min(72, Number(data.maxTokens) || (data.smallDevice ? 48 : 64))),
         do_sample: false,
         repetition_penalty: 1.02,
         use_cache: true,
         streamer
       });
+      flushTokens();
       const text = extractAssistantText(output);
       if (!text) throw new Error('The model returned an empty answer. Try a shorter question.');
       send('result', { id, text });
